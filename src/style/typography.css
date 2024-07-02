@@ -1,0 +1,78 @@
+:root {
+  --font-family: "Pretendard", sans-serif;
+
+  --bold-weight: 700;
+  --medium-weight: 500;
+
+  --font-size-24: 24px;
+  --font-size-16: 16px;
+  --font-size-14: 14px;
+  --font-size-12: 12px;
+
+  --line-height-auto: auto;
+  --line-height-22: 22px;
+}
+
+/* Base Styles */
+body {
+  font-family: var(--font-family);
+}
+
+/* 24px */
+.display-bold24 {
+  font-weight: var(--bold-weight);
+  font-size: var(--font-size-24);
+  line-height: var(--line-height-auto);
+}
+
+/* 16px */
+.display-bold16,
+.selected-bold16 {
+  font-weight: var(--bold-weight);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-auto);
+}
+
+p,
+.display-medium16,
+.available-medium16 {
+  font-weight: var(--medium-weight);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-22);
+}
+.display-medium16:hover {
+  text-decoration: underline;
+}
+
+/* 14px */
+.display-bold14,
+.selected-bold14 {
+  font-weight: var(--bold-weight);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-auto);
+}
+
+.display-medium14,
+.available-medium14 {
+  font-weight: var(--medium-weight);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-auto);
+}
+.display-medium14:hover {
+  text-decoration: underline;
+}
+
+/* 12px */
+.display-bold12 {
+  font-weight: var(--bold-weight);
+  font-size: var(--font-size-12);
+  line-height: var(--line-height-auto);
+}
+
+button,
+.display-medium12,
+.available-medium12 {
+  font-weight: var(--medium-weight);
+  font-size: var(--font-size-12);
+  line-height: var(--line-height-auto);
+}
