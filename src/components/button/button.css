@@ -1,0 +1,43 @@
+.button {
+  width: 24px;
+  height: 24px;
+  padding: 0 5px;
+
+  border: 1px solid var(--border-default);
+  border-radius: 50px;
+
+  color: var(--text-weak);
+
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  background-color: var(--surface-default);
+}
+.button:hover {
+  border-color: var(--border-bold);
+  color: var(--text-bold);
+}
+
+/* variant */
+.button-white {
+  background-color: var(--surface-default);
+}
+
+.button-gray {
+  background-color: var(--surface-alt);
+}
+
+/* icon */
+.button > div {
+  height: 12px;
+}
+.button-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* text */
+.button-text {
+  padding-right: 4px;
+}

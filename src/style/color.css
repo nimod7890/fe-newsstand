@@ -8,6 +8,16 @@
   --grayscale-400: #5f6e76;
   --grayscale-500: #4b5966;
   --grayscale-black: #14212b;
+
   --blue-100: #7890e7;
   --blue-500: #4362d0;
+
+  --border-default: #d2dae0;
+  --border-bold: #6e8091;
+
+  --surface-alt: #f5f7f9;
+  --surface-default: #ffffff;
+
+  --text-weak: #879298;
+  --text-bold: #4b5966;
 }
