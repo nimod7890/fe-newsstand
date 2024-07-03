@@ -11,7 +11,7 @@ import { createOverlayContainer } from "../overlay.js";
 /**
  * Shows a dialog with a message and custom confirm/cancel buttons.
  *
- * @param {{message:string;leftButtonProps:DialogButtonProps;rightButtonProps:DialogButtonProps}} message
+ * @param {{message:string;leftButtonProps:DialogButtonProps;rightButtonProps:DialogButtonProps}} dialogProps
  */
 export function showDialog({ message, leftButtonProps, rightButtonProps }) {
   const dialog = createOverlayContainer("dialog");
