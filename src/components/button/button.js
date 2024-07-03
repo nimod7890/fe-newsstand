@@ -1,12 +1,12 @@
 /**
- * @typedef {Object} ButtonOptions
+ * @typedef {Object} ButtonProps
  * @property {'white' | 'gray'} [color='white']
  * @property {string} [text='']
  * @property {string} [iconId]
  */
 
 /**
- * @param {ButtonOptions} options
+ * @param {ButtonProps} props
  *
  * @returns {HTMLButtonElement}
  */
