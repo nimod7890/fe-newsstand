@@ -1,0 +1,8 @@
+.overlay-container {
+  z-index: 9999;
+  position: fixed;
+
+  box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
+    0 2px 18px hsla(var(--grayscale-black), 0.8);
+  background-color: var(--surface-default);
+}

@@ -1,0 +1,28 @@
+.dialog {
+  min-width: 320px;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border-default);
+  overflow: hidden;
+}
+
+.dialog > p {
+  text-align: center;
+  padding: 24px;
+  border: 1px solid var(--border-default);
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dialog-button {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-default);
+  color: var(--text-default);
+  background-color: var(--surface-alt);
+}
