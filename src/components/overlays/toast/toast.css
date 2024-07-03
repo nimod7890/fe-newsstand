@@ -1,0 +1,40 @@
+#toast-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.toast {
+  max-width: 300px;
+  margin-top: 10px;
+  padding: 16px 24px;
+  background-color: var(--surface-brand-default);
+  animation: slidein 0.5s forwards;
+  color: var(--text-white-default);
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideout {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.toast.fadeout {
+  animation: slideout 0.5s forwards;
+}
