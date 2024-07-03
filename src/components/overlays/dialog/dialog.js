@@ -9,7 +9,6 @@ import { createOverlayContainer } from "../overlay.js";
  */
 
 /**
- * Shows a dialog with a message and custom confirm/cancel buttons.
  *
  * @param {{message:string;leftButtonProps:DialogButtonProps;rightButtonProps:DialogButtonProps}} dialogProps
  */
@@ -37,7 +36,7 @@ export function showDialog({ message, leftButtonProps, rightButtonProps }) {
 
 /**
  * @param {ButtonProps} buttonProps
- * @param {HTMLElement} dialog
+ * @param {HTMLDivElement} dialog
  * @returns {HTMLButtonElement}
  */
 function createDialogButton({ className, onClick, text }, dialog) {
