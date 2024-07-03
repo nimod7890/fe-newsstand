@@ -1,4 +1,4 @@
-.news-ticker-container {
+#news-ticker-container {
   display: flex;
   gap: 20px;
 }
