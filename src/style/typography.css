@@ -1,6 +1,4 @@
 :root {
-  --font-family: "Pretendard", sans-serif;
-
   --bold-weight: 700;
   --medium-weight: 500;
 
@@ -15,7 +13,7 @@
 
 /* Base Styles */
 body {
-  font-family: var(--font-family);
+  color: var(--text-default);
 }
 
 /* 24px */
@@ -40,8 +38,13 @@ p,
   font-size: var(--font-size-16);
   line-height: var(--line-height-22);
 }
-.display-medium16:hover {
+.available-medium16:hover {
   text-decoration: underline;
+}
+
+p > strong {
+  font-weight: var(--bold-weight);
+  color: var(--text-strong);
 }
 
 /* 14px */
@@ -58,7 +61,7 @@ p,
   font-size: var(--font-size-14);
   line-height: var(--line-height-auto);
 }
-.display-medium14:hover {
+.available-medium14:hover {
   text-decoration: underline;
 }
 
