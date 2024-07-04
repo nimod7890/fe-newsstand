@@ -31,23 +31,19 @@ export function createNewsTicker({ tag, newsItems }, scrollDelay = 0) {
 /**
  * @param {NewsItemProps} newsItem
  * @param {string} [tag='']
- * @returns {HTMLLIElement}
+ * @returns {string}
  */
 function createNewsItem({ title, link }, tag) {
   const container = document.createElement("li");
 
   if (tag?.length > 0) {
-    const newsSource = document.createElement("p");
-    newsSource.className = "display-bold14";
-    newsSource.textContent = tag;
-    container.appendChild(newsSource);
+    container.insertAdjacentHTML("beforeend", `<p class='display-bold14'>${tag}</p>`);
   }
 
-  const newsText = document.createElement("a");
-  newsText.className = "available-medium14";
-  newsText.textContent = title;
-  newsText.href = link;
-  container.appendChild(newsText);
+  container.insertAdjacentHTML(
+    "beforeend",
+    `<a href=${link} class='available-medium14'>${title}</a>`
+  );
 
   return container;
 }
@@ -112,9 +108,7 @@ function handleTransitionEnd(current, next, nextIndex) {
     next.style.display = "flex";
 
     next.classList.add("reset");
-    setTimeout(() => {
-      next.classList.remove("reset");
-    }, 10);
+    setTimeout(() => next.classList.remove("reset"), 10);
   }, 1000);
 }
 

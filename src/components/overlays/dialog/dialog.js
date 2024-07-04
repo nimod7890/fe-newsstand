@@ -15,20 +15,17 @@ import { createOverlayContainer } from "../overlay.js";
 export function showDialog({ message, leftButtonProps, rightButtonProps }) {
   const dialog = createOverlayContainer("dialog");
 
-  const messageElement = document.createElement("p");
-  messageElement.className = "display-bold16";
-  messageElement.innerHTML = message;
+  const messageElement = `<p class='display-bold16'>${message}</p>`;
 
   const buttonsContainer = document.createElement("div");
   buttonsContainer.className = "dialog-buttons";
 
   const leftButton = createDialogButton(leftButtonProps, dialog);
   const rightButton = createDialogButton(rightButtonProps, dialog);
-
   buttonsContainer.appendChild(leftButton);
   buttonsContainer.appendChild(rightButton);
 
-  dialog.appendChild(messageElement);
+  dialog.innerHTML = messageElement;
   dialog.appendChild(buttonsContainer);
 
   document.body.appendChild(dialog);
@@ -39,7 +36,7 @@ export function showDialog({ message, leftButtonProps, rightButtonProps }) {
  * @param {HTMLDivElement} dialog
  * @returns {HTMLButtonElement}
  */
-function createDialogButton({ className, onClick, text }, dialog) {
+function createDialogButton({ className = "", onClick, text }, dialog) {
   const button = document.createElement("button");
   button.className = `dialog-button available-medium16 ${className}`;
   button.textContent = text;

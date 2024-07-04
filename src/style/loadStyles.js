@@ -17,9 +17,8 @@ const stylesheets = [
 stylesheets.forEach(loadCSS);
 
 function loadCSS(url) {
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.type = "text/css";
-  link.href = url;
-  document.head.appendChild(link);
+  document.head.insertAdjacentHTML(
+    "beforeend",
+    `<link rel='stylesheet' type='text/css' href='${url}'/>`
+  );
 }
