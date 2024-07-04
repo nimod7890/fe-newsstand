@@ -12,7 +12,7 @@
  */
 export function createButton({ iconId, text = "", color = "white" }) {
   if (!iconId) {
-    throw Error("icon은 필수 property입니다.");
+    throw Error("iconId는 필수 property입니다.");
   }
 
   const button = document.createElement("button");
@@ -33,6 +33,5 @@ export function createButton({ iconId, text = "", color = "white" }) {
     textSpan.textContent = text;
     button.appendChild(textSpan);
   }
-
   return button;
 }
