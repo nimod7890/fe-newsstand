@@ -2,6 +2,7 @@ const stylesheets = [
   "src/style/global.css",
   "src/style/typography.css",
   "src/style/color.css",
+  "src/style/layout.css",
 
   "src/components/button/button.css",
   "src/components/newsTicker/newsTicker.css",

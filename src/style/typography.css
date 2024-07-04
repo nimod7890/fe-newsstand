@@ -21,6 +21,7 @@ body {
   font-weight: var(--bold-weight);
   font-size: var(--font-size-24);
   line-height: var(--line-height-auto);
+  color: var(--text-strong);
 }
 
 /* 16px */

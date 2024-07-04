@@ -1,0 +1,38 @@
+/* container */
+body {
+  width: 100%;
+
+  min-height: 100vh;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#contents-container {
+  padding: 10px 20px;
+  max-width: calc(40px + 930px); /* add padding s*/
+  width: 100%;
+  background-color: lightblue;
+}
+
+/* header */
+
+header {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+}
+
+.logo > svg {
+  color: var(--text-point);
+}

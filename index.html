@@ -10,11 +10,25 @@
     <title>newsstand</title>
   </head>
   <body>
-    <div id="toast-container">
-      <!-- toast container -->
-    </div>
-    <div id="news-ticker-container">
-      <!-- news ticker container -->
+    <div id="contents-container">
+      <header>
+        <div class="logo">
+          <svg>
+            <use xlink:href="src/assets/sprite.svg#newspaper"></use>
+          </svg>
+          <h1 class="display-bold24">뉴스스탠드</h1>
+        </div>
+        <time id="current-date" class="display-medium16">
+          <!-- formatted current date -->
+        </time>
+      </header>
+      <section id="news-ticker-container">
+        <!-- headline news ticker  -->
+      </section>
+      <main></main>
+      <div id="toast-container">
+        <!-- toast container -->
+      </div>
     </div>
     <script src="./index.js" type="module"></script>
   </body>
