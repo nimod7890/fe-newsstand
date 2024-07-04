@@ -70,3 +70,9 @@ body {
   font-family: "Pretendard", cursive, sans-serif;
   padding: 0;
 }
+
+svg {
+  width: 24px;
+  height: 24px;
+  color: currentColor;
+}
