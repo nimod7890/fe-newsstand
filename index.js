@@ -50,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /** handler */
 
-  function handleNewsClick(id) {
-    console.log(`Tab with id ${id} clicked`);
+  function handleNewsClick(event) {
+    console.log(`Tab with id ${event.target.id} clicked`);
   }
 
-  function handleViewChange(iconId) {
-    console.log(`View with iconId ${iconId} selected`);
+  function handleViewChange(event) {
+    console.log(`View with iconId ${event.target.id} selected`);
   }
 });

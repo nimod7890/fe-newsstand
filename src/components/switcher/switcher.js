@@ -10,7 +10,7 @@ import { ButtonProps } from "../button/button.js";
  * @param {Object} params
  * @param {string} params.className 
  * @param {TabItem[]|ButtonProps[]} params.items 
- *  * @param {(event:)=>void} params.onClick 
+ *  * @param {(event:Event)=>void} params.onClick 
 
  * @returns {HTMLUListElement}
  */
