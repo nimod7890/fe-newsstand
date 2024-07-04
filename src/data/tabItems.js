@@ -3,4 +3,4 @@ export const dataTabItems = [
   { id: "subscribed-news-tab", text: "내가 구독한 언론사" },
 ];
 
-export const viewTabItems = [{ iconId: "list_view" }, { iconId: "grid_view" }];
+export const viewTabItems = [{ iconId: "list-view" }, { iconId: "grid-view" }];

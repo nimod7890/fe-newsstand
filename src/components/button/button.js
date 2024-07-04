@@ -2,7 +2,7 @@
  * @typedef {Object} ButtonProps
  * @property {'white' | 'gray'} [color='white']
  * @property {string} [text='']
- * @property {"arrow" | "plus" | "closed" | "grid_view" | "list_view" | "newspaper"} [iconId]
+ * @property {"arrow" | "plus" | "closed" | "grid-view" | "list-view" | "newspaper"} [iconId]
  */
 
 export const ButtonProps = {};
