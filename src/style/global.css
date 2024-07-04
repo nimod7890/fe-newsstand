@@ -76,3 +76,10 @@ svg {
   height: 24px;
   color: currentColor;
 }
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: none;
+}

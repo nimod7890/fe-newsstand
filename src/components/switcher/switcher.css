@@ -1,0 +1,36 @@
+#switcher-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#switcher-container ul {
+  display: flex;
+  align-items: center;
+}
+
+#switcher-container label {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-weak);
+
+  display: flex;
+  align-items: center;
+}
+
+#switcher-container .tab-switcher input:checked + label {
+  color: var(--text-bold);
+  font-weight: var(--bold-weight);
+}
+
+#switcher-container .view-switcher input:checked + label {
+  color: var(--text-point);
+}
+
+.tab-switcher {
+  gap: 24px;
+}
+
+.view-switcher {
+  gap: 8px;
+}

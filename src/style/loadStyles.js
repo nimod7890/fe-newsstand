@@ -6,6 +6,7 @@ const stylesheets = [
 
   "src/components/button/button.css",
   "src/components/newsTicker/newsTicker.css",
+  "src/components/switcher/switcher.css",
 
   "src/components/overlays/overlay.css",
   "src/components/overlays/dialog/dialog.css",

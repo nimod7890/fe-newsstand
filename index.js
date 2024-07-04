@@ -1,5 +1,8 @@
 import { createNewsTicker } from "./src/components/newsTicker/newsTicker.js";
+import { createSwitcher } from "./src/components/switcher/switcher.js";
+
 import { leftNewsItems, rightNewsItems } from "./src/data/headlineNews.js";
+import { dataTabItems, viewTabItems } from "./src/data/tabItems.js";
 
 /* render current time */
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,4 +28,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   container.appendChild(left);
   container.appendChild(right);
+});
+
+/* render data & view switcher  */
+document.addEventListener("DOMContentLoaded", () => {
+  const navContainer = document.getElementById("switcher-container");
+
+  const tabSwitcher = createSwitcher({
+    className: "tab-switcher",
+    items: dataTabItems,
+    onClick: handleNewsClick,
+  });
+  const viewSwitcher = createSwitcher({
+    className: "view-switcher",
+    items: viewTabItems,
+    onClick: handleViewChange,
+  });
+
+  navContainer.appendChild(tabSwitcher);
+  navContainer.appendChild(viewSwitcher);
+
+  /** handler */
+
+  function handleNewsClick(id) {
+    console.log(`Tab with id ${id} clicked`);
+  }
+
+  function handleViewChange(iconId) {
+    console.log(`View with iconId ${iconId} selected`);
+  }
 });

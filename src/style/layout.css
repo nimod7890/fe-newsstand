@@ -15,7 +15,6 @@ body {
   padding: 10px 20px;
   max-width: calc(40px + 930px); /* add padding s*/
   width: 100%;
-  background-color: lightblue;
 }
 
 /* header */

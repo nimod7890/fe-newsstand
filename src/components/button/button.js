@@ -5,6 +5,8 @@
  * @property {"arrow" | "plus" | "closed" | "grid_view" | "list_view" | "newspaper"} [iconId]
  */
 
+export const ButtonProps = {};
+
 /**
  * @param {ButtonProps} props
  *
