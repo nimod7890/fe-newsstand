@@ -1,8 +1,3 @@
-#news-ticker-container {
-  display: flex;
-  gap: 20px;
-}
-
 .news-ticker {
   background-color: var(--surface-alt);
   border: 1px solid var(--border-default);

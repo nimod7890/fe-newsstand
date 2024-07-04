@@ -1,4 +1,4 @@
-/* container */
+/* content container */
 body {
   width: 100%;
 
@@ -35,4 +35,12 @@ header {
 
 .logo > svg {
   color: var(--text-point);
+}
+
+/** head line news ticker container*/
+#news-ticker-container {
+  margin-bottom: 32px;
+
+  display: flex;
+  gap: 20px;
 }
