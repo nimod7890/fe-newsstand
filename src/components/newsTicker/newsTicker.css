@@ -21,7 +21,7 @@
 
   position: absolute;
   width: 100%;
-  transition: opacity 1s, transform 1s;
+  transition: opacity 0.2s, transform 1s;
 }
 
 .news-ticker p {
