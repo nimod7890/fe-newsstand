@@ -1,4 +1,4 @@
-export const news = [
+export const allCompanies = [
   {
     id: 1,
     type: "종합/경제",
@@ -201,3 +201,5 @@ export const news = [
     ],
   },
 ];
+
+export const subscribedCompanies = [];
