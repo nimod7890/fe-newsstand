@@ -9,8 +9,17 @@ import {
   switchCompanyView,
 } from "./src/features/renderNews/utils/updateStates.js";
 
+initialize();
+
+function initialize() {
+  renderCurrentTime();
+  renderHeadlineNewsTicker();
+  renderSwitcher();
+  renderNewsView();
+}
+
 /* render current time */
-document.addEventListener("DOMContentLoaded", () => {
+function renderCurrentTime() {
   const timeElement = document.getElementById("current-date");
   const now = new Date();
   const formattedDate = now.toLocaleDateString("ko-KR", {
@@ -22,10 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   timeElement.dateTime = now.toISOString();
   timeElement.textContent = formattedDate;
-});
+}
 
 /* render headline news ticker */
-document.addEventListener("DOMContentLoaded", () => {
+function renderHeadlineNewsTicker() {
   const container = document.getElementById("news-ticker-container");
 
   const left = createNewsTicker({ newsItems: leftNewsItems, tag: "연합뉴스" });
@@ -33,10 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   container.appendChild(left);
   container.appendChild(right);
-});
+}
 
 /* render switcher */
-document.addEventListener("DOMContentLoaded", () => {
+function renderSwitcher() {
   const navContainer = document.getElementById("switcher-container");
 
   const tabSwitcher = createSwitcher({
@@ -53,9 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   navContainer.appendChild(tabSwitcher);
   navContainer.appendChild(viewSwitcher);
-});
+}
 
 /** render news view */
-document.addEventListener("DOMContentLoaded", () => {
+function renderNewsView() {
   switchCompanyTab("all-news-tab");
-});
+}
