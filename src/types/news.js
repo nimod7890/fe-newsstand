@@ -1,14 +1,9 @@
 /**
- * @typedef {Object} MainNews
- * @property {number} id - The ID of the main news
- * @property {string} src - The source URL of the main news
- * @property {string} title - The title of the main news
- */
-
-/**
  * @typedef {Object} NewsItem
  * @property {number} id - The ID of the news item
+ * @property {string} imageUrl
  * @property {string} title - The title of the news item
+ * @property {string} url
  */
 
 /**
@@ -17,7 +12,7 @@
  * @property {string} companyLogo - The logo URL of the company
  * @property {string} companyName - The name of the company
  * @property {string} updatedDate - The last updated date of the company
- * @property {MainNews} mainNews - The main news of the company
+ * @property {NewsItem} mainNews - The main news of the company
  * @property {NewsItem[]} news - The list of news items of the company
  */
 
@@ -33,11 +28,10 @@
  * @property {'list-view' | 'grid-view'} MainNews.currentView
  * @property {number} MainNews.currentTypeIndex
  * @property {number} MainNews.currentCompanyIndex
- * @property {Array<MainNews>} MainNews.data
+ * @property {Array<NewsItem>} MainNews.data
  */
 
 export const NewsCategory = {};
 export const MainNewsState = {};
-export const MainNews = {};
 export const NewsItem = {};
 export const Company = {};
