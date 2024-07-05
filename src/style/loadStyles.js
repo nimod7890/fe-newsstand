@@ -13,6 +13,8 @@ const stylesheets = [
   "src/components/overlays/toast/toast.css",
 
   "src/features/unsubscribeDialog/unsubscribeDialog.css",
+
+  "src/features/renderNEws/components/list/company/company.css",
 ];
 
 stylesheets.forEach(loadCSS);

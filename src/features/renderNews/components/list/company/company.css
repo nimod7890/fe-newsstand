@@ -1,0 +1,12 @@
+.list-company-container {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 16px;
+}
+
+.company-container-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}

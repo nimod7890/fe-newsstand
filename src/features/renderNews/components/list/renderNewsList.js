@@ -1,4 +1,5 @@
 import { MainNewsState } from "../../../../types/news.js";
+import { createCompany } from "./company/company.js";
 
 /**
  *
@@ -8,8 +9,5 @@ import { MainNewsState } from "../../../../types/news.js";
 export function renderListView(container, state) {
   const currentType = state.data[state.currentTypeIndex];
   const currentCompany = currentType?.company[state.currentCompanyIndex];
-
-  container;
-  currentType;
-  currentCompany;
+  if (currentCompany) container.appendChild(createCompany(currentCompany));
 }

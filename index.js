@@ -54,3 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
   navContainer.appendChild(tabSwitcher);
   navContainer.appendChild(viewSwitcher);
 });
+
+/** render news view */
+document.addEventListener("DOMContentLoaded", () => {
+  switchCompanyTab("all-news-tab");
+});
