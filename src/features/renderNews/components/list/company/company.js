@@ -1,17 +1,17 @@
 import { createButton } from "../../../../../components/button/button.js";
-import { Company } from "../../../../../types/news.js";
+import { Company, NewsItem } from "../../../../../types/news.js";
 
 /**
  * @param {Company} company
  * @returns {HTMLDivElement}
  */
 export function createCompany(company) {
-  const { companyLogo, companyName, updatedDate, mainNews, news } = company;
-
   const container = document.createElement("div");
   container.className = "list-company-container";
 
   container.appendChild(createHeader(company));
+  container.appendChild(createNewsContents(company));
+
   return container;
 }
 
@@ -32,6 +32,77 @@ function createHeader(company) {
 }
 
 /**
+ * @param {Company} company
+ * @returns {HTMLDivElement}
+ */
+function createNewsContents(company) {
+  const { mainNews, news, companyName } = company;
+  const newsContentscontainer = document.createElement("div");
+  newsContentscontainer.className = "company-container-contents";
+
+  newsContentscontainer.appendChild(createMainNews(mainNews));
+  newsContentscontainer.appendChild(createNewsList(news, companyName));
+
+  return newsContentscontainer;
+}
+
+/**
+ * @param {NewsItem} mainNews
+ * @returns {HTMLDivElement}
+ */
+function createMainNews(mainNews) {
+  const { imageUrl } = mainNews;
+
+  const mainNewsContainer = document.createElement("div");
+  mainNewsContainer.className = "main-news";
+  mainNewsContainer.insertAdjacentHTML(
+    "beforeend",
+    `<img loading='lazy' src=${imageUrl} alt='메인 뉴스 썸네일'/>`
+  );
+  mainNewsContainer.appendChild(createNewsTitle(mainNews));
+
+  return mainNewsContainer;
+}
+
+/**
+ * @param {NewsItem[]} newsList
+ * @param {string} companyName
+ * @returns {HTMLUListElement}
+ */
+function createNewsList(newsList, companyName) {
+  const newsListContainer = document.createElement("ul");
+  newsListContainer.className = "news-list";
+
+  newsList.forEach((news) => {
+    const newsElement = document.createElement("li");
+    newsElement.appendChild(createNewsTitle(news));
+    newsListContainer.appendChild(newsElement);
+  });
+
+  newsListContainer.insertAdjacentHTML(
+    "beforeend",
+    `<p class='display-medium14'>${companyName}에서 직접 편집한 뉴스입니다.</p>`
+  );
+
+  return newsListContainer;
+}
+
+/**
+ * @param {NewsItem} news
+ * @returns {HTMLUListElement}
+ */
+function createNewsTitle(news) {
+  const { src = "#", title } = news;
+
+  const titleElement = document.createElement("a");
+  titleElement.className = "available-medium16";
+  titleElement.src = src;
+  titleElement.textContent = title;
+
+  return titleElement;
+}
+
+/**
  * @param {string} isoString
  * @returns {string}
  */
@@ -49,5 +120,5 @@ function formatDateString(isoString) {
 
   const time = date.toISOString().split("T")[1].substring(0, 5);
 
-  return `${formattedDate} ${time} 직접 편집`;
+  return `${formattedDate} ${time} 편집`;
 }

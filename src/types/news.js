@@ -25,10 +25,10 @@
 
 /**
  * @typedef {Object} MainNewsState
- * @property {'list-view' | 'grid-view'} MainNews.currentView
- * @property {number} MainNews.currentTypeIndex
- * @property {number} MainNews.currentCompanyIndex
- * @property {Array<NewsItem>} MainNews.data
+ * @property {'list-view' | 'grid-view'} MainNewsState.currentView
+ * @property {number} MainNewsState.currentTypeIndex
+ * @property {number} MainNewsState.currentCompanyIndex
+ * @property {Array<NewsItem>} MainNewsState.data
  */
 
 export const NewsCategory = {};
