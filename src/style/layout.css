@@ -43,3 +43,10 @@ header {
   display: flex;
   gap: 20px;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
