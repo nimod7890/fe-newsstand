@@ -1,4 +1,4 @@
-import { NewsCategory } from "../types/news";
+import { NewsCategory } from "../types/news.js";
 
 /**
  * @type {NewsCategory[]}
