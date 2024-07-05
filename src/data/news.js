@@ -7,7 +7,7 @@ export const allCompanies = [
         companyId: 1,
         companyLogo: "https://newsstand.naver.com/824",
         companyName: "서울파이낸스",
-        updatedDate: "07월 03일 10:10 직접 편집",
+        updatedDate: "2024-07-03T01:10:00Z",
         mainNews: {
           id: 1,
           src: "http://www.seoulfn.com/news/articleView.html?idxno=524732",
@@ -32,7 +32,7 @@ export const allCompanies = [
         companyId: 1,
         companyLogo: "https://newsstand.naver.com/945",
         companyName: "YTN사이언스",
-        updatedDate: "07월 03일 10:24 직접 편집",
+        updatedDate: "2024-07-02T01:10:00Z",
         mainNews: {
           id: 1,
           src: "https://science.ytn.co.kr/program/view.php?mcd=0082&key=202407021107311016",
@@ -60,7 +60,7 @@ export const allCompanies = [
         companyId: 1,
         companyLogo: "https://newsstand.naver.com/681",
         companyName: "ECONOTIMES",
-        updatedDate: "07월 02일 23:51 직접 편집",
+        updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           id: 1,
           src: "https://www.econotimes.com/What-happens-next-in-Ukraines-debt-negotiations-could-change-the-course-of-the-war-1680642",
