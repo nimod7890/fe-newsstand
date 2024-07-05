@@ -1,7 +1,9 @@
+import { MainNewsState } from "../../../../types/news.js";
+
 /**
  *
  * @param {HTMLElement} container
- * @param {*} state
+ * @param {MainNewsState} state
  */
 export function renderListView(container, state) {
   const currentType = state.data[state.currentTypeIndex];

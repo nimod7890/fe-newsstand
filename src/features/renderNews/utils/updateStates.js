@@ -1,6 +1,10 @@
 import { allCompanies, subscribedCompanies } from "../../../data/news.js";
 import { render } from "./renderView.js";
+import { MainNewsState } from "../../../types/news.js";
 
+/**
+ * @type {MainNewsState}
+ */
 const state = {
   currentView: "list-view",
   currentTypeIndex: 0,
