@@ -10,7 +10,7 @@ export function createCompany(company) {
   container.className = "list-company-container";
 
   container.appendChild(createHeader(company));
-  container.appendChild(createNewsContents(company));
+  container.insertAdjacentHTML("beforeend", createNewsContents(company));
 
   return container;
 }
@@ -24,8 +24,11 @@ function createHeader(company) {
 
   const header = document.createElement("div");
   header.className = "company-container-header display-medium12";
-  header.insertAdjacentHTML("beforeend", `<img src=${companyLogoUrl} alt='${companyName} 로고'/>`);
-  header.insertAdjacentHTML("beforeend", `<time>${formatDateString(updatedDate)}</time>`);
+
+  header.innerHTML = `
+    <img src=${companyLogoUrl} alt='${companyName} 로고'/>
+    <time>${formatDateString(updatedDate)}</time>
+  `;
   header.appendChild(createButton({ iconId: "plus", text: "구독하기" }));
 
   return header;
@@ -33,73 +36,54 @@ function createHeader(company) {
 
 /**
  * @param {Company} company
- * @returns {HTMLDivElement}
+ * @returns {string}
  */
 function createNewsContents(company) {
   const { newsItems, companyName, mainNews } = company;
-  const newsContentscontainer = document.createElement("div");
-  newsContentscontainer.className = "company-container-contents";
 
-  newsContentscontainer.appendChild(createMainNews(mainNews));
-  newsContentscontainer.appendChild(createNewsList(newsItems, companyName));
-
-  return newsContentscontainer;
+  return `<div class='company-container-contents'>
+            ${createMainNews(mainNews)}
+            ${createNewsList(newsItems, companyName)}
+          </div>`;
 }
 
 /**
  * @param {NewsItem} mainNews
- * @returns {HTMLDivElement}
+ * @returns {string}
  */
 function createMainNews(mainNews) {
-  const { thumbnailUrl: imageUrl } = mainNews;
+  const { thumbnailUrl } = mainNews;
 
-  const mainNewsContainer = document.createElement("div");
-  mainNewsContainer.className = "main-news";
-  mainNewsContainer.insertAdjacentHTML(
-    "beforeend",
-    `<img loading='lazy' src=${imageUrl} alt='메인 뉴스 썸네일'/>`
-  );
-  mainNewsContainer.appendChild(createNewsTitle(mainNews));
-
-  return mainNewsContainer;
+  return `<div class='main-news'>
+            <img loading='lazy' src=${thumbnailUrl} alt='메인 뉴스 썸네일'/>
+            ${createNewsTitle(mainNews)}
+          </div>`;
 }
 
 /**
  * @param {NewsItem[]} newsList
  * @param {string} companyName
- * @returns {HTMLUListElement}
+ * @returns {string}
  */
 function createNewsList(newsList, companyName) {
-  const newsListContainer = document.createElement("ul");
-  newsListContainer.className = "news-list";
+  const newsItems = newsList.map(createNewsTitle).join("");
 
-  newsList.forEach((news) => {
-    const newsElement = document.createElement("li");
-    newsElement.appendChild(createNewsTitle(news));
-    newsListContainer.appendChild(newsElement);
-  });
-
-  newsListContainer.insertAdjacentHTML(
-    "beforeend",
-    `<p class='display-medium14'>${companyName}에서 직접 편집한 뉴스입니다.</p>`
-  );
-
-  return newsListContainer;
+  return `
+   <ul class="news-list">
+     ${newsItems}
+     <p class="display-medium14">${companyName}에서 직접 편집한 뉴스입니다.</p>
+   </ul>
+ `;
 }
 
 /**
  * @param {NewsItem} news
- * @returns {HTMLUListElement}
+ * @returns {string}
  */
 function createNewsTitle(news) {
-  const { src = "#", title } = news;
+  const { url, title } = news;
 
-  const titleElement = document.createElement("a");
-  titleElement.className = "available-medium16";
-  titleElement.src = src;
-  titleElement.textContent = title;
-
-  return titleElement;
+  return `<a class='display-medium16' href=${url} target='_blank'>${title}</a>`;
 }
 
 /**
