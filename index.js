@@ -3,10 +3,13 @@ import { createSwitcher } from "./src/components/switcher/switcher.js";
 
 import { leftNewsItems, rightNewsItems } from "./src/data/headlineNews.js";
 import { dataTabItems, viewTabItems } from "./src/data/tabItems.js";
+import { createCompanyNavButton } from "./src/features/renderNews/components/@common/companyNavButton/CompanyNavButton.js";
 
 import {
   switchCompanyTab,
   switchCompanyView,
+  updateNext,
+  updatePrev,
 } from "./src/features/renderNews/utils/updateStates.js";
 
 initialize();
@@ -67,4 +70,11 @@ function renderSwitcher() {
 /** render news view */
 function renderNewsView() {
   switchCompanyTab("all-news-tab");
+
+  const container = document.getElementById("main-news-contents");
+
+  const prevButton = createCompanyNavButton({ direction: "prev", onClick: updatePrev });
+  const nextButton = createCompanyNavButton({ direction: "next", onClick: updateNext });
+
+  container.append(prevButton, nextButton);
 }

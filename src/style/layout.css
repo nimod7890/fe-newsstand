@@ -44,9 +44,14 @@ header {
   gap: 20px;
 }
 
+/** news container */
+
 main {
   display: flex;
   flex-direction: column;
 
   gap: 24px;
+
+  position: relative;
+  width: 100%;
 }
