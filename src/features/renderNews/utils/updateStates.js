@@ -56,11 +56,11 @@ const updateCompanyState = {
 };
 
 function updatePrev() {
-  updateCompanyState[state.currentView][state.currentDataType].prev;
+  updateCompanyState[state.currentView][state.currentDataType].prev();
 }
 
 function updateNext() {
-  updateCompanyState[state.currentView][state.currentDataType].next;
+  updateCompanyState[state.currentView][state.currentDataType].next();
 }
 
 function updateListViewCompanyInSubscribedTab(offset) {
