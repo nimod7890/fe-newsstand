@@ -24,12 +24,19 @@
   gap: 16px;
 }
 
+.company-container-contents .main-news:hover {
+  transform: scale(1.05);
+  transition: transform 0.5s;
+  text-decoration: underline;
+}
+
 .company-container-contents .main-news > img {
   max-width: 320px;
   width: 100%;
   height: 200px;
-  object-fit: contain;
+  object-fit: fill;
 }
+
 .company-container-contents .main-news > a {
   color: var(--text-strong);
 }
@@ -44,4 +51,8 @@
 
 .company-container-contents .news-list > p {
   color: var(--text-weak);
+}
+
+.company-container-contents .news-list a:hover {
+  text-decoration: underline;
 }
