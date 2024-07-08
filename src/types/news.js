@@ -29,7 +29,7 @@
  * @property {"all-news-tab" | "subscribed-news-tab"} MainNewsState.currentDataType
  * @property {number} MainNewsState.currentCategoryIndex
  * @property {number} MainNewsState.currentCompanyIndex
- * @property {NewsCategory[]} MainNewsState.data
+ * @property {NewsCategory[] | Company[]} MainNewsState.data
  */
 
 export const NewsCategory = {};

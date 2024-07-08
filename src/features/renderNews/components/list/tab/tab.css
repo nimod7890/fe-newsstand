@@ -1,17 +1,17 @@
-.list-categories-container {
+.list-tab {
   background-color: var(--surface-alt);
   display: flex;
   align-items: center;
   overflow: auto;
 }
 
-.list-category-button {
+.list-tab-item {
   height: 40px;
   padding: 0 16px;
   color: var(--text-weak);
 }
 
-.selected-category {
+.selected-tab {
   background-color: var(--surface-brand-alt);
   color: var(--text-white-default);
 

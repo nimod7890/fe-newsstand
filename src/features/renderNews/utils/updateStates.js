@@ -23,7 +23,8 @@ function resetIndexes() {
  * @param {MainNewsState.currentDataType} id
  */
 function switchCompanyTab(id) {
-  state.data = state.data = id === "all-news-tab" ? allCompanies : subscribedCompanies;
+  state.currentDataType = id;
+  state.data = id === "all-news-tab" ? allCompanies : subscribedCompanies;
   resetIndexes();
   render(state);
 }
@@ -39,6 +40,12 @@ function switchCompanyView(view) {
 function updateCompanyType(index) {
   state.currentCategoryIndex = index;
   state.currentCompanyIndex = 0;
+  render(state);
+}
+
+/** 내가 구독한 언론사 페이지에서 company 선택 시 */
+function updateCompany(companyIndex) {
+  state.currentCompanyIndex = companyIndex;
   render(state);
 }
 
@@ -83,4 +90,11 @@ function updateListViewCompanyInAllNewTab(offset) {
   render(state);
 }
 
-export { switchCompanyView, updatePrev, updateNext, updateCompanyType, switchCompanyTab };
+export {
+  updateCompany,
+  switchCompanyView,
+  updatePrev,
+  updateNext,
+  updateCompanyType,
+  switchCompanyTab,
+};

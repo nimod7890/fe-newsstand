@@ -1,39 +1,32 @@
 import { createIconTemplateStrings } from "../../../../../components/icon/icon.js";
 import { MainNewsState } from "../../../../../types/news.js";
-import { updateCompanyType } from "../../../utils/updateStates.js";
 
 /**
- * @param {string} category
- * @param {number} categoryId
- * @param {string} companyName
- * @param {MainNewsState} state
+ * @param {Object} props
+ * @param {string} props.innerText
+ * @param {MainNewsState} props.state
+ * @param {boolean} props.isSelect
  * @returns {HTMLButtonElement}
  */
-export function createCategory(category, categoryId, companyName, state) {
-  const { currentDataType, currentCategoryIndex } = state;
-
-  const isSelected = currentCategoryIndex === categoryId;
-
+export function createTabItem({ innerText, state, isSelected }) {
   const button = document.createElement("button");
   button.className = classMapping[isSelected];
-
-  button.innerHTML = `<p>${currentDataType === "all-news-tab" ? category : companyName}</p>`;
+  button.innerHTML = `<p>${innerText}</p>`;
 
   if (isSelected) {
     const additionalComponent = createCategoryDetails(state);
     button.insertAdjacentHTML("beforeend", additionalComponent);
   }
 
-  button.addEventListener("click", () => updateCompanyType(categoryId));
   return button;
 }
 
 /** button class */
 
 const classes = {
-  base: "list-category-button",
+  base: "list-tab-item",
   unselected: "available-medium14",
-  selected: "selected-bold14 selected-category",
+  selected: "selected-bold14 selected-tab",
 };
 
 const classMapping = {
