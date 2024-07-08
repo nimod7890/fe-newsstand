@@ -32,7 +32,6 @@ body {
   line-height: var(--line-height-auto);
 }
 
-p,
 .display-medium16,
 .available-medium16 {
   font-weight: var(--medium-weight);
