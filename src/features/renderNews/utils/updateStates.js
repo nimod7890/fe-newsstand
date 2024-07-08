@@ -71,7 +71,14 @@ function updateNext() {
 }
 
 function updateListViewCompanyInSubscribedTab(offset) {
-  offset;
+  state.currentCompanyIndex += offset;
+  if (state.currentCompanyIndex < 0) {
+    state.currentCompanyIndex = state.data.length - 1;
+  } else if (state.currentCompanyIndex >= state.data.length) {
+    state.currentCompanyIndex = 0;
+  }
+
+  render(state);
 }
 
 function updateListViewCompanyInAllNewTab(offset) {
