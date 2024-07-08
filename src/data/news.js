@@ -6,7 +6,7 @@ import { NewsCategory } from "../types/news.js";
 export const allCompanies = [
   {
     id: 1,
-    category: "종합/경제",
+    categoryId: 0,
     companies: [
       {
         companyId: 1,
@@ -332,7 +332,7 @@ export const allCompanies = [
   },
   {
     id: 2,
-    category: "방송/통신",
+    categoryId: 1,
     companies: [
       {
         id: 1,
@@ -658,7 +658,7 @@ export const allCompanies = [
   },
   {
     id: 3,
-    category: "IT",
+    categoryId: 2,
     companies: [
       {
         id: 1,
@@ -986,7 +986,7 @@ export const allCompanies = [
   },
   {
     id: 4,
-    category: "영자지",
+    categoryId: 3,
     companies: [
       {
         id: 1,
@@ -1316,7 +1316,7 @@ export const allCompanies = [
   },
   {
     id: 5,
-    category: "스포츠/연예",
+    categoryId: 4,
     companies: [
       {
         id: 1,
@@ -1648,7 +1648,7 @@ export const allCompanies = [
   },
   {
     id: 6,
-    category: "매거진/전문지",
+    categoryId: 5,
     companies: [
       {
         id: 5,
@@ -1980,7 +1980,7 @@ export const allCompanies = [
   },
   {
     id: 7,
-    category: "지역",
+    categoryId: 6,
     companies: [
       {
         id: 1,

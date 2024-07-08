@@ -19,13 +19,14 @@
 /**
  * @typedef {Object} NewsCategory
  * @property {number} id
- * @property {string} category
+ * @property {string} categoryId
  * @property {Company[]} companies
  */
 
 /**
  * @typedef {Object} MainNewsState
  * @property {'list-view' | 'grid-view'} MainNewsState.currentView
+ * @property {"all-news-tab" | "subscribed-news-tab"} MainNewsState.currentDataType
  * @property {number} MainNewsState.currentCategoryIndex
  * @property {number} MainNewsState.currentCompanyIndex
  * @property {NewsCategory[]} MainNewsState.data

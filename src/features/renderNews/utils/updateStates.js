@@ -7,6 +7,7 @@ import { MainNewsState } from "../../../types/news.js";
  */
 const state = {
   currentView: "list-view",
+  currentDataType: "all-news-tab",
   currentCategoryIndex: 0,
   currentCompanyIndex: 0,
   data: [],
@@ -19,7 +20,7 @@ function resetIndexes() {
 
 /**
  * 전체 언론사 보기 / 내가 구독한 언론사 보기 탭 선택 시
- * @param {"all-news-tab" | "subscribed-news-tab"} id
+ * @param {MainNewsState.currentDataType} id
  */
 function switchCompanyTab(id) {
   state.data = state.data = id === "all-news-tab" ? allCompanies : subscribedCompanies;
