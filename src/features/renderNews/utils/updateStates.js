@@ -1,4 +1,4 @@
-import { allCompanies, subscribedCompanies } from "../../../data/news.js";
+import { allCompanies, subscribedCompanies } from "../../../data/companies.js";
 import { render } from "./renderView.js";
 import { MainNewsState } from "../../../types/news.js";
 
