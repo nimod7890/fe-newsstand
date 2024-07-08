@@ -1,0 +1,25 @@
+.company-nav-button {
+  z-index: 1;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  color: var(--border-bold);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.company-nav-button.prev {
+  left: -50px;
+  transform: rotate(180deg);
+}
+
+.company-nav-button.next {
+  right: -50px;
+}

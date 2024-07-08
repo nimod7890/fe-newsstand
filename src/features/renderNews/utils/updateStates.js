@@ -41,7 +41,15 @@ function updateCompanyType(index) {
   render(state);
 }
 
-/** 리스트 뷰 상태일 때 prev, next button 클릭 시  */
+function updatePrev() {
+  state.currentView == "list-view" && updateCompany(-1);
+}
+
+function updateNext() {
+  state.currentView == "list-view" && updateCompany(1);
+}
+
+/** 리스트 뷰 상태일 때 prev, next button 클릭 시 */
 function updateCompany(offset) {
   const currentType = state.data[state.currentTypeIndex];
   state.currentCompanyIndex += offset;
@@ -57,4 +65,4 @@ function updateCompany(offset) {
   render(state);
 }
 
-export { switchCompanyView, updateCompany, updateCompanyType, switchCompanyTab };
+export { switchCompanyView, updatePrev, updateNext, updateCompanyType, switchCompanyTab };
