@@ -42,7 +42,7 @@ function createNewsItem({ title, link }, tag) {
 
   container.insertAdjacentHTML(
     "beforeend",
-    `<a href=${link} class='available-medium14'>${title}</a>`
+    `<a href=${link} class='available-medium14 ellipsis'>${title}</a>`
   );
 
   return container;

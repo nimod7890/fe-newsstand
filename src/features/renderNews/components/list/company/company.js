@@ -83,7 +83,7 @@ function createNewsList(newsList, companyName) {
 function createNewsTitle(news) {
   const { url, title } = news;
 
-  return `<a class='display-medium16' href=${url} target='_blank'>${title}</a>`;
+  return `<a class='display-medium16 ellipsis' href=${url} target='_blank'>${title}</a>`;
 }
 
 /**

@@ -79,3 +79,9 @@ button,
   font-size: var(--font-size-12);
   line-height: var(--line-height-auto);
 }
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
