@@ -15,6 +15,11 @@
   align-items: center;
 }
 
+.company-nav-button > svg {
+  height: 40px;
+  width: 40px;
+}
+
 .company-nav-button.prev {
   left: -50px;
   transform: rotate(180deg);
