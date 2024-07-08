@@ -20,11 +20,11 @@ export function createCompany(company) {
  * @returns {HTMLDivElement}
  */
 function createHeader(company) {
-  const { companyLogo, companyName, updatedDate } = company;
+  const { companyLogoUrl, companyName, updatedDate } = company;
 
   const header = document.createElement("div");
   header.className = "company-container-header display-medium12";
-  header.insertAdjacentHTML("beforeend", `<img src=${companyLogo} alt='${companyName} 로고'/>`);
+  header.insertAdjacentHTML("beforeend", `<img src=${companyLogoUrl} alt='${companyName} 로고'/>`);
   header.insertAdjacentHTML("beforeend", `<time>${formatDateString(updatedDate)}</time>`);
   header.appendChild(createButton({ iconId: "plus", text: "구독하기" }));
 
@@ -36,12 +36,12 @@ function createHeader(company) {
  * @returns {HTMLDivElement}
  */
 function createNewsContents(company) {
-  const { mainNews, news, companyName } = company;
+  const { newsItems, companyName, mainNews } = company;
   const newsContentscontainer = document.createElement("div");
   newsContentscontainer.className = "company-container-contents";
 
   newsContentscontainer.appendChild(createMainNews(mainNews));
-  newsContentscontainer.appendChild(createNewsList(news, companyName));
+  newsContentscontainer.appendChild(createNewsList(newsItems, companyName));
 
   return newsContentscontainer;
 }
@@ -51,7 +51,7 @@ function createNewsContents(company) {
  * @returns {HTMLDivElement}
  */
 function createMainNews(mainNews) {
-  const { imageUrl } = mainNews;
+  const { thumbnailUrl: imageUrl } = mainNews;
 
   const mainNewsContainer = document.createElement("div");
   mainNewsContainer.className = "main-news";

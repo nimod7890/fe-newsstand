@@ -7,7 +7,7 @@ import { createCompany } from "./company/company.js";
  * @param {MainNewsState} state
  */
 export function renderListView(container, state) {
-  const currentType = state.data[state.currentTypeIndex];
-  const currentCompany = currentType?.company[state.currentCompanyIndex];
+  const currentCategory = state.data[state.currentCategoryIndex];
+  const currentCompany = currentCategory.companies[state.currentCompanyIndex];
   container.appendChild(createCompany(currentCompany));
 }

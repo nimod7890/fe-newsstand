@@ -7,13 +7,13 @@ import { MainNewsState } from "../../../types/news.js";
  */
 const state = {
   currentView: "list-view",
-  currentTypeIndex: 0,
+  currentCategoryIndex: 0,
   currentCompanyIndex: 0,
   data: [],
 };
 
 function resetIndexes() {
-  state.currentTypeIndex = 0;
+  state.currentCategoryIndex = 0;
   state.currentCompanyIndex = 0;
 }
 
@@ -36,7 +36,7 @@ function switchCompanyView(view) {
 
 /** 리스트 뷰 내 언론사 type(종합/경제, IT 등) 탭 선택 시 */
 function updateCompanyType(index) {
-  state.currentTypeIndex = index;
+  state.currentCategoryIndex = index;
   state.currentCompanyIndex = 0;
   render(state);
 }
@@ -51,14 +51,15 @@ function updateNext() {
 
 /** 리스트 뷰 상태일 때 prev, next button 클릭 시 */
 function updateCompany(offset) {
-  const currentType = state.data[state.currentTypeIndex];
+  const currentType = state.data[state.currentCategoryIndex];
   state.currentCompanyIndex += offset;
 
   if (state.currentCompanyIndex < 0) {
-    state.currentTypeIndex = (state.currentTypeIndex - 1 + state.data.length) % state.data.length;
-    state.currentCompanyIndex = state.data[state.currentTypeIndex].company.length - 1;
-  } else if (state.currentCompanyIndex >= currentType.company.length) {
-    state.currentTypeIndex = (state.currentTypeIndex + 1) % state.data.length;
+    state.currentCategoryIndex =
+      (state.currentCategoryIndex - 1 + state.data.length) % state.data.length;
+    state.currentCompanyIndex = state.data[state.currentCategoryIndex].companies.length - 1;
+  } else if (state.currentCompanyIndex >= currentType.companies.length) {
+    state.currentCategoryIndex = (state.currentCategoryIndex + 1) % state.data.length;
     state.currentCompanyIndex = 0;
   }
 
