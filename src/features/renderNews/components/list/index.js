@@ -18,5 +18,10 @@ export function renderListView(container, state) {
     container.appendChild(createTab(state));
     // 언론사
     container.appendChild(createCompany(currentCompany));
+  } else {
+    container.insertAdjacentHTML(
+      "beforeend",
+      `<p class='empty-text'>해당하는 언론사가 존재하지 않습니다.</p>`
+    );
   }
 }
