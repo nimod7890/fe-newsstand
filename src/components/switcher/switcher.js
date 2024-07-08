@@ -1,4 +1,5 @@
 import { ButtonProps } from "../button/button.js";
+import { createIconTemplateStrings } from "../icon/icon.js";
 
 /**
  * @typedef {Object} TabItem
@@ -37,9 +38,7 @@ export function createSwitcher({ className, items, onClick }) {
     if (isTabItem(item)) {
       label.innerHTML = item.text;
     } else if (isButtonProps(item)) {
-      const svg = `<svg class="icon">
-                    <use xlink:href="src/assets/sprite.svg#${item.iconId}"></use>
-                  </svg>`;
+      const svg = createIconTemplateStrings({ iconId: item.iconId });
       label.innerHTML = svg;
     }
 

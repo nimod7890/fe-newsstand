@@ -71,12 +71,6 @@ body {
   padding: 0;
 }
 
-svg {
-  width: 24px;
-  height: 24px;
-  color: currentColor;
-}
-
 input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
