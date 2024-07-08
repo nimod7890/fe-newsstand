@@ -16,7 +16,9 @@ const stylesheets = [
   "src/features/unsubscribeDialog/unsubscribeDialog.css",
 
   "src/features/renderNews/components/@common/mainArrowButton/mainArrowButton.css",
+
   "src/features/renderNews/components/list/company/company.css",
+  "src/features/renderNews/components/list/categories/categories.css",
 ];
 
 stylesheets.forEach(loadCSS);

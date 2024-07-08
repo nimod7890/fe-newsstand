@@ -42,16 +42,32 @@ function updateCompanyType(index) {
   render(state);
 }
 
+const updateCompanyState = {
+  ["list-view"]: {
+    ["all-news-tab"]: {
+      prev: () => updateListViewCompanyInAllNewTab(-1),
+      next: () => updateListViewCompanyInAllNewTab(1),
+    },
+    ["subscribed-news-tab"]: {
+      prev: () => updateListViewCompanyInSubscribedTab(-1),
+      next: () => updateListViewCompanyInSubscribedTab(1),
+    },
+  },
+};
+
 function updatePrev() {
-  state.currentView == "list-view" && updateCompany(-1);
+  updateCompanyState[state.currentView][state.currentDataType].prev;
 }
 
 function updateNext() {
-  state.currentView == "list-view" && updateCompany(1);
+  updateCompanyState[state.currentView][state.currentDataType].next;
 }
 
-/** 리스트 뷰 상태일 때 prev, next button 클릭 시 */
-function updateCompany(offset) {
+function updateListViewCompanyInSubscribedTab(offset) {
+  offset;
+}
+
+function updateListViewCompanyInAllNewTab(offset) {
   const currentType = state.data[state.currentCategoryIndex];
   state.currentCompanyIndex += offset;
 
