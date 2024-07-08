@@ -45,6 +45,7 @@
   gap: 16px;
 
   color: var(--text-bold);
+  overflow: hidden;
 }
 
 .company-container-contents .news-list > p {
