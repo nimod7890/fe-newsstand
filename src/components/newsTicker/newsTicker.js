@@ -12,7 +12,7 @@
  */
 export function createNewsTicker({ tag, newsItems }, scrollDelay = 0) {
   const ticker = document.createElement("ul");
-  ticker.className = `news-ticker`;
+  ticker.className = `news-ticker border-box`;
 
   newsItems.forEach((item, index) => {
     const newsItem = createNewsItem(item, tag);

@@ -20,7 +20,7 @@ export function createButton({ iconId, text = "", color = "white" }) {
   }
 
   const button = document.createElement("button");
-  button.className = `button button-${color}`;
+  button.className = `button button-${color} border-box`;
 
   const icon = document.createElement("div");
   icon.innerHTML = createIconTemplateStrings({ className: "button-icon", iconId });

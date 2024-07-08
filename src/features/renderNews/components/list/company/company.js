@@ -7,7 +7,7 @@ import { Company, NewsItem } from "../../../../../types/news.js";
  */
 export function createCompany(company) {
   const container = document.createElement("div");
-  container.className = "list-company-container";
+  container.className = "list-company-container border-box";
 
   container.appendChild(createHeader(company));
   container.insertAdjacentHTML("beforeend", createNewsContents(company));

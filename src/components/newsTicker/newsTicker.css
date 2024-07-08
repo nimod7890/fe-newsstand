@@ -1,6 +1,6 @@
 .news-ticker {
   background-color: var(--surface-alt);
-  border: 1px solid var(--border-default);
+
   width: 500px;
   height: 50px;
   position: relative;
