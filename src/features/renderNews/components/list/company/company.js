@@ -1,6 +1,5 @@
 import { Company, NewsItem } from "../../../../../types/news.js";
 import { createSubscriptionButton } from "../../../../subscriptionButton/components/subscriptionButton.js";
-import { getObjectSubscribedCompanies } from "../../../../subscriptionButton/utils/localStorage.js";
 
 /**
  * @param {Company} company
@@ -31,9 +30,7 @@ function createHeader(company) {
     <time>${formatDateString(updatedDate)}</time>
   `;
 
-  const subscriptions = getObjectSubscribedCompanies();
-  const isSubscribed = subscriptions.hasOwnProperty(company.id);
-  header.appendChild(createSubscriptionButton({ company, isSubscribed }));
+  header.appendChild(createSubscriptionButton(company));
 
   return header;
 }

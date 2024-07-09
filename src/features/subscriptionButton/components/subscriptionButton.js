@@ -1,5 +1,6 @@
 import { createButton } from "../../../components/button/button.js";
 import { Company } from "../../../types/news.js";
+import { getObjectSubscribedCompanies } from "../utils/localStorage.js";
 import { showSubscribeToast } from "./subscribeToast.js";
 import { showUnsubscribeDialog } from "./unsubscribeDialog/unsubscribeDialog.js";
 
@@ -9,13 +10,14 @@ const buttonProps = {
 };
 
 /**
- * @param {Object} props
- * @param {Company} props.company
- * @param {boolean} props.isSubscribed
+ * @param {Company} company
  *
  * @return {HTMLButtonElement}
  */
-export function createSubscriptionButton({ company, isSubscribed }) {
+export function createSubscriptionButton(company) {
+  const subscriptions = getObjectSubscribedCompanies();
+  const isSubscribed = subscriptions.hasOwnProperty(company.id);
+
   const button = createButton(buttonProps[isSubscribed]);
   button.setAttribute("data-company-id", company.id);
   button.setAttribute("aria-label", buttonProps[isSubscribed].ariaLabel);
