@@ -1,6 +1,7 @@
-import { allCompanies, subscribedCompanies } from "../../../data/companies.js";
+import { allCompanies } from "../../../data/companies.js";
 import { render } from "./renderView.js";
 import { MainNewsState } from "../../../types/news.js";
+import { getArraySubscribedCompanies } from "../../subscriptionButton/utils/localStorage.js";
 
 /**
  * @type {MainNewsState}
@@ -23,8 +24,11 @@ function resetIndexes() {
  * @param {MainNewsState.currentDataType} id
  */
 function switchCompanyTab(id) {
+  const tab = document.getElementById(id);
+  tab.checked = true;
+
   state.currentDataType = id;
-  state.data = id === "all-news-tab" ? allCompanies : subscribedCompanies;
+  state.data = id === "all-news-tab" ? allCompanies : getArraySubscribedCompanies();
   resetIndexes();
   render(state);
 }
@@ -70,14 +74,15 @@ function updateNext() {
   updateCompanyState[state.currentView][state.currentDataType].next();
 }
 
-function updateListViewCompanyInSubscribedTab(offset) {
+function updateListViewCompanyInSubscribedTab(offset = 0) {
+  state.data = getArraySubscribedCompanies();
+
   state.currentCompanyIndex += offset;
   if (state.currentCompanyIndex < 0) {
     state.currentCompanyIndex = state.data.length - 1;
   } else if (state.currentCompanyIndex >= state.data.length) {
     state.currentCompanyIndex = 0;
   }
-
   render(state);
 }
 
@@ -104,4 +109,5 @@ export {
   updateNext,
   updateCompanyType,
   switchCompanyTab,
+  updateListViewCompanyInSubscribedTab,
 };

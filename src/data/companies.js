@@ -2305,6 +2305,3 @@ export const allCompanies = [
     ],
   },
 ];
-
-/** @type {Company[]} */
-export const subscribedCompanies = [];
