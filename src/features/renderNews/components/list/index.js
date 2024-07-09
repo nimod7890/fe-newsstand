@@ -17,7 +17,7 @@ export function renderListView(container, state) {
     // 언론사 카테고리
     container.appendChild(createTab(state));
     // 언론사
-    container.appendChild(createCompany(currentCompany));
+    container.appendChild(createCompany(currentCompany, state.currentDataType));
   } else {
     container.insertAdjacentHTML(
       "beforeend",

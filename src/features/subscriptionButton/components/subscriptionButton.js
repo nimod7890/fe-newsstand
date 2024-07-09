@@ -11,35 +11,36 @@ const buttonProps = {
 
 /**
  * @param {Company} company
- *
+ * @param {"all-news-tab" | "subscribed-news-tab"} dataType
  * @return {HTMLButtonElement}
  */
-export function createSubscriptionButton(company) {
+export function createSubscriptionButton(company, dataType) {
   const subscriptions = getObjectSubscribedCompanies();
   const isSubscribed = subscriptions.hasOwnProperty(company.id);
 
   const button = createButton(buttonProps[isSubscribed]);
   button.setAttribute("data-company-id", company.id);
-  button.setAttribute("aria-label", buttonProps[isSubscribed].ariaLabel);
+  button.setAttribute("aria-label", `${company.name} ${buttonProps[isSubscribed].ariaLabel}`);
   button.addEventListener("click", () =>
-    isSubscribed ? showUnsubscribeDialog(company) : showSubscribeToast(company)
+    isSubscribed ? showUnsubscribeDialog(company, dataType) : showSubscribeToast(company)
   );
   return button;
 }
 
-/** storage 변경될 경우 구독 버튼 교체 */
-
 document.addEventListener("DOMContentLoaded", () => {
-  window.addEventListener("storage", (event) => updateSubscriptionButtons(event.detail));
+  window.addEventListener("storage", ({ detail }) => updateSubscriptionButtons(detail));
 });
 
-function updateSubscriptionButtons({ company, isSubscribed }) {
+function updateSubscriptionButtons({ company, isSubscribed, dataType = "all-news-tab" }) {
   const subscriptionButton = document.querySelector(`[data-company-id="${company.id}"]`);
 
   if (subscriptionButton) {
     const newButton = createButton(buttonProps[isSubscribed]);
+    newButton.setAttribute("data-company-id", company.id);
     newButton.setAttribute("aria-label", `${company.name} ${buttonProps[isSubscribed].ariaLabel}`);
-    newButton.addEventListener("click", () => handleSubscriptionClick([isSubscribed], company));
+    newButton.addEventListener("click", () =>
+      isSubscribed ? showUnsubscribeDialog(company, dataType) : showSubscribeToast(company)
+    );
 
     subscriptionButton.replaceWith(newButton);
   }

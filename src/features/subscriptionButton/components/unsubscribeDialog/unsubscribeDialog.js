@@ -5,15 +5,16 @@ import { dispatchStorageEvent } from "../../utils/dispatchStorageEvent.js";
 import { removeSubscribedCompany } from "../../utils/localStorage.js";
 
 /**
- * @param {Company} xcompany
+ * @param {Company} company
+ * @param {"all-news-tab" | "subscribed-news-tab"} dataType
  */
-export function showUnsubscribeDialog(company) {
+export function showUnsubscribeDialog(company, dataType) {
   const confirmProps = {
     text: "예, 해지합니다",
     onClick: () => {
       removeSubscribedCompany(company.id);
       dispatchStorageEvent({ company, isSubscribed: false });
-      rerenderListViewCompanyInSubscribedTab();
+      dataType === "subscribed-news-tab" && rerenderListViewCompanyInSubscribedTab();
     },
   };
 

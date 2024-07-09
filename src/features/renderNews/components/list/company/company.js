@@ -3,13 +3,14 @@ import { createSubscriptionButton } from "../../../../subscriptionButton/compone
 
 /**
  * @param {Company} company
+ * @param {"all-news-tab" | "subscribed-news-tab"} dataType
  * @returns {HTMLDivElement}
  */
-export function createCompany(company) {
+export function createCompany(company, dataType) {
   const container = document.createElement("div");
   container.className = "list-company-container border-box";
 
-  container.appendChild(createHeader(company));
+  container.appendChild(createHeader(company, dataType));
   container.insertAdjacentHTML("beforeend", createNewsContents(company));
 
   return container;
@@ -17,9 +18,10 @@ export function createCompany(company) {
 
 /**
  * @param {Company} company
+ * @param {"all-news-tab" | "subscribed-news-tab"} dataType
  * @returns {HTMLDivElement}
  */
-function createHeader(company) {
+function createHeader(company, dataType) {
   const { logoUrl, name, updatedDate } = company;
 
   const header = document.createElement("div");
@@ -30,7 +32,7 @@ function createHeader(company) {
     <time>${formatDateString(updatedDate)}</time>
   `;
 
-  header.appendChild(createSubscriptionButton(company));
+  header.appendChild(createSubscriptionButton(company, dataType));
 
   return header;
 }
