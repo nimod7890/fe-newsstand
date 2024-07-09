@@ -15,7 +15,7 @@ import { createOverlayContainer } from "../overlay.js";
 export function showDialog({ message, leftButtonProps, rightButtonProps }) {
   const dialog = createOverlayContainer("dialog border-box");
 
-  const messageElement = `<p class='border-box display-bold16'>${message}</p>`;
+  const messageElement = `<p class='border-box display-medium16'>${message}</p>`;
 
   const buttonsContainer = document.createElement("div");
   buttonsContainer.className = "dialog-buttons";
@@ -41,7 +41,7 @@ function createDialogButton({ className = "", onClick, text }, dialog) {
   button.className = `dialog-button border-box available-medium16 ${className}`;
   button.textContent = text;
   button.onclick = () => {
-    onClick();
+    onClick && onClick();
     document.body.removeChild(dialog);
   };
   return button;
