@@ -74,7 +74,7 @@ function updateNext() {
   updateCompanyState[state.currentView][state.currentDataType].next();
 }
 
-function updateListViewCompanyInSubscribedTab(offset = 0) {
+function updateListViewCompanyInSubscribedTab(offset) {
   state.data = getArraySubscribedCompanies();
 
   state.currentCompanyIndex += offset;
@@ -102,6 +102,10 @@ function updateListViewCompanyInAllTab(offset) {
   render(state);
 }
 
+function rerenderListViewCompanyInSubscribedTab() {
+  updateListViewCompanyInSubscribedTab(0);
+}
+
 export {
   updateCompany,
   switchCompanyView,
@@ -109,5 +113,5 @@ export {
   updateNext,
   updateCompanyType,
   switchCompanyTab,
-  updateListViewCompanyInSubscribedTab,
+  rerenderListViewCompanyInSubscribedTab,
 };
