@@ -34,7 +34,6 @@ export function removeSubscribedCompany(companyId) {
   const companies = getObjectSubscribedCompanies(StorageKeys.SubscribedCompanies);
   if (companies.hasOwnProperty(companyId)) {
     delete companies[companyId];
-    console.log(companies);
     setSubscribedCompanies(companies);
   }
 }
