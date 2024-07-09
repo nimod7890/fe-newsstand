@@ -1,7 +1,7 @@
-import { showDialog } from "../../components/overlays/dialog/dialog.js";
-import { Company } from "../../types/news.js";
-import { StorageKeys, removeFromLocalStorageArray } from "../../utils/localStorage.js";
-import { updateNext } from "../renderNews/utils/updateStates.js";
+import { showDialog } from "../../../../components/overlays/dialog/dialog.js";
+import { Company } from "../../../../types/news.js";
+import { dispatchStorageEvent } from "../../utils/dispatchStorageEvent.js";
+import { removeSubscribedCompany } from "../../utils/localStorage.js";
 
 /**
  * @param {Company} xcompany
@@ -10,8 +10,8 @@ export function showUnsubscribeDialog(company) {
   const confirmProps = {
     text: "예, 해지합니다",
     onClick: () => {
-      updateNext();
-      removeFromLocalStorageArray(StorageKeys.SubscribedCompanies, company);
+      removeSubscribedCompany(company.id);
+      dispatchStorageEvent({ company, isSubscribed: false });
     },
   };
 

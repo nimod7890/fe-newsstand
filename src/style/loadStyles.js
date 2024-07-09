@@ -13,7 +13,7 @@ const stylesheets = [
   "src/components/overlays/dialog/dialog.css",
   "src/components/overlays/toast/toast.css",
 
-  "src/features/unsubscribeDialog/unsubscribeDialog.css",
+  "src/features/subscriptionButton/components/unsubscribeDialog/unsubscribeDialog.css",
 
   "src/features/renderNews/components/@common/mainArrowButton/mainArrowButton.css",
 
