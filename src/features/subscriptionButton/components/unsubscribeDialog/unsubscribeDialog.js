@@ -1,7 +1,7 @@
 import { showDialog } from "../../../../components/overlays/dialog/dialog.js";
 import { Company } from "../../../../types/news.js";
 import { rerenderListViewCompanyInSubscribedTab } from "../../../renderNews/utils/updateStates.js";
-import { dispatchStorageEvent } from "../../utils/dispatchStorageEvent.js";
+import { dispatchSubscriptionUpdateEvent } from "../../utils/dispatchSubscriptionUpdateEvent.js";
 import { removeSubscribedCompany } from "../../utils/localStorage.js";
 
 /**
@@ -13,7 +13,7 @@ export function showUnsubscribeDialog(company, dataType) {
     text: "예, 해지합니다",
     onClick: () => {
       removeSubscribedCompany(company.id);
-      dispatchStorageEvent({ company, isSubscribed: false });
+      dispatchSubscriptionUpdateEvent({ company, isSubscribed: false });
       dataType === "subscribed-news-tab" && rerenderListViewCompanyInSubscribedTab();
     },
   };

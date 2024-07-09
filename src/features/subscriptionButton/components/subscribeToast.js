@@ -1,6 +1,6 @@
 import { showToast } from "../../../components/overlays/toast/toast.js";
 import { switchCompanyTab } from "../../renderNews/utils/updateStates.js";
-import { dispatchStorageEvent } from "../utils/dispatchStorageEvent.js";
+import { dispatchSubscriptionUpdateEvent } from "../utils/dispatchSubscriptionUpdateEvent.js";
 import { addSubscribedCompany } from "../utils/localStorage.js";
 
 const TOAST_SHOWING_TIME = 5000;
@@ -15,5 +15,5 @@ export function showSubscribeToast(company) {
     switchCompanyTab("subscribed-news-tab");
   }, TOAST_SHOWING_TIME);
 
-  dispatchStorageEvent({ company, isSubscribed: true });
+  dispatchSubscriptionUpdateEvent({ company, isSubscribed: true });
 }
