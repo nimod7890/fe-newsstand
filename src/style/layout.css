@@ -32,13 +32,13 @@ header {
   align-items: center;
 }
 
-.logo {
+#logo {
   display: flex;
   align-items: center;
   gap: 2.5px;
 }
 
-.logo > svg {
+#logo > svg {
   color: var(--text-point);
 }
 

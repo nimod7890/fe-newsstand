@@ -15,14 +15,17 @@ import {
 initialize();
 
 function initialize() {
-  renderCurrentTime();
+  renderHeader();
   renderHeadlineNewsTicker();
   renderSwitcher();
   renderNewsView();
 }
 
-/* render current time */
-function renderCurrentTime() {
+function renderHeader() {
+  const logo = document.getElementById("logo");
+  logo.addEventListener("click", () => history.go(0));
+
+  /* render current time */
   const timeElement = document.getElementById("current-date");
   const now = new Date();
   const formattedDate = now.toLocaleDateString("ko-KR", {
