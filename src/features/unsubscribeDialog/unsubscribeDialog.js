@@ -1,19 +1,27 @@
 import { showDialog } from "../../components/overlays/dialog/dialog.js";
+import { Company } from "../../types/news.js";
+import { StorageKeys, removeFromLocalStorageArray } from "../../utils/localStorage.js";
+import { updateNext } from "../renderNews/utils/updateStates.js";
 
-export function showUnsubscribeDialog() {
+/**
+ * @param {Company} xcompany
+ */
+export function showUnsubscribeDialog(company) {
   const confirmProps = {
     text: "예, 해지합니다",
-    onClick: () => console.log("Confirmed"),
+    onClick: () => {
+      updateNext();
+      removeFromLocalStorageArray(StorageKeys.SubscribedCompanies, company);
+    },
   };
 
   const cancelProps = {
     text: "아니오",
     className: "cancel",
-    onClick: () => console.log("Cancelled"),
   };
 
   showDialog({
-    message: `<strong>해당 언론사</strong>을(를)<br/> 구독해지하시겠습니까?`,
+    message: `<strong>${company.name}</strong>을(를)<br/> 구독해지하시겠습니까?`,
     leftButtonProps: confirmProps,
     rightButtonProps: cancelProps,
   });
