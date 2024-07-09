@@ -1,8 +1,6 @@
 import { createButton } from "../../../components/button/button.js";
-import { Company } from "../../../types/news.js";
-import { getObjectSubscribedCompanies } from "../utils/localStorage.js";
-import { showSubscribeToast } from "./subscribeToast.js";
-import { showUnsubscribeDialog } from "./unsubscribeDialog/unsubscribeDialog.js";
+import { showSubscribeToast } from "../components/subscribeToast.js";
+import { showUnsubscribeDialog } from "../components/unsubscribeDialog/unsubscribeDialog.js";
 
 const buttonProps = {
   true: { iconId: "closed", ariaLabel: "구독해제" },
@@ -10,14 +8,13 @@ const buttonProps = {
 };
 
 /**
- * @param {Company} company
- * @param {"all-news-tab" | "subscribed-news-tab"} dataType
- * @return {HTMLButtonElement}
+ * @param {Object} props
+ * @param {Company} props.company
+ * @param {boolean} props.isSubscribed
+ * @param {"all-news-tab" | "subscribed-news-tab"} props.dataType
+ * @returns {HTMLButtonElement}
  */
-export function createSubscriptionButton(company, dataType) {
-  const subscriptions = getObjectSubscribedCompanies();
-  const isSubscribed = subscriptions.hasOwnProperty(company.id);
-
+export function createSubscriptionButton({ company, isSubscribed, dataType }) {
   const button = createButton(buttonProps[isSubscribed]);
   button.setAttribute("data-company-id", company.id);
   button.setAttribute("aria-label", `${company.name} ${buttonProps[isSubscribed].ariaLabel}`);
@@ -25,23 +22,4 @@ export function createSubscriptionButton(company, dataType) {
     isSubscribed ? showUnsubscribeDialog(company, dataType) : showSubscribeToast(company)
   );
   return button;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  window.addEventListener("storage", ({ detail }) => updateSubscriptionButtons(detail));
-});
-
-function updateSubscriptionButtons({ company, isSubscribed, dataType = "all-news-tab" }) {
-  const subscriptionButton = document.querySelector(`[data-company-id="${company.id}"]`);
-
-  if (subscriptionButton) {
-    const newButton = createButton(buttonProps[isSubscribed]);
-    newButton.setAttribute("data-company-id", company.id);
-    newButton.setAttribute("aria-label", `${company.name} ${buttonProps[isSubscribed].ariaLabel}`);
-    newButton.addEventListener("click", () =>
-      isSubscribed ? showUnsubscribeDialog(company, dataType) : showSubscribeToast(company)
-    );
-
-    subscriptionButton.replaceWith(newButton);
-  }
 }

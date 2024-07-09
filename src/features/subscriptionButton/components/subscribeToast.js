@@ -3,7 +3,7 @@ import { switchCompanyTab } from "../../renderNews/utils/updateStates.js";
 import { dispatchStorageEvent } from "../utils/dispatchStorageEvent.js";
 import { addSubscribedCompany } from "../utils/localStorage.js";
 
-const TOAST_SHOWING_TIME = 2000;
+const TOAST_SHOWING_TIME = 5000;
 
 /**
  * @param {Company} company
