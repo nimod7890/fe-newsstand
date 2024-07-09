@@ -6,7 +6,6 @@ import { createTabItem } from "./tabItem.js";
 
 /**
  * @param {MainNewsState} state
- * @param {string} companyName
  */
 export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDataType, data }) {
   const categories = document.createElement("div");
@@ -25,7 +24,7 @@ export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDa
       categories.appendChild(categoryElement);
     });
   } else {
-    data.forEach(({ companyName }, companyIndex) => {
+    data.forEach(({ name: companyName }, companyIndex) => {
       const companyElement = createTabItem({
         innerText: companyName,
         isSelected: companyIndex === currentCompanyIndex,

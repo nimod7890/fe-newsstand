@@ -8,9 +8,9 @@
 
 /**
  * @typedef {Object} Company
- * @property {number} companyId
- * @property {string} companyLogoUrl
- * @property {string} companyName
+ * @property {number} id
+ * @property {string} logoUrl
+ * @property {string} name
  * @property {string} updatedDate
  * @property {NewsItem} mainNews
  * @property {NewsItem[]} newsItems

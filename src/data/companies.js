@@ -9,9 +9,9 @@ export const allCompanies = [
     categoryId: 0,
     companies: [
       {
-        companyId: 1,
-        companyName: "연합뉴스",
-        companyLogoUrl: "/src/assets/images/yonhapNews.png",
+        id: 1,
+        name: "연합뉴스",
+        logoUrl: "/src/assets/images/yonhapNews.png",
         updatedDate: "2024-07-03T01:10:00Z",
         mainNews: {
           id: 1,
@@ -56,8 +56,8 @@ export const allCompanies = [
       },
       {
         id: 2,
-        companyName: "서울경제",
-        companyLogoUrl: "/src/assets/images/seoulEconomic.png",
+        name: "서울경제",
+        logoUrl: "/src/assets/images/seoulEconomic.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -102,8 +102,8 @@ export const allCompanies = [
       },
       {
         id: 3,
-        companyName: "데일리한국",
-        companyLogoUrl: "/src/assets/images/dailyKorea.png",
+        name: "데일리한국",
+        logoUrl: "/src/assets/images/dailyKorea.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -147,8 +147,8 @@ export const allCompanies = [
       },
       {
         id: 4,
-        companyName: "파이낸스",
-        companyLogoUrl: "/src/assets/images/finance.png",
+        name: "파이낸스",
+        logoUrl: "/src/assets/images/finance.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           id: 1,
@@ -193,8 +193,8 @@ export const allCompanies = [
       },
       {
         id: 5,
-        companyName: "아이뉴스",
-        companyLogoUrl: "/src/assets/images/iNews.png",
+        name: "아이뉴스",
+        logoUrl: "/src/assets/images/iNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -240,8 +240,8 @@ export const allCompanies = [
       },
       {
         id: 6,
-        companyName: "시사위크",
-        companyLogoUrl: "/src/assets/images/sisaweek.png",
+        name: "시사위크",
+        logoUrl: "/src/assets/images/sisaweek.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -285,8 +285,8 @@ export const allCompanies = [
       },
       {
         id: 7,
-        companyName: "엑스포츠",
-        companyLogoUrl: "/src/assets/images/ecSportsNews.png",
+        name: "엑스포츠",
+        logoUrl: "/src/assets/images/ecSportsNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           id: 1,
@@ -335,9 +335,9 @@ export const allCompanies = [
     categoryId: 1,
     companies: [
       {
-        id: 1,
-        companyName: "일간스포츠",
-        companyLogoUrl: "/src/assets/images/ilganSports.png",
+        id: 8,
+        name: "일간스포츠",
+        logoUrl: "/src/assets/images/ilganSports.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -381,9 +381,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 2,
-        companyName: "중앙일보",
-        companyLogoUrl: "/src/assets/images/joongangNews.png",
+        id: 9,
+        name: "중앙일보",
+        logoUrl: "/src/assets/images/joongangNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           id: 1,
@@ -428,9 +428,9 @@ export const allCompanies = [
       },
 
       {
-        id: 3,
-        companyName: "여성경제신문",
-        companyLogoUrl: "/src/assets/images/womanEconomic.png",
+        id: 10,
+        name: "여성경제신문",
+        logoUrl: "/src/assets/images/womanEconomic.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           id: 1,
@@ -473,9 +473,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 4,
-        companyName: "인사이트",
-        companyLogoUrl: "/src/assets/images/insight.png",
+        id: 11,
+        name: "인사이트",
+        logoUrl: "/src/assets/images/insight.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -519,9 +519,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 5,
-        companyName: "데이터뉴스",
-        companyLogoUrl: "/src/assets/images/dataNews.png",
+        id: 12,
+        name: "데이터뉴스",
+        logoUrl: "/src/assets/images/dataNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -565,9 +565,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 6,
-        companyName: "JTBC",
-        companyLogoUrl: "/src/assets/images/JTBC.png",
+        id: 13,
+        name: "JTBC",
+        logoUrl: "/src/assets/images/JTBC.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -610,9 +610,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 7,
-        companyName: "KBSWorld",
-        companyLogoUrl: "/src/assets/images/KBSWorld.png",
+        id: 14,
+        name: "KBSWorld",
+        logoUrl: "/src/assets/images/KBSWorld.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -661,9 +661,9 @@ export const allCompanies = [
     categoryId: 2,
     companies: [
       {
-        id: 1,
-        companyName: "KNN",
-        companyLogoUrl: "/src/assets/images/KNN.png",
+        id: 15,
+        name: "KNN",
+        logoUrl: "/src/assets/images/KNN.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -711,8 +711,8 @@ export const allCompanies = [
       },
       {
         id: 2,
-        companyName: "국민일보",
-        companyLogoUrl: "/src/assets/images/koockminNews.png",
+        name: "국민일보",
+        logoUrl: "/src/assets/images/koockminNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -757,8 +757,8 @@ export const allCompanies = [
       },
       {
         id: 3,
-        companyName: "매일경제",
-        companyLogoUrl: "/src/assets/images/mailEconomic.png",
+        name: "매일경제",
+        logoUrl: "/src/assets/images/mailEconomic.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -802,8 +802,8 @@ export const allCompanies = [
       },
       {
         id: 4,
-        companyName: "MBN",
-        companyLogoUrl: "/src/assets/images/MBN.png",
+        name: "MBN",
+        logoUrl: "/src/assets/images/MBN.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -848,8 +848,8 @@ export const allCompanies = [
       },
       {
         id: 5,
-        companyName: "마이데일리",
-        companyLogoUrl: "/src/assets/images/mydaily.png",
+        name: "마이데일리",
+        logoUrl: "/src/assets/images/mydaily.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -894,8 +894,8 @@ export const allCompanies = [
       },
       {
         id: 6,
-        companyName: "뉴데일리",
-        companyLogoUrl: "/src/assets/images/newDaily.png",
+        name: "뉴데일리",
+        logoUrl: "/src/assets/images/newDaily.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -939,8 +939,8 @@ export const allCompanies = [
       },
       {
         id: 7,
-        companyName: "OBS",
-        companyLogoUrl: "/src/assets/images/OBS.png",
+        name: "OBS",
+        logoUrl: "/src/assets/images/OBS.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -989,9 +989,9 @@ export const allCompanies = [
     categoryId: 3,
     companies: [
       {
-        id: 1,
-        companyName: "Digital Today",
-        companyLogoUrl: "/src/assets/images/digitalToday.png",
+        id: 16,
+        name: "Digital Today",
+        logoUrl: "/src/assets/images/digitalToday.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1036,8 +1036,8 @@ export const allCompanies = [
       },
       {
         id: 2,
-        companyName: "SBSBiz",
-        companyLogoUrl: "/src/assets/images/SBSBiz.png",
+        name: "SBSBiz",
+        logoUrl: "/src/assets/images/SBSBiz.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1082,8 +1082,8 @@ export const allCompanies = [
       },
       {
         id: 3,
-        companyName: "헤럴드 경제",
-        companyLogoUrl: "/src/assets/images/HEconimic.png",
+        name: "헤럴드 경제",
+        logoUrl: "/src/assets/images/HEconimic.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1128,8 +1128,8 @@ export const allCompanies = [
       },
       {
         id: 4,
-        companyName: "스포츠동아",
-        companyLogoUrl: "/src/assets/images/sportsDonga.png",
+        name: "스포츠동아",
+        logoUrl: "/src/assets/images/sportsDonga.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1175,8 +1175,8 @@ export const allCompanies = [
       },
       {
         id: 5,
-        companyName: "스포츠뉴스",
-        companyLogoUrl: "/src/assets/images/sportsNews.png",
+        name: "스포츠뉴스",
+        logoUrl: "/src/assets/images/sportsNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1222,8 +1222,8 @@ export const allCompanies = [
       },
       {
         id: 6,
-        companyName: "MKSports",
-        companyLogoUrl: "/src/assets/images/MKSports.png",
+        name: "MKSports",
+        logoUrl: "/src/assets/images/MKSports.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1268,8 +1268,8 @@ export const allCompanies = [
       },
       {
         id: 7,
-        companyName: "세계뉴스",
-        companyLogoUrl: "/src/assets/images/worldNews.png",
+        name: "세계뉴스",
+        logoUrl: "/src/assets/images/worldNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1319,9 +1319,9 @@ export const allCompanies = [
     categoryId: 4,
     companies: [
       {
-        id: 1,
-        companyName: "ZNDETKorea",
-        companyLogoUrl: "/src/assets/images/ZNDETKorea.png",
+        id: 17,
+        name: "ZNDETKorea",
+        logoUrl: "/src/assets/images/ZNDETKorea.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1366,9 +1366,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 2,
-        companyName: "전자뉴스",
-        companyLogoUrl: "/src/assets/images/junjaNews.png",
+        id: 18,
+        name: "전자뉴스",
+        logoUrl: "/src/assets/images/junjaNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1413,9 +1413,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 3,
-        companyName: "에너지경제",
-        companyLogoUrl: "/src/assets/images/energyEconomy.png",
+        id: 19,
+        name: "에너지경제",
+        logoUrl: "/src/assets/images/energyEconomy.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1459,9 +1459,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 4,
-        companyName: "일간스포츠",
-        companyLogoUrl: "/src/assets/images/ilganSports.png",
+        id: 20,
+        name: "일간스포츠",
+        logoUrl: "/src/assets/images/ilganSports.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1506,9 +1506,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 5,
-        companyName: "데일리안",
-        companyLogoUrl: "/src/assets/images/dailyAn.png",
+        id: 21,
+        name: "데일리안",
+        logoUrl: "/src/assets/images/dailyAn.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1553,9 +1553,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 6,
-        companyName: "YTN",
-        companyLogoUrl: "/src/assets/images/YTN.png",
+        id: 22,
+        name: "YTN",
+        logoUrl: "/src/assets/images/YTN.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1599,9 +1599,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 7,
-        companyName: "동아일보",
-        companyLogoUrl: "/src/assets/images/DonaANews.png",
+        id: 23,
+        name: "동아일보",
+        logoUrl: "/src/assets/images/DonaANews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1651,9 +1651,9 @@ export const allCompanies = [
     categoryId: 5,
     companies: [
       {
-        id: 5,
-        companyName: "텐아시아",
-        companyLogoUrl: "/src/assets/images/10Asia.png",
+        id: 24,
+        name: "텐아시아",
+        logoUrl: "/src/assets/images/10Asia.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1698,9 +1698,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 2,
-        companyName: "SBS",
-        companyLogoUrl: "/src/assets/images/SBS.png",
+        id: 25,
+        name: "SBS",
+        logoUrl: "/src/assets/images/SBS.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1745,9 +1745,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 3,
-        companyName: "서울신문",
-        companyLogoUrl: "/src/assets/images/seoulNews.png",
+        id: 26,
+        name: "서울신문",
+        logoUrl: "/src/assets/images/seoulNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1791,9 +1791,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 4,
-        companyName: "조선Biz",
-        companyLogoUrl: "/src/assets/images/chosunBiz.png",
+        id: 27,
+        name: "조선Biz",
+        logoUrl: "/src/assets/images/chosunBiz.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1838,9 +1838,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 5,
-        companyName: "조이뉴스24",
-        companyLogoUrl: "/src/assets/images/joyNews24.png",
+        id: 28,
+        name: "조이뉴스24",
+        logoUrl: "/src/assets/images/joyNews24.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1885,9 +1885,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 6,
-        companyName: "TV리포트",
-        companyLogoUrl: "/src/assets/images/TVReport.png",
+        id: 29,
+        name: "TV리포트",
+        logoUrl: "/src/assets/images/TVReport.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1931,9 +1931,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 7,
-        companyName: "e데일리",
-        companyLogoUrl: "/src/assets/images/eDaily.png",
+        id: 30,
+        name: "e데일리",
+        logoUrl: "/src/assets/images/eDaily.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -1983,9 +1983,9 @@ export const allCompanies = [
     categoryId: 6,
     companies: [
       {
-        id: 1,
-        companyName: "파이낸셜뉴스",
-        companyLogoUrl: "/src/assets/images/finacialNews.png",
+        id: 31,
+        name: "파이낸셜뉴스",
+        logoUrl: "/src/assets/images/finacialNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -2028,9 +2028,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 2,
-        companyName: "it조선",
-        companyLogoUrl: "/src/assets/images/itChosun.png",
+        id: 32,
+        name: "it조선",
+        logoUrl: "/src/assets/images/itChosun.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -2074,9 +2074,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 3,
-        companyName: "미디어오늘",
-        companyLogoUrl: "/src/assets/images/mediaToday.png",
+        id: 33,
+        name: "미디어오늘",
+        logoUrl: "/src/assets/images/mediaToday.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -2120,9 +2120,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 4,
-        companyName: "오마이뉴스",
-        companyLogoUrl: "/src/assets/images/ohmyNews.png",
+        id: 34,
+        name: "오마이뉴스",
+        logoUrl: "/src/assets/images/ohmyNews.png",
         updatedDate: "2024-07-04T01:10:00Z",
 
         mainNews: {
@@ -2167,9 +2167,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 5,
-        companyName: "시사저널e",
-        companyLogoUrl: "/src/assets/images/sisajounalE.png",
+        id: 35,
+        name: "시사저널e",
+        logoUrl: "/src/assets/images/sisajounalE.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -2213,9 +2213,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 6,
-        companyName: "매일경제",
-        companyLogoUrl: "/src/assets/images/mailEconomic.png",
+        id: 36,
+        name: "매일경제",
+        logoUrl: "/src/assets/images/mailEconomic.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
@@ -2258,9 +2258,9 @@ export const allCompanies = [
         ],
       },
       {
-        id: 7,
-        companyName: "한국경제TV",
-        companyLogoUrl: "/src/assets/images/koreaEconomyTY.png",
+        id: 37,
+        name: "한국경제TV",
+        logoUrl: "/src/assets/images/koreaEconomyTY.png",
         updatedDate: "2024-07-04T01:10:00Z",
         mainNews: {
           thumbnailUrl:
