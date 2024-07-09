@@ -12,7 +12,6 @@ const buttonProps = {
  * @param {Object} props
  * @param {Company} props.company
  * @param {boolean} props.isSubscribed
- * @param {void} props.onSubscribe
  *
  * @return {HTMLButtonElement}
  */
