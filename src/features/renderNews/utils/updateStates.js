@@ -56,8 +56,8 @@ function updateCompany(companyIndex) {
 const updateCompanyState = {
   ["list-view"]: {
     ["all-news-tab"]: {
-      prev: () => updateListViewCompanyInAllNewTab(-1),
-      next: () => updateListViewCompanyInAllNewTab(1),
+      prev: () => updateListViewCompanyInAllTab(-1),
+      next: () => updateListViewCompanyInAllTab(1),
     },
     ["subscribed-news-tab"]: {
       prev: () => updateListViewCompanyInSubscribedTab(-1),
@@ -86,7 +86,7 @@ function updateListViewCompanyInSubscribedTab(offset = 0) {
   render(state);
 }
 
-function updateListViewCompanyInAllNewTab(offset) {
+function updateListViewCompanyInAllTab(offset) {
   const currentType = state.data[state.currentCategoryIndex];
   state.currentCompanyIndex += offset;
 
