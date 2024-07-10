@@ -1,4 +1,4 @@
-import { createIconTemplateStrings } from "../../../../../components/icon/icon.js";
+import { createIcon } from "../../../../../components/icon/icon.js";
 import { companyCategories } from "../../../../../data/companyCategories.js";
 import { MainNewsState } from "../../../../../types/news.js";
 import { updateCompany, updateCompanyType } from "../../../utils/updateStates.js";
@@ -27,7 +27,7 @@ export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDa
       const companyElement = createTabItem({
         innerText: companyName,
         isSelected: companyIndex === currentCompanyIndex,
-        children: createIconTemplateStrings({ iconId: "arrow" }),
+        children: createIcon({ iconId: "arrow" }),
       });
       companyElement.addEventListener("click", () => updateCompany(companyIndex));
 

@@ -1,4 +1,4 @@
-import { createIconTemplateStrings } from "../../../../../components/icon/icon.js";
+import { createIcon } from "../../../../../components/icon/icon.js";
 
 /**
  * @typedef {Object} CompanyNavButtonProps
@@ -15,8 +15,9 @@ export function createMainArrowButton({ direction, onClick }) {
   button.className = `company-nav-button ${direction}`;
   button.setAttribute("aria-label", direction === "prev" ? "이전 언론사" : "다음 언론사");
 
-  const svg = createIconTemplateStrings({ iconId: "arrow" });
-  button.innerHTML = svg;
+  const icon = createIcon({ iconId: "arrow" });
+  button.appendChild(icon);
+
   button.addEventListener("click", onClick);
 
   return button;
