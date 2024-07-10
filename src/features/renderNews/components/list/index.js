@@ -10,7 +10,7 @@ import { createCompany } from "./company/company.js";
 export async function renderListView(container, state) {
   const currentCompany =
     state.currentDataType === "all-news-tab"
-      ? state.data[state.currentCategoryIndex - 1]?.companies[state.currentCompanyIndex]
+      ? state.data[state.currentTabId - 1]?.companies[state.currentCompanyIndex]
       : state.data[state.currentCompanyIndex];
 
   if (currentCompany) {

@@ -9,6 +9,7 @@
 /**
  * @typedef {Object} Company
  * @property {number} id
+ * @property {number} companyId
  * @property {string} logoUrl
  * @property {string} name
  * @property {string} updatedDate
@@ -27,8 +28,9 @@
  * @typedef {Object} MainNewsState
  * @property {'list-view' | 'grid-view'} MainNewsState.currentView
  * @property {"all-news-tab" | "subscribed-news-tab"} MainNewsState.currentDataType
- * @property {number} MainNewsState.currentCategoryIndex
+ * @property {number} MainNewsState.currentTabId
  * @property {number} MainNewsState.currentCompanyIndex
+ * @property {number} MainNewsState.totalTabNumber
  * @property {NewsCategory[] | Company[]} MainNewsState.data
  */
 
