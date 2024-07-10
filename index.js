@@ -1,7 +1,6 @@
 import { createNewsTicker } from "./src/components/newsTicker/newsTicker.js";
 import { createSwitcher } from "./src/components/switcher/switcher.js";
 
-import { leftNewsItems, rightNewsItems } from "./src/data/headlineNews.js";
 import { dataTabItems, viewTabItems } from "./src/features/renderNews/constants/tabItems.js";
 import { createMainArrowButton } from "./src/features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
 
@@ -11,12 +10,13 @@ import {
   updateNext,
   updatePrev,
 } from "./src/features/renderNews/utils/updateStates.js";
+import { getHeadlineList } from "./src/apis/news.js";
 
 initialize();
 
-function initialize() {
+async function initialize() {
   renderHeader();
-  renderHeadlineNewsTicker();
+  await renderHeadlineNewsTicker();
   renderSwitcher();
   renderNewsView();
 }
@@ -40,11 +40,13 @@ function renderHeader() {
 }
 
 /* render headline news ticker */
-function renderHeadlineNewsTicker() {
+async function renderHeadlineNewsTicker() {
+  const headlines = await getHeadlineList();
+
   const container = document.getElementById("news-ticker-container");
 
-  const left = createNewsTicker({ newsItems: leftNewsItems, tag: "연합뉴스" });
-  const right = createNewsTicker({ newsItems: rightNewsItems, tag: "연합뉴스" }, 1);
+  const left = createNewsTicker({ newsItems: headlines.slice(0, 5), tag: "연합뉴스" });
+  const right = createNewsTicker({ newsItems: headlines.slice(5), tag: "연합뉴스" }, 1);
 
   container.append(left, right);
 }
