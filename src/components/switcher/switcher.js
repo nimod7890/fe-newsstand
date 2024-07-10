@@ -1,4 +1,3 @@
-import { convertStringToFragment } from "../../utils/convertStringToFragment.js";
 import { ButtonProps } from "../button/button.js";
 import { createIcon } from "../icon/icon.js";
 
@@ -20,11 +19,11 @@ export function createSwitcher({ className, items, onClick }) {
   const switcher = items.reduce((list, item, itemIndex) => {
     const listItem = document.createElement("li");
 
-    const input = createInput({ item, itemIndex, name: className });
-
+    const input = createInput({ item, itemIndex, name: className, onClick });
     const label = createLabel(item);
 
     listItem.append(input, label);
+
     list.appendChild(listItem);
 
     return list;
@@ -41,13 +40,16 @@ export function createSwitcher({ className, items, onClick }) {
  * @param {TabItem|ButtonProps} params.item
  * @param {string} params.name
  * @param {number} params.itemIndex
+ * @param {(event:Event)=>void} params.onClick
  *
  * @returns {HTMLInputElement}
  */
-function createInput({ item, name, itemIndex }) {
-  const input = convertStringToFragment(
-    `<input type='radio' name=${name} id=${getItemId(item)} />`
-  );
+function createInput({ item, name, itemIndex, onClick }) {
+  const input = document.createElement("input");
+  input.id = getItemId(item);
+  input.name = name;
+  input.type = "radio";
+  input.addEventListener("change", onClick);
 
   if (itemIndex === 0) {
     input.checked = true;
