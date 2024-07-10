@@ -3,7 +3,7 @@ import { convertStringToFragment } from "../../utils/convertStringToFragment.js"
 /**
  * @param {"arrow" | "plus" | "closed" | "grid-view" | "list-view" | "newspaper"} iconId
  * @param {string} className
- * @returns {string} icon
+ * @returns {SVGElement} icon
  */
 export function createIcon({ className = "", iconId }) {
   const iconString = `<svg class='${className}'>
