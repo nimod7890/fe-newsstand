@@ -1,4 +1,5 @@
 import { Company, NewsItem } from "../../../../../types/news.js";
+import { convertStringToFragment } from "../../../../../utils/convertStringToFragment.js";
 import { createSubscriptionButton } from "../../../../subscriptionButton/components/subscriptionButton.js";
 import { getObjectSubscribedCompanies } from "../../../../subscriptionButton/utils/localStorage.js";
 
@@ -11,8 +12,10 @@ export function createCompany(company, dataType) {
   const container = document.createElement("div");
   container.className = "list-company-container border-box";
 
-  container.appendChild(createHeader(company, dataType));
-  container.insertAdjacentHTML("beforeend", createNewsContents(company));
+  const header = createHeader(company, dataType);
+  const contents = createMainContents(company);
+
+  container.append(header, contents);
 
   return container;
 }
@@ -23,46 +26,54 @@ export function createCompany(company, dataType) {
  * @returns {HTMLDivElement}
  */
 function createHeader(company, dataType) {
-  const { logoUrl, name, updatedDate } = company;
+  const { id, logoUrl, name, updatedDate } = company;
+  const formattedUpdatedDate = formatDateString(updatedDate);
 
   const header = document.createElement("div");
   header.className = "company-container-header display-medium12";
 
   header.innerHTML = `
-    <img src=${logoUrl} alt='${name} 로고'/>
-    <time>${formatDateString(updatedDate)}</time>
-  `;
+                      <img src=${logoUrl} alt='${name} 로고'/>
+                      <time>${formattedUpdatedDate}</time>
+                    `;
 
   const subscriptions = getObjectSubscribedCompanies();
-  const isSubscribed = Object.hasOwn(subscriptions, company.id);
-  header.appendChild(createSubscriptionButton({ company, isSubscribed, dataType }));
+  const isSubscribed = Object.hasOwn(subscriptions, id);
+  const subscriptionButton = createSubscriptionButton({ company, isSubscribed, dataType });
+
+  header.appendChild(subscriptionButton);
 
   return header;
 }
 
 /**
  * @param {Company} company
- * @returns {string}
+ * @returns {HTMLDivElement}
  */
-function createNewsContents(company) {
-  const { newsItems, name, mainNews } = company;
+function createMainContents({ newsItems, name, mainNews }) {
+  const thumbnailNews = createStringMainNews(mainNews);
+  const newsList = createStringNewsList(newsItems, name);
 
-  return `<div class='company-container-contents'>
-            ${createMainNews(mainNews)}
-            ${createNewsList(newsItems, name)}
-          </div>`;
+  const contentsString = `<div class='company-container-contents'>
+                            ${thumbnailNews}
+                            ${newsList}
+                          </div>`;
+
+  return convertStringToFragment(contentsString);
 }
 
 /**
  * @param {NewsItem} mainNews
  * @returns {string}
  */
-function createMainNews(mainNews) {
+function createStringMainNews(mainNews) {
   const { thumbnailUrl } = mainNews;
+
+  const newsTitle = createStringNewsTitle(mainNews);
 
   return `<div class='main-news'>
             <img loading='lazy' src=${thumbnailUrl} alt='메인 뉴스 썸네일'/>
-            ${createNewsTitle(mainNews)}
+            ${newsTitle}
           </div>`;
 }
 
@@ -71,24 +82,20 @@ function createMainNews(mainNews) {
  * @param {string} name
  * @returns {string}
  */
-function createNewsList(newsList, name) {
-  const newsItems = newsList.map(createNewsTitle).join("");
+function createStringNewsList(newsList, name) {
+  const newsElements = newsList.map(createStringNewsTitle).join("");
 
-  return `
-   <ul class="news-list">
-     ${newsItems}
-     <p class="display-medium14">${name}에서 직접 편집한 뉴스입니다.</p>
-   </ul>
- `;
+  return `<ul class="news-list">
+            ${newsElements}
+            <p class="display-medium14">${name}에서 직접 편집한 뉴스입니다.</p>
+          </ul>`;
 }
 
 /**
  * @param {NewsItem} news
  * @returns {string}
  */
-function createNewsTitle(news) {
-  const { url, title } = news;
-
+function createStringNewsTitle({ url, title }) {
   return `<a class='display-medium16 ellipsis' href=${url} target='_blank'>${title}</a>`;
 }
 

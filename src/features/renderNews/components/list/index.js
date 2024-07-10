@@ -16,11 +16,10 @@ export function renderListView(container, state) {
   if (currentCompany) {
     const tab = createTab(state);
     const company = createCompany(currentCompany, state.currentDataType);
+
     container.append(tab, company);
   } else {
-    container.insertAdjacentHTML(
-      "beforeend",
-      `<p class='empty-text'>해당하는 언론사가 존재하지 않습니다.</p>`
-    );
+    const empty = `<p class='empty-text'>해당하는 언론사가 존재하지 않습니다.</p>`;
+    container.appendChild(empty);
   }
 }
