@@ -10,7 +10,7 @@ import { convertStringToFragment } from "../../../../utils/convertStringToFragme
  */
 export async function renderListView(container, state) {
   const currentCompany = state.data[state.currentCompanyIndex];
-  console.log(state);
+
   if (currentCompany) {
     const tab = await createTab(state);
     const company = createCompany(currentCompany, state.currentDataType);
