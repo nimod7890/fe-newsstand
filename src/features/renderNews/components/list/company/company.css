@@ -32,6 +32,7 @@
   gap: 16px;
 
   width: 320px;
+  overflow: hidden;
 }
 
 .main-news > img {
