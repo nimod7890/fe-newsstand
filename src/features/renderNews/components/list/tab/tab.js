@@ -9,7 +9,7 @@ import { createTabItem } from "./tabItem.js";
  */
 export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDataType, data }) {
   const categories = document.createElement("div");
-  categories.className = "list-tab";
+  categories.className = "list-tab border-box";
 
   if (currentDataType === "all-news-tab") {
     companyCategories.forEach((category, categoryIndex) => {
