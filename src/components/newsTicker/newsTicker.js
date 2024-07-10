@@ -2,7 +2,7 @@
  * @typedef {Object} NewsItemProps
  * @property {number} id
  * @property {string} title
- * @property {string} link
+ * @property {string} url
  */
 
 /**
@@ -33,7 +33,7 @@ export function createNewsTicker({ tag, newsItems }, scrollDelay = 0) {
  * @param {string} [tag='']
  * @returns {string}
  */
-function createNewsItem({ title, link }, tag) {
+function createNewsItem({ title, url }, tag) {
   const container = document.createElement("li");
 
   if (tag?.length > 0) {
@@ -42,7 +42,7 @@ function createNewsItem({ title, link }, tag) {
 
   container.insertAdjacentHTML(
     "beforeend",
-    `<a href=${link} class='available-medium14 ellipsis'>${title}</a>`
+    `<a href=${url} class='available-medium14 ellipsis'>${title}</a>`
   );
 
   return container;
