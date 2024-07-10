@@ -22,8 +22,7 @@ export function showDialog({ message, leftButtonProps, rightButtonProps }) {
 
   const leftButton = createDialogButton(leftButtonProps, dialog);
   const rightButton = createDialogButton(rightButtonProps, dialog);
-  buttonsContainer.appendChild(leftButton);
-  buttonsContainer.appendChild(rightButton);
+  buttonsContainer.append(leftButton, rightButton);
 
   dialog.innerHTML = messageElement;
   dialog.appendChild(buttonsContainer);

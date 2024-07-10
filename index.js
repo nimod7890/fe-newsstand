@@ -46,8 +46,7 @@ function renderHeadlineNewsTicker() {
   const left = createNewsTicker({ newsItems: leftNewsItems, tag: "연합뉴스" });
   const right = createNewsTicker({ newsItems: rightNewsItems, tag: "연합뉴스" }, 1);
 
-  container.appendChild(left);
-  container.appendChild(right);
+  container.append(left, right);
 }
 
 /* render switcher */
@@ -66,8 +65,7 @@ function renderSwitcher() {
     onClick: (event) => switchCompanyView(event.target.id),
   });
 
-  navContainer.appendChild(tabSwitcher);
-  navContainer.appendChild(viewSwitcher);
+  navContainer.append(tabSwitcher, viewSwitcher);
 }
 
 /** render news view */

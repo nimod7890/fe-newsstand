@@ -37,7 +37,7 @@ function startProgressBar(selectedButton) {
   const progressBar = document.createElement("div");
   progressBar.className = "tab-progress";
   progressBar.style.animationDuration = `${PROGRESS_DURATION_SEC}s`;
-  selectedButton.appendChild(progressBar);
-
   progressBar.addEventListener("animationend", updateNext, { once: true });
+
+  selectedButton.appendChild(progressBar);
 }

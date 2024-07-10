@@ -19,6 +19,7 @@ export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDa
         children: `${currentCompanyIndex + 1}/${data[currentCategoryIndex].companies.length}`,
       });
       categoryElement.addEventListener("click", () => updateCompanyType(categoryIndex));
+
       categories.appendChild(categoryElement);
     });
   } else {
@@ -29,6 +30,7 @@ export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDa
         children: createIconTemplateStrings({ iconId: "arrow" }),
       });
       companyElement.addEventListener("click", () => updateCompany(companyIndex));
+
       categories.appendChild(companyElement);
     });
   }

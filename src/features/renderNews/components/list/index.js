@@ -14,10 +14,9 @@ export function renderListView(container, state) {
       : state.data[state.currentCompanyIndex];
 
   if (currentCompany) {
-    // 언론사 카테고리
-    container.appendChild(createTab(state));
-    // 언론사
-    container.appendChild(createCompany(currentCompany, state.currentDataType));
+    const tab = createTab(state);
+    const company = createCompany(currentCompany, state.currentDataType);
+    container.append(tab, company);
   } else {
     container.insertAdjacentHTML(
       "beforeend",

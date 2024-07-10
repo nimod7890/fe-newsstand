@@ -44,8 +44,7 @@ export function createSwitcher({ className, items, onClick }) {
 
     input.addEventListener("change", onClick);
 
-    listItem.appendChild(input);
-    listItem.appendChild(label);
+    listItem.append(input, label);
     list.appendChild(listItem);
   });
 
