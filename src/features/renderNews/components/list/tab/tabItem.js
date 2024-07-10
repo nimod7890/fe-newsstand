@@ -18,9 +18,11 @@ const classMapping = {
  * @param {string} props.innerText
  * @param {string | HTMLElement} props.children
  * @param {boolean} props.isSelect
+ * @param {()=>void} props.onClick
+ *
  * @returns {HTMLButtonElement}
  */
-export function createTabItem({ innerText, children, isSelected }) {
+export function createTabItem({ innerText, children, isSelected, onClick }) {
   const button = document.createElement("button");
   button.className = classMapping[isSelected];
 
@@ -34,6 +36,7 @@ export function createTabItem({ innerText, children, isSelected }) {
     startProgressBar(button);
   }
 
+  button.addEventListener("click", onClick);
   return button;
 }
 
