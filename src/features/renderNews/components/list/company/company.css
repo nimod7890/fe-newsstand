@@ -1,22 +1,32 @@
+/* container */
 .list-company-container {
   display: flex;
   flex-direction: column;
-  padding: 24px;
   gap: 16px;
+
+  padding: 24px 0;
 }
 
+.list-company-container > div {
+  padding: 0 24px;
+}
+
+/* header */
 .company-container-header {
   display: flex;
   gap: 16px;
   align-items: center;
 }
 
+/* contents */
 .company-container-contents {
+  overflow: hidden;
   display: flex;
   gap: 32px;
 }
 
-.company-container-contents .main-news {
+/* main news */
+.main-news {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -24,34 +34,40 @@
   width: 320px;
 }
 
-.company-container-contents .main-news:hover {
-  transform: scale(1.05);
-  transition: transform 0.5s;
-  text-decoration: underline;
-}
-
-.company-container-contents .main-news > img {
+.main-news > img {
   height: 200px;
   object-fit: cover;
 }
 
-.company-container-contents .main-news > a {
+.main-news > a {
   color: var(--text-strong);
 }
 
-.company-container-contents .news-list {
+.main-news:hover > a {
+  text-decoration: underline;
+}
+
+.main-news:hover > img {
+  transition: transform 0.2s;
+  transform: scale(1.05);
+}
+
+/* news-list */
+
+.news-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
 
   color: var(--text-bold);
+  min-width: 320px;
   overflow: hidden;
 }
 
-.company-container-contents .news-list > p {
+.news-list > p {
   color: var(--text-weak);
 }
 
-.company-container-contents .news-list a:hover {
+.news-list a:hover {
   text-decoration: underline;
 }
