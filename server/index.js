@@ -50,10 +50,6 @@ class Server {
   }
 }
 
-function shuffleArray(array) {
-  return array.slice().sort(() => Math.random() - 0.5);
-}
-
 const createServer = (port, dbFilePath) => new Server(port, dbFilePath);
 
 createServer(3001, DATA_PATH);
