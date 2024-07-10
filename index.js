@@ -2,7 +2,7 @@ import { createNewsTicker } from "./src/components/newsTicker/newsTicker.js";
 import { createSwitcher } from "./src/components/switcher/switcher.js";
 
 import { leftNewsItems, rightNewsItems } from "./src/data/headlineNews.js";
-import { dataTabItems, viewTabItems } from "./src/data/tabItems.js";
+import { dataTabItems, viewTabItems } from "./src/features/renderNews/constants/tabItems.js";
 import { createMainArrowButton } from "./src/features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
 
 import {
