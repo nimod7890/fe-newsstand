@@ -16,17 +16,21 @@ const classMapping = {
 /**
  * @param {Object} props
  * @param {string} props.innerText
- * @param {string} props.children
+ * @param {string | HTMLElement} props.children
  * @param {boolean} props.isSelect
  * @returns {HTMLButtonElement}
  */
 export function createTabItem({ innerText, children, isSelected }) {
   const button = document.createElement("button");
   button.className = classMapping[isSelected];
+
   button.innerHTML = `<p>${innerText}</p>`;
 
   if (isSelected) {
-    button.insertAdjacentHTML("beforeend", `<p>${children}</p>`);
+    const pWrapper = document.createElement("p");
+    pWrapper.append(children);
+    button.appendChild(pWrapper);
+
     startProgressBar(button);
   }
 
@@ -37,6 +41,7 @@ function startProgressBar(selectedButton) {
   const progressBar = document.createElement("div");
   progressBar.className = "tab-progress";
   progressBar.style.animationDuration = `${PROGRESS_DURATION_SEC}s`;
+
   progressBar.addEventListener("animationend", updateNext, { once: true });
 
   selectedButton.appendChild(progressBar);

@@ -1,3 +1,4 @@
+import { convertStringToFragment } from "../../utils/convertStringToFragment.js";
 import { ButtonProps } from "../button/button.js";
 import { createIcon } from "../icon/icon.js";
 
@@ -16,39 +17,60 @@ import { createIcon } from "../icon/icon.js";
  * @returns {HTMLUListElement}
  */
 export function createSwitcher({ className, items, onClick }) {
-  const list = document.createElement("ul");
-  list.className = className;
-
-  items.forEach((item, index) => {
+  const switcher = items.reduce((list, item, itemIndex) => {
     const listItem = document.createElement("li");
 
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = className;
-    input.id = item.id || item.iconId;
+    const input = createInput({ item, itemIndex, name: className });
 
-    if (index === 0) {
-      input.checked = true;
-    }
-
-    const label = document.createElement("label");
-    label.htmlFor = input.id;
-    label.classList.add("available-medium16");
-
-    if (isTabItem(item)) {
-      label.innerHTML = item.text;
-    } else if (isButtonProps(item)) {
-      const icon = createIcon({ iconId: item.iconId });
-      label.appendChild(icon);
-    }
-
-    input.addEventListener("change", onClick);
+    const label = createLabel(item);
 
     listItem.append(input, label);
     list.appendChild(listItem);
-  });
 
-  return list;
+    return list;
+  }, document.createElement("ul"));
+
+  switcher.classList.add(className);
+
+  return switcher;
+}
+
+/**
+ *
+ * @param {Object} params
+ * @param {TabItem|ButtonProps} params.item
+ * @param {string} params.name
+ * @param {number} params.itemIndex
+ *
+ * @returns {HTMLInputElement}
+ */
+function createInput({ item, name, itemIndex }) {
+  const input = convertStringToFragment(
+    `<input type='radio' name=${name} id=${getItemId(item)} />`
+  );
+
+  if (itemIndex === 0) {
+    input.checked = true;
+  }
+
+  return input;
+}
+
+/**
+ * @param {TabItem|ButtonProps} item
+ *
+ * @returns {HTMLLabelElement}
+ */
+function createLabel(item) {
+  const label = document.createElement("label");
+  label.classList.add("available-medium16");
+
+  label.htmlFor = getItemId(item);
+
+  const innerContent = isTabItem(item) ? item.text : createIcon({ iconId: item.iconId });
+  label.append(innerContent);
+
+  return label;
 }
 
 /**
@@ -61,8 +83,8 @@ function isTabItem(item) {
 
 /**
  * @param {TabItem | ButtonProps} item
- * @returns {item is ButtonProps}
+ * @returns {string} itemId
  */
-function isButtonProps(item) {
-  return item && typeof item.iconId === "string";
+function getItemId(item) {
+  return isTabItem(item) ? item.id : item.iconId;
 }
