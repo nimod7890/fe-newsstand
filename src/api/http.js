@@ -13,6 +13,6 @@ class FetchWrapper {
   }
 }
 
-const fetchWrapper = new FetchWrapper(BASE_URL);
+const http = new FetchWrapper(BASE_URL);
 
-export default fetchWrapper;
+export default http;
