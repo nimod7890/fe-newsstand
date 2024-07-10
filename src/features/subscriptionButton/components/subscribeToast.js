@@ -11,8 +11,9 @@ const TOAST_SHOWING_TIME = 5000;
 export function showSubscribeToast(company) {
   showToast("내가 구독한 언론사에 추가되었습니다.", TOAST_SHOWING_TIME);
   addSubscribedCompany(company);
-  setTimeout(() => {
-    switchCompanyTab("subscribed-news-tab");
+
+  setTimeout(async () => {
+    await switchCompanyTab("subscribed-news-tab");
   }, TOAST_SHOWING_TIME);
 
   dispatchSubscriptionUpdateEvent({ company, isSubscribed: true });

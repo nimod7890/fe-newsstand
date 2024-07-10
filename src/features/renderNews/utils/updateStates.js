@@ -1,7 +1,7 @@
-import { allCompanies } from "../../../data/companies.js";
 import { render } from "./renderView.js";
 import { MainNewsState } from "../../../types/news.js";
 import { getArraySubscribedCompanies } from "../../subscriptionButton/utils/localStorage.js";
+import { getCompanyList } from "../../../apis/news.js";
 
 /**
  * @type {MainNewsState}
@@ -15,6 +15,7 @@ const state = {
   data: [],
 };
 
+/** todo: tab id data에서 가져와서 보완해야 함  */
 function resetIndexes() {
   state.currentTabId = 1;
   state.currentCompanyIndex = 0;
@@ -22,14 +23,18 @@ function resetIndexes() {
 
 /**
  * 전체 언론사 보기 / 내가 구독한 언론사 보기 탭 선택 시
- * @param {MainNewsState.currentDataType} id
+ * @param {MainNewsState.currentDataType} tabId
  */
-function switchCompanyTab(id) {
-  const tab = document.getElementById(id);
+async function switchCompanyTab(tabId) {
+  const tab = document.getElementById(tabId);
   tab.checked = true;
 
-  state.currentDataType = id;
-  state.data = id === "all-news-tab" ? allCompanies : getArraySubscribedCompanies();
+  state.currentDataType = tabId;
+  if (tabId === "all-news-tab") {
+    state.data = await getCompanyList({ categoryId: state.currentTabId });
+  } else {
+    state.data = getArraySubscribedCompanies();
+  }
   resetIndexes();
   render(state);
 }
@@ -42,9 +47,9 @@ function switchCompanyView(view) {
 }
 
 /** 리스트 뷰 내 언론사 type(종합/경제, IT 등) 탭 선택 시 */
-function updateCompanyType(categoryId) {
+async function updateCompanyType(categoryId) {
+  await updateData(categoryId);
   state.currentTabId = categoryId;
-  state.currentCompanyIndex = 0;
   render(state);
 }
 
@@ -67,6 +72,12 @@ const updateCompanyState = {
   },
 };
 
+async function updateData(categoryId) {
+  state.data = await getCompanyList({ categoryId });
+  state.currentCompanyIndex = 0;
+  state.currentTabId = categoryId;
+}
+
 function updatePrev() {
   updateCompanyState[state.currentView][state.currentDataType].prev();
 }
@@ -87,19 +98,15 @@ function updateListViewCompanyInSubscribedTab(offset) {
   render(state);
 }
 
-function updateListViewCompanyInAllTab(offset) {
-  const currentTab = state.data[state.currentTabId - 1];
+async function updateListViewCompanyInAllTab(offset) {
   state.currentCompanyIndex += offset;
 
   if (state.currentCompanyIndex < 0) {
-    state.currentTabId =
-      ((state.currentTabId - 2 + state.totalTabNumber) % state.totalTabNumber) + 1;
-    state.currentCompanyIndex = currentTab.companies.length - 1;
-  } else if (state.currentCompanyIndex >= currentTab.companies.length) {
-    state.currentTabId = (state.currentTabId % state.totalTabNumber) + 1;
-    state.currentCompanyIndex = 0;
+    await updateData(((state.currentTabId - 2 + state.totalTabNumber) % state.totalTabNumber) + 1);
+    state.currentCompanyIndex = state.data.length - 1;
+  } else if (state.currentCompanyIndex >= state.data.length) {
+    await updateData((state.currentTabId % state.totalTabNumber) + 1);
   }
-
   render(state);
 }
 

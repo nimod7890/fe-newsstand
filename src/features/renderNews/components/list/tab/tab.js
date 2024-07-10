@@ -22,9 +22,9 @@ export async function createTab({ currentTabId, currentCompanyIndex, currentData
     categoryList.forEach(({ id, name }) => {
       const categoryElement = createTabItem({
         innerText: name,
-        isSelected: id === currentTabId,
-        children: `${currentCompanyIndex + 1}/${data[currentTabId - 1].companies.length}`,
-        onClick: () => updateCompanyType(id),
+        isSelected: +id === +currentTabId,
+        children: `${currentCompanyIndex + 1}/${data.length}`,
+        onClick: async () => await updateCompanyType(id),
       });
 
       container.appendChild(categoryElement);

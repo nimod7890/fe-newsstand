@@ -18,7 +18,7 @@ async function initialize() {
   renderHeader();
   await renderHeadlineNewsTicker();
   renderSwitcher();
-  renderNewsView();
+  await renderNewsView();
 }
 
 function renderHeader() {
@@ -58,7 +58,7 @@ function renderSwitcher() {
   const tabSwitcher = createSwitcher({
     className: "tab-switcher",
     items: dataTabItems,
-    onClick: (event) => switchCompanyTab(event.target.id),
+    onClick: async (event) => await switchCompanyTab(event.target.id),
   });
 
   const viewSwitcher = createSwitcher({
@@ -71,8 +71,8 @@ function renderSwitcher() {
 }
 
 /** render news view */
-function renderNewsView() {
-  switchCompanyTab("all-news-tab");
+async function renderNewsView() {
+  await switchCompanyTab("all-news-tab");
 
   const container = document.getElementById("main-news-contents");
 

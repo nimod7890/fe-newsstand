@@ -31,7 +31,7 @@
  * @property {number} MainNewsState.currentTabId
  * @property {number} MainNewsState.currentCompanyIndex
  * @property {number} MainNewsState.totalTabNumber
- * @property {NewsCategory[] | Company[]} MainNewsState.data
+ * @property {Company[]} MainNewsState.data
  */
 
 export const NewsCategory = {};
