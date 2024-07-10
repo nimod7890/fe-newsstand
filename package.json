@@ -1,12 +1,15 @@
 {
-  "packageManager": "yarn@4.3.1",
   "type": "module",
   "scripts": {
-    "start": "concurrently \"live-server src --mount=/src:./src\" \"json-server --watch src/data.json --port 3001\""
+    "start": "concurrently \"live-server src --mount=/src:./src\" \"node server/index.js\"",
+    "live-server": "live-server src --mount=/src:./src",
+    "json-server": "json-server --watch server/data.json --port 3001",
+    "node-server": "node server/index.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "json-server": "^1.0.0-beta.1",
+    "json-server": "^0.17.3",
     "live-server": "^1.2.2"
-  }
+  },
+  "packageManager": "yarn@4.3.1"
 }
