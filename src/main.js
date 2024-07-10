@@ -1,16 +1,16 @@
-import { createNewsTicker } from "./src/components/newsTicker/newsTicker.js";
-import { createSwitcher } from "./src/components/switcher/switcher.js";
+import { createNewsTicker } from "./components/newsTicker/newsTicker.js";
+import { createSwitcher } from "./components/switcher/switcher.js";
 
-import { dataTabItems, viewTabItems } from "./src/features/renderNews/constants/tabItems.js";
-import { createMainArrowButton } from "./src/features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
+import { dataTabItems, viewTabItems } from "./features/renderNews/constants/tabItems.js";
+import { createMainArrowButton } from "./features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
 
 import {
   switchCompanyTab,
   switchCompanyView,
   updateNext,
   updatePrev,
-} from "./src/features/renderNews/utils/updateStates.js";
-import { getHeadlineList } from "./src/apis/news.js";
+} from "./features/renderNews/utils/updateStates.js";
+import { getHeadlineList } from "./apis/news.js";
 
 initialize();
 
