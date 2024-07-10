@@ -1,4 +1,6 @@
 import jsonServer from "json-server";
+
+const PORT_NUMBER = 3001;
 const DATA_PATH = "server/data.json";
 class Server {
   constructor(port, dbFilePath) {
@@ -52,4 +54,4 @@ class Server {
 
 const createServer = (port, dbFilePath) => new Server(port, dbFilePath);
 
-createServer(3001, DATA_PATH);
+createServer(PORT_NUMBER, DATA_PATH);
