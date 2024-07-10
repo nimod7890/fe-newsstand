@@ -2,7 +2,7 @@
   "packageManager": "yarn@4.3.1",
   "type": "module",
   "scripts": {
-    "start": "concurrently \"live-server src --mount=/src:./src\" \"json-server --watch src/data/data.json --port 3001\""
+    "start": "concurrently \"live-server src --mount=/src:./src\" \"json-server --watch src/data.json --port 3001\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
