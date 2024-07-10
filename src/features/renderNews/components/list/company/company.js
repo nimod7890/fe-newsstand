@@ -34,7 +34,7 @@ function createHeader(company, dataType) {
   `;
 
   const subscriptions = getObjectSubscribedCompanies();
-  const isSubscribed = subscriptions.hasOwnProperty(company.id);
+  const isSubscribed = Object.hasOwn(subscriptions, company.id);
   header.appendChild(createSubscriptionButton({ company, isSubscribed, dataType }));
 
   return header;

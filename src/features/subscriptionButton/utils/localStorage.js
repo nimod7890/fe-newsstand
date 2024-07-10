@@ -32,7 +32,7 @@ export function addSubscribedCompany(company) {
  */
 export function removeSubscribedCompany(companyId) {
   const companies = getObjectSubscribedCompanies(StorageKeys.SubscribedCompanies);
-  if (companies.hasOwnProperty(companyId)) {
+  if (Object.hasOwn(companies, companyId)) {
     delete companies[companyId];
     setSubscribedCompanies(companies);
   }
