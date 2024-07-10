@@ -9,13 +9,13 @@ import { getArraySubscribedCompanies } from "../../subscriptionButton/utils/loca
 const state = {
   currentView: "list-view",
   currentDataType: "all-news-tab",
-  currentCategoryIndex: 0,
+  currentCategoryIndex: 1,
   currentCompanyIndex: 0,
   data: [],
 };
 
 function resetIndexes() {
-  state.currentCategoryIndex = 0;
+  state.currentCategoryIndex = 1;
   state.currentCompanyIndex = 0;
 }
 
@@ -41,8 +41,8 @@ function switchCompanyView(view) {
 }
 
 /** 리스트 뷰 내 언론사 type(종합/경제, IT 등) 탭 선택 시 */
-function updateCompanyType(index) {
-  state.currentCategoryIndex = index;
+function updateCompanyType(categoryId) {
+  state.currentCategoryIndex = categoryId;
   state.currentCompanyIndex = 0;
   render(state);
 }
@@ -87,15 +87,17 @@ function updateListViewCompanyInSubscribedTab(offset) {
 }
 
 function updateListViewCompanyInAllTab(offset) {
-  const currentType = state.data[state.currentCategoryIndex];
+  const currentType = state.data[state.currentCategoryIndex - 1];
   state.currentCompanyIndex += offset;
 
   if (state.currentCompanyIndex < 0) {
     state.currentCategoryIndex =
       (state.currentCategoryIndex - 1 + state.data.length) % state.data.length;
-    state.currentCompanyIndex = state.data[state.currentCategoryIndex].companies.length - 1;
+
+    state.currentCompanyIndex = state.data[state.currentCategoryIndex - 1].companies.length - 1;
   } else if (state.currentCompanyIndex >= currentType.companies.length) {
     state.currentCategoryIndex = (state.currentCategoryIndex + 1) % state.data.length;
+
     state.currentCompanyIndex = 0;
   }
 

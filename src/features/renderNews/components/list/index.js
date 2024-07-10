@@ -7,14 +7,14 @@ import { createCompany } from "./company/company.js";
  * @param {HTMLElement} container
  * @param {MainNewsState} state
  */
-export function renderListView(container, state) {
+export async function renderListView(container, state) {
   const currentCompany =
     state.currentDataType === "all-news-tab"
-      ? state.data[state.currentCategoryIndex]?.companies[state.currentCompanyIndex]
+      ? state.data[state.currentCategoryIndex - 1]?.companies[state.currentCompanyIndex]
       : state.data[state.currentCompanyIndex];
 
   if (currentCompany) {
-    const tab = createTab(state);
+    const tab = await createTab(state);
     const company = createCompany(currentCompany, state.currentDataType);
 
     container.append(tab, company);

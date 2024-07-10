@@ -1,5 +1,5 @@
 import { createIcon } from "../../../../../components/icon/icon.js";
-import { companyCategories } from "../../../../../data/companyCategories.js";
+import { getCategoryList } from "../../../../../apis/news.js";
 import { MainNewsState } from "../../../../../types/news.js";
 import { updateCompany, updateCompanyType } from "../../../utils/updateStates.js";
 import { createTabItem } from "./tabItem.js";
@@ -7,20 +7,27 @@ import { createTabItem } from "./tabItem.js";
 /**
  * @param {MainNewsState} state
  */
-export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDataType, data }) {
-  const categories = document.createElement("div");
-  categories.className = "list-tab border-box";
+export async function createTab({
+  currentCategoryIndex,
+  currentCompanyIndex,
+  currentDataType,
+  data,
+}) {
+  const container = document.createElement("div");
+  container.className = "list-tab border-box";
 
   if (currentDataType === "all-news-tab") {
-    companyCategories.forEach((category, categoryIndex) => {
-      const categoryElement = createTabItem({
-        innerText: category,
-        isSelected: categoryIndex === currentCategoryIndex,
-        children: `${currentCompanyIndex + 1}/${data[currentCategoryIndex].companies.length}`,
-      });
-      categoryElement.addEventListener("click", () => updateCompanyType(categoryIndex));
+    const categoryList = await getCategoryList();
 
-      categories.appendChild(categoryElement);
+    categoryList.forEach(({ id, name }) => {
+      const categoryElement = createTabItem({
+        innerText: name,
+        isSelected: id === currentCategoryIndex,
+        children: `${currentCompanyIndex + 1}/${data[currentCategoryIndex - 1].companies.length}`,
+        onClick: () => updateCompanyType(id),
+      });
+
+      container.appendChild(categoryElement);
     });
   } else {
     data.forEach(({ name: companyName }, companyIndex) => {
@@ -28,12 +35,12 @@ export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDa
         innerText: companyName,
         isSelected: companyIndex === currentCompanyIndex,
         children: createIcon({ iconId: "arrow" }),
+        onClick: () => updateCompany(companyIndex),
       });
-      companyElement.addEventListener("click", () => updateCompany(companyIndex));
 
-      categories.appendChild(companyElement);
+      container.appendChild(companyElement);
     });
   }
 
-  return categories;
+  return container;
 }
