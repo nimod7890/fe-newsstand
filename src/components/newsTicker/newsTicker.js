@@ -116,11 +116,6 @@ function handleTransitionEnd(current, next, nextIndex) {
  * @param {HTMLUListElement} ticker
  */
 function addTickerEventListeners(ticker) {
-  ticker.addEventListener("mouseenter", () => {
-    ticker.classList.add("paused");
-  });
-
-  ticker.addEventListener("mouseleave", () => {
-    ticker.classList.remove("paused");
-  });
+  ticker.addEventListener("mouseenter", () => ticker.classList.add("paused"));
+  ticker.addEventListener("mouseleave", () => ticker.classList.remove("paused"));
 }
