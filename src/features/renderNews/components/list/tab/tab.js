@@ -11,7 +11,12 @@ import { createTabItem } from "./tabItem.js";
 /**
  * @param {MainNewsState} state
  */
-export async function createTab({ currentTabId, currentCompanyIndex, currentDataType, companies }) {
+export async function createTab({
+  currentTabId,
+  currentDataIndex: currentCompanyIndex,
+  currentDataType,
+  companies,
+}) {
   const container = document.createElement("div");
   container.className = "list-tab border-box";
 

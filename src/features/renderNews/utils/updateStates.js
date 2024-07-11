@@ -11,13 +11,13 @@ const state = {
   currentDataType: "all-news-tab",
   currentTabId: 1,
   totalTabNumber: 0,
-  currentCompanyIndex: 0,
+  currentDataIndex: 0,
   companies: [],
 };
 
 function resetIndexes() {
   state.currentTabId = 1;
-  state.currentCompanyIndex = 0;
+  state.currentDataIndex = 0;
 }
 
 /**
@@ -38,7 +38,10 @@ async function switchCompanyTab(tabId) {
   render(state);
 }
 
-/** 리스트 뷰 / 그리드 뷰 탭 선택 시 */
+/**
+ * 리스트 뷰 / 그리드 뷰 탭 선택 시
+ * @param {'list-view' | 'grid-view'} view
+ */
 function switchCompanyView(view) {
   state.currentView = view;
 
@@ -46,16 +49,9 @@ function switchCompanyView(view) {
   render(state);
 }
 
-/** 리스트 뷰 내 언론사 type(종합/경제, IT 등) 탭 선택 시 */
-async function updateCompanyType(categoryId) {
-  await updateData(categoryId);
-  state.currentTabId = categoryId;
-  render(state);
-}
-
 /** 내가 구독한 언론사 페이지에서 company 선택 시 */
 function updateCompany(companyIndex) {
-  state.currentCompanyIndex = companyIndex;
+  state.currentDataIndex = companyIndex;
   render(state);
 }
 
@@ -74,7 +70,7 @@ const updateCompanyState = {
 
 async function updateData(categoryId) {
   state.companies = await getCompanyList({ categoryId });
-  state.currentCompanyIndex = 0;
+  state.currentDataIndex = 0;
   state.currentTabId = categoryId;
 }
 
@@ -86,25 +82,31 @@ function updateNext() {
   updateCompanyState[state.currentView][state.currentDataType].next();
 }
 
+async function updateListViewCompanyType(categoryId) {
+  await updateData(categoryId);
+  state.currentTabId = categoryId;
+  render(state);
+}
+
 function updateListViewCompanyInSubscribedTab(offset) {
   state.companies = getArraySubscribedCompanies();
 
-  state.currentCompanyIndex += offset;
-  if (state.currentCompanyIndex < 0) {
-    state.currentCompanyIndex = state.companies.length - 1;
-  } else if (state.currentCompanyIndex >= state.companies.length) {
-    state.currentCompanyIndex = 0;
+  state.currentDataIndex += offset;
+  if (state.currentDataIndex < 0) {
+    state.currentDataIndex = state.companies.length - 1;
+  } else if (state.currentDataIndex >= state.companies.length) {
+    state.currentDataIndex = 0;
   }
   render(state);
 }
 
 async function updateListViewCompanyInAllTab(offset) {
-  state.currentCompanyIndex += offset;
+  state.currentDataIndex += offset;
 
-  if (state.currentCompanyIndex < 0) {
+  if (state.currentDataIndex < 0) {
     await updateData(((state.currentTabId - 2 + state.totalTabNumber) % state.totalTabNumber) + 1);
-    state.currentCompanyIndex = state.companies.length - 1;
-  } else if (state.currentCompanyIndex >= state.companies.length) {
+    state.currentDataIndex = state.companies.length - 1;
+  } else if (state.currentDataIndex >= state.companies.length) {
     await updateData((state.currentTabId % state.totalTabNumber) + 1);
   }
   render(state);
@@ -126,7 +128,7 @@ export {
   switchCompanyView,
   updatePrev,
   updateNext,
-  updateCompanyType,
+  updateListViewCompanyType,
   switchCompanyTab,
   rerenderListViewCompanyInSubscribedTab,
   setTotalTabNumber,
