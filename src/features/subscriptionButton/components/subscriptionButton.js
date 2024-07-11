@@ -18,19 +18,21 @@ const buttonProps = {
 
 /**
  * @param {SubscriptionButtonProps} props
+ * @param {HTMLDivElement} container
  * @returns {HTMLButtonElement}
  */
-export function createSubscriptionButton(props) {
+export function createSubscriptionButton({ container, ...props }) {
   const {
     company: { id, name },
     isSubscribed,
+    isGridView = false,
   } = props;
 
   const button = createButton(buttonProps[isSubscribed]);
 
   button.setAttribute("data-company-id", id);
   button.setAttribute("aria-label", `${name} ${buttonProps[isSubscribed].ariaLabel}`);
-  button.addEventListener("click", () => handleSubscriptionClick(props));
+  (isGridView ? container : button).addEventListener("click", () => handleSubscriptionClick(props));
 
   return button;
 }

@@ -21,6 +21,7 @@ export function renderCompany({ container, company, dataType }) {
     isSubscribed,
     dataType,
     isGridView: true,
+    container,
   });
 
   subscriptionButton.classList.add("hover-hidden");
