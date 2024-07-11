@@ -67,6 +67,7 @@ const updateState = {
     ["subscribed-news-tab"]: {
       prev: () => updateListViewCompanyInSubscribedTab(-1),
       next: () => updateListViewCompanyInSubscribedTab(1),
+      rerender: () => updateListViewCompanyInSubscribedTab(0),
     },
   },
   ["grid-view"]: {
@@ -77,6 +78,10 @@ const updateState = {
     ["subscribed-news-tab"]: {
       prev: () => updateGridViewCompany(-1),
       next: () => updateGridViewCompany(1),
+      rerender: () => {
+        state.companies = getArraySubscribedCompanies();
+        updateGridViewCompany(0);
+      },
     },
   },
 };
@@ -131,8 +136,8 @@ async function updateListViewCompanyInAllTab(offset) {
   render(state);
 }
 
-function rerenderListViewCompanyInSubscribedTab() {
-  updateListViewCompanyInSubscribedTab(0);
+function rerenderCompanyInSubscribedTab() {
+  updateState[state.currentView]["subscribed-news-tab"].rerender();
 }
 
 /** grid view */
@@ -163,6 +168,6 @@ export {
   updateNext,
   updateListViewCompanyType,
   switchCompanyTab,
-  rerenderListViewCompanyInSubscribedTab,
+  rerenderCompanyInSubscribedTab,
   setTotalTabNumber,
 };

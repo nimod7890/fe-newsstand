@@ -1,6 +1,6 @@
 import { showDialog } from "../../../../components/overlays/dialog/dialog.js";
 import { Company } from "../../../../types/news.js";
-import { rerenderListViewCompanyInSubscribedTab } from "../../../renderNews/utils/updateStates.js";
+import { rerenderCompanyInSubscribedTab } from "../../../renderNews/utils/updateStates.js";
 import { dispatchSubscriptionUpdateEvent } from "../../utils/dispatchSubscriptionUpdateEvent.js";
 import { removeSubscribedCompany } from "../../utils/localStorage.js";
 
@@ -14,7 +14,7 @@ export function showUnsubscribeDialog(company, dataType) {
     onClick: () => {
       removeSubscribedCompany(company.id);
       dispatchSubscriptionUpdateEvent({ company, isSubscribed: false });
-      dataType === "subscribed-news-tab" && rerenderListViewCompanyInSubscribedTab();
+      dataType === "subscribed-news-tab" && rerenderCompanyInSubscribedTab();
     },
   };
 
