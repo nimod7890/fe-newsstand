@@ -9,11 +9,11 @@ import { convertStringToFragment } from "../../../../utils/convertStringToFragme
  * @param {MainNewsState} state
  */
 export async function renderListView(container, state) {
-  const currentCompany = state.data[state.currentCompanyIndex];
+  const currentCompany = state.companies[state.companyIndex];
 
   if (currentCompany) {
     const tab = await createTab(state);
-    const company = createCompany(currentCompany, state.currentDataType);
+    const company = createCompany(currentCompany, state.dataTabId);
     container.append(tab, company);
   } else {
     // Todo: 전체 언론사 페이지에서 선택한 카테고리 내 언론사 데이터 존재하지 않는 경우 에러 처리 필요

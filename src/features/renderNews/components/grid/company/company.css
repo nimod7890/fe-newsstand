@@ -1,0 +1,17 @@
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-item-company {
+  cursor: pointer;
+}
+
+.grid-item-company:hover {
+  background-color: var(--surface-alt);
+}
+
+.hover-hidden {
+  display: none;
+}

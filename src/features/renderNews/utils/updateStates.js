@@ -2,132 +2,199 @@ import { render } from "./renderView.js";
 import { MainNewsState } from "../../../types/news.js";
 import { getArraySubscribedCompanies } from "../../subscriptionButton/utils/localStorage.js";
 import { getCompanyList } from "../../../apis/news.js";
+import { GRID_ITEM_PER_PAGE } from "../constants/gridItemPerPage.js";
+
+// Constants
+const LIST_VIEW = "list-view";
+const GRID_VIEW = "grid-view";
+
+const ALL_NEWS_TAB = "all-news-tab";
+const SUBSCRIBED_NEWS_TAB = "subscribed-news-tab";
 
 /**
  * @type {MainNewsState}
  */
 const state = {
-  currentView: "list-view",
-  currentDataType: "all-news-tab",
-  currentTabId: 1,
+  viewTabId: GRID_VIEW,
+  dataTabId: ALL_NEWS_TAB,
+  categoryId: null,
   totalTabNumber: 0,
-  currentCompanyIndex: 0,
-  data: [],
+  companyIndex: 0,
+  companies: [],
 };
 
-/** todo: tab id data에서 가져와서 보완해야 함  */
-function resetIndexes() {
-  state.currentTabId = 1;
-  state.currentCompanyIndex = 0;
-}
-
-/**
- * 전체 언론사 보기 / 내가 구독한 언론사 보기 탭 선택 시
- * @param {MainNewsState.currentDataType} tabId
- */
-async function switchCompanyTab(tabId) {
-  const tab = document.getElementById(tabId);
-  tab.checked = true;
-
-  state.currentDataType = tabId;
-  if (tabId === "all-news-tab") {
-    state.data = await getCompanyList({ categoryId: state.currentTabId });
-  } else {
-    state.data = getArraySubscribedCompanies();
-  }
-  resetIndexes();
-  render(state);
-}
-
-/** 리스트 뷰 / 그리드 뷰 탭 선택 시 */
-function switchCompanyView(view) {
-  state.currentView = view;
-  resetIndexes();
-  render(state);
-}
-
-/** 리스트 뷰 내 언론사 type(종합/경제, IT 등) 탭 선택 시 */
-async function updateCompanyType(categoryId) {
-  await updateData(categoryId);
-  state.currentTabId = categoryId;
-  render(state);
-}
-
-/** 내가 구독한 언론사 페이지에서 company 선택 시 */
-function updateCompany(companyIndex) {
-  state.currentCompanyIndex = companyIndex;
-  render(state);
-}
-
-const updateCompanyState = {
-  ["list-view"]: {
-    ["all-news-tab"]: {
-      prev: () => updateListViewCompanyInAllTab(-1),
-      next: () => updateListViewCompanyInAllTab(1),
+const updateState = {
+  [LIST_VIEW]: {
+    [ALL_NEWS_TAB]: {
+      prev: () => selectAdjacentCompanyInListViewAllTab(-1),
+      next: () => selectAdjacentCompanyInListViewAllTab(1),
     },
-    ["subscribed-news-tab"]: {
-      prev: () => updateListViewCompanyInSubscribedTab(-1),
-      next: () => updateListViewCompanyInSubscribedTab(1),
+    [SUBSCRIBED_NEWS_TAB]: {
+      prev: () => selectAdjacentCompanyInListViewSubscribedTab(-1),
+      next: () => selectAdjacentCompanyInListViewSubscribedTab(1),
+      rerender: () => selectAdjacentCompanyInListViewSubscribedTab(0),
+    },
+  },
+  [GRID_VIEW]: {
+    [ALL_NEWS_TAB]: {
+      prev: () => navigateGridViewPage(-1),
+      next: () => navigateGridViewPage(1),
+      rerender: () => render(state),
+    },
+    [SUBSCRIBED_NEWS_TAB]: {
+      prev: () => navigateGridViewPage(-1),
+      next: () => navigateGridViewPage(1),
+      rerender: () => navigateGridViewPage(0),
     },
   },
 };
 
-async function updateData(categoryId) {
-  state.data = await getCompanyList({ categoryId });
-  state.currentCompanyIndex = 0;
-  state.currentTabId = categoryId;
+async function renderInit() {
+  selectTab(GRID_VIEW, "currentView");
+  selectTab(ALL_NEWS_TAB, "currentDataType");
+
+  state.companies = await getCompanyList({ categoryId: state.categoryId });
+
+  render(state);
 }
 
+/**
+ * 전체 언론사 보기 / 구독한 언론사 보기 탭 선택 시
+ * @param {Object} props
+ * @param {"all-news-tab" | "subscribed-news-tab"} dataTabId
+ * @param {'list-view' | 'grid-view' | undefined} [view]
+ */
+async function switchCompanyData({ dataTabId, view }) {
+  const viewTabId = view ?? (dataTabId === ALL_NEWS_TAB ? GRID_VIEW : LIST_VIEW);
+  const categoryId = viewTabId === LIST_VIEW ? 1 : null;
+
+  selectTab(dataTabId, "currentDataType");
+  selectTab(viewTabId, "currentView");
+
+  state.companyIndex = 0;
+  state.categoryId = categoryId;
+  state.companies =
+    dataTabId === ALL_NEWS_TAB
+      ? await getCompanyList({ categoryId })
+      : getArraySubscribedCompanies();
+
+  render(state);
+}
+
+/**
+ * 리스트 뷰 / 그리드 뷰 탭 선택 시
+ * @param {'list-view' | 'grid-view'} view
+ */
+async function switchCompanyView(view) {
+  await switchCompanyData({ dataTabId: state.dataTabId, view });
+}
+
+/* 이전/다음 버튼 클릭 시 */
+
 function updatePrev() {
-  updateCompanyState[state.currentView][state.currentDataType].prev();
+  updateState[state.viewTabId][state.dataTabId].prev();
 }
 
 function updateNext() {
-  updateCompanyState[state.currentView][state.currentDataType].next();
+  updateState[state.viewTabId][state.dataTabId].next();
 }
 
-function updateListViewCompanyInSubscribedTab(offset) {
-  state.data = getArraySubscribedCompanies();
+/** list view */
 
-  state.currentCompanyIndex += offset;
-  if (state.currentCompanyIndex < 0) {
-    state.currentCompanyIndex = state.data.length - 1;
-  } else if (state.currentCompanyIndex >= state.data.length) {
-    state.currentCompanyIndex = 0;
-  }
+async function selectCompanyTypeInListView(categoryId) {
+  await updateData(categoryId);
+  state.categoryId = categoryId;
   render(state);
 }
 
-async function updateListViewCompanyInAllTab(offset) {
-  state.currentCompanyIndex += offset;
-
-  if (state.currentCompanyIndex < 0) {
-    await updateData(((state.currentTabId - 2 + state.totalTabNumber) % state.totalTabNumber) + 1);
-    state.currentCompanyIndex = state.data.length - 1;
-  } else if (state.currentCompanyIndex >= state.data.length) {
-    await updateData((state.currentTabId % state.totalTabNumber) + 1);
-  }
+function selectCompanyByIndexInListView(companyIndex) {
+  state.companyIndex = companyIndex;
   render(state);
 }
 
-function rerenderListViewCompanyInSubscribedTab() {
-  updateListViewCompanyInSubscribedTab(0);
+async function selectAdjacentCompanyInListViewAllTab(offset) {
+  state.companyIndex += offset;
+
+  if (state.companyIndex < 0) {
+    await updateData(((state.categoryId - 2 + state.totalTabNumber) % state.totalTabNumber) + 1);
+    state.companyIndex = state.companies.length - 1;
+  } else if (state.companyIndex >= state.companies.length) {
+    await updateData((state.categoryId % state.totalTabNumber) + 1);
+  }
+
+  render(state);
+}
+
+function selectAdjacentCompanyInListViewSubscribedTab(offset) {
+  state.companyIndex += offset;
+
+  if (state.companyIndex < 0) {
+    state.companyIndex = state.companies.length - 1;
+  } else if (state.companyIndex >= state.companies.length) {
+    state.companyIndex = 0;
+  }
+
+  render(state);
+}
+
+function rerenderInSubscribedTab() {
+  state.companies = getArraySubscribedCompanies();
+  updateState[state.viewTabId][SUBSCRIBED_NEWS_TAB].rerender();
 }
 
 /**
  * @param {number} total
  */
-function setTotalTabNumber(total) {
+function setTotalTabNumberInListView(total) {
   state.totalTabNumber = total;
 }
 
+/* grid view */
+
+function navigateGridViewPage(offset) {
+  const newIndex = state.companyIndex + offset * GRID_ITEM_PER_PAGE;
+
+  if (newIndex < 0) {
+    state.companyIndex =
+      (Math.ceil(state.companies.length / GRID_ITEM_PER_PAGE) - 1) * GRID_ITEM_PER_PAGE;
+  } else if (newIndex >= state.companies.length) {
+    state.companyIndex = 0;
+  } else {
+    state.companyIndex = newIndex;
+  }
+
+  render(state);
+}
+
+function rerenderInGridView() {
+  updateState[GRID_VIEW][state.dataTabId].rerender();
+}
+
+/** utils */
+
+function selectTab(elementId, stateKey) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.checked = true;
+    state[stateKey] = elementId;
+  }
+}
+
+async function updateData(categoryId) {
+  state.companies = await getCompanyList({ categoryId });
+  state.companyIndex = 0;
+  state.categoryId = categoryId;
+}
+
 export {
-  updateCompany,
-  switchCompanyView,
+  renderInit,
   updatePrev,
   updateNext,
-  updateCompanyType,
-  switchCompanyTab,
-  rerenderListViewCompanyInSubscribedTab,
-  setTotalTabNumber,
+  switchCompanyData,
+  switchCompanyView,
+  selectCompanyByIndexInListView,
+  selectCompanyTypeInListView,
+  setTotalTabNumberInListView,
+  rerenderInGridView,
+  rerenderInSubscribedTab,
 };

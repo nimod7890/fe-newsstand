@@ -1,16 +1,3 @@
-/* container */
-.list-company-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  padding: 24px 0;
-}
-
-.list-company-container > div {
-  padding: 0 24px;
-}
-
 /* header */
 .company-container-header {
   display: flex;
@@ -20,7 +7,7 @@
 
 /* contents */
 .company-container-contents {
-  overflow: hidden;
+  overflow: scroll;
   display: flex;
   gap: 32px;
 }
@@ -32,10 +19,12 @@
   gap: 16px;
 
   width: 320px;
+  min-width: 320px;
   overflow: hidden;
 }
 
 .main-news > img {
+  width: 320px;
   height: 200px;
   object-fit: cover;
 }

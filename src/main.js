@@ -5,10 +5,11 @@ import { dataTabItems, viewTabItems } from "./features/renderNews/constants/tabI
 import { createMainArrowButton } from "./features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
 
 import {
-  switchCompanyTab,
+  switchCompanyData,
   switchCompanyView,
   updateNext,
   updatePrev,
+  renderInit,
 } from "./features/renderNews/utils/updateStates.js";
 import { getHeadlineList } from "./apis/news.js";
 
@@ -58,13 +59,13 @@ function renderSwitcher() {
   const tabSwitcher = createSwitcher({
     className: "tab-switcher",
     items: dataTabItems,
-    onClick: async (event) => await switchCompanyTab(event.target.id),
+    onClick: async (event) => await switchCompanyData({ dataTabId: event.target.id }),
   });
 
   const viewSwitcher = createSwitcher({
     className: "view-switcher",
     items: viewTabItems,
-    onClick: (event) => switchCompanyView(event.target.id),
+    onClick: async (event) => await switchCompanyView(event.target.id),
   });
 
   navContainer.append(tabSwitcher, viewSwitcher);
@@ -72,7 +73,7 @@ function renderSwitcher() {
 
 /** render news view */
 async function renderNewsView() {
-  await switchCompanyTab("all-news-tab");
+  await renderInit();
 
   const container = document.getElementById("main-news-contents");
 

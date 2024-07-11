@@ -12,13 +12,12 @@ export const getCategoryList = async () => http.get("/categories");
 export const getHeadlineList = async () => http.get("/headlines");
 
 /**
- *
- * @param {number} categoryId
+ * @param {Object} props
+ * @param {number} props.categoryId
  * @returns {Promise<Company[]>}
  */
-export const getCompanyList = ({ categoryId }) => {
+export const getCompanyList = ({ categoryId = null } = {}) => {
   const params = new URLSearchParams();
   categoryId && params.set("categoryId", categoryId);
-
   return http.get(`/companies?${params.toString()}`);
 };

@@ -1,4 +1,5 @@
 import { createButton } from "../../../components/button/button.js";
+import { Company } from "../../../types/news.js";
 import { showSubscribeToast } from "../components/subscribeToast.js";
 import { showUnsubscribeDialog } from "../components/unsubscribeDialog/unsubscribeDialog.js";
 
@@ -8,18 +9,41 @@ const buttonProps = {
 };
 
 /**
- * @param {Object} props
- * @param {Company} props.company
- * @param {boolean} props.isSubscribed
- * @param {"all-news-tab" | "subscribed-news-tab"} props.dataType
+ * @typedef {Object} SubscriptionButtonProps
+ * @property {Company} company
+ * @property {boolean} isSubscribed
+ * @property {"all-news-tab" | "subscribed-news-tab"} [dataTabId="all-news-tab"]
+ * @property {boolean} [isGridView=false]
+ */
+
+/**
+ * @param {SubscriptionButtonProps} props
+ * @param {HTMLDivElement} container
  * @returns {HTMLButtonElement}
  */
-export function createSubscriptionButton({ company, isSubscribed, dataType }) {
+export function createSubscriptionButton({ container, ...props }) {
+  const {
+    company: { id, name },
+    isSubscribed,
+    isGridView = false,
+  } = props;
+
   const button = createButton(buttonProps[isSubscribed]);
-  button.setAttribute("data-company-id", company.id);
-  button.setAttribute("aria-label", `${company.name} ${buttonProps[isSubscribed].ariaLabel}`);
-  button.addEventListener("click", () =>
-    isSubscribed ? showUnsubscribeDialog(company, dataType) : showSubscribeToast(company)
-  );
+
+  button.setAttribute("data-company-id", id);
+  button.setAttribute("aria-label", `${name} ${buttonProps[isSubscribed].ariaLabel}`);
+  (isGridView ? container : button).addEventListener("click", () => handleSubscriptionClick(props));
+
   return button;
+}
+
+/**
+ * @param {SubscriptionButtonProps} props
+ */
+function handleSubscriptionClick(props) {
+  const { company, isSubscribed, isGridView, dataTabId } = props;
+
+  isSubscribed
+    ? showUnsubscribeDialog({ company, isGridView, dataTabId })
+    : showSubscribeToast(company, isGridView);
 }

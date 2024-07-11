@@ -14,5 +14,5 @@ export function render(state) {
   const container = document.getElementById("news-container");
   container.className = "border-box";
   container.innerHTML = "";
-  renderView[state.currentView](container, state);
+  renderView[state.viewTabId](container, state);
 }
