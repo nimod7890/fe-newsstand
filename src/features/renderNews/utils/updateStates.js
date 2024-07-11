@@ -55,7 +55,7 @@ function updateCompany(companyIndex) {
   render(state);
 }
 
-const updateCompanyState = {
+const updateState = {
   ["list-view"]: {
     ["all-news-tab"]: {
       prev: () => updateListViewCompanyInAllTab(-1),
@@ -75,11 +75,11 @@ async function updateData(categoryId) {
 }
 
 function updatePrev() {
-  updateCompanyState[state.currentView][state.currentDataType].prev();
+  updateState[state.currentView][state.currentDataType].prev();
 }
 
 function updateNext() {
-  updateCompanyState[state.currentView][state.currentDataType].next();
+  updateState[state.currentView][state.currentDataType].next();
 }
 
 async function updateListViewCompanyType(categoryId) {
