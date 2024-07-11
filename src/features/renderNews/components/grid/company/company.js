@@ -12,8 +12,8 @@ import { createCompanyLogoTemplate } from "../../@common/companyLogo.js";
 export function renderCompany({ container, company, dataType }) {
   container.classList.add("grid-item-company");
 
-  const logo = createCompanyLogoTemplate(company);
-  container.innerHTML = logo;
+  const companyLogo = document.createElement("div");
+  companyLogo.innerHTML = createCompanyLogoTemplate(company);
 
   const subscriptions = getObjectSubscribedCompanies();
   const isSubscribed = Object.hasOwn(subscriptions, company.id);
@@ -22,14 +22,17 @@ export function renderCompany({ container, company, dataType }) {
     isSubscribed,
     dataType,
   });
+  subscriptionButton.classList.add("hover-hidden");
 
   container.addEventListener("mouseenter", () => {
-    container.dataset.originalContent = container.innerHTML;
-    container.innerHTML = "";
-    container.appendChild(subscriptionButton);
+    companyLogo.classList.add("hover-hidden");
+    subscriptionButton.classList.remove("hover-hidden");
   });
 
   container.addEventListener("mouseleave", () => {
-    container.innerHTML = container.dataset.originalContent;
+    companyLogo.classList.remove("hover-hidden");
+    subscriptionButton.classList.add("hover-hidden");
   });
+
+  container.append(companyLogo, subscriptionButton);
 }
