@@ -60,15 +60,21 @@ async function renderInit() {
 
 /**
  * 전체 언론사 보기 / 구독한 언론사 보기 탭 선택 시
- * @param {"all-news-tab" | "subscribed-news-tab"} tabId
+ * @param {"all-news-tab" | "subscribed-news-tab"} dataTabId
+ * @param {'list-view' | 'grid-view' | undefined} [view]
  */
-async function switchCompanyData(tabId) {
-  resetIndexes();
-  selectTab(tabId, "currentDataType");
+async function switchCompanyData(dataTabId, view) {
+  const viewTabId = view ?? (dataTabId === ALL_NEWS_TAB ? GRID_VIEW : LIST_VIEW);
+  const categoryId = viewTabId === LIST_VIEW ? 1 : null;
 
+  selectTab(dataTabId, "currentDataType");
+  selectTab(viewTabId, "currentView");
+
+  state.currentDataIndex = 0;
+  state.currentTabId = categoryId;
   state.companies =
-    tabId === ALL_NEWS_TAB
-      ? await getCompanyList({ categoryId: state.currentTabId })
+    dataTabId === ALL_NEWS_TAB
+      ? await getCompanyList({ categoryId })
       : getArraySubscribedCompanies();
 
   render(state);
@@ -79,8 +85,7 @@ async function switchCompanyData(tabId) {
  * @param {'list-view' | 'grid-view'} view
  */
 async function switchCompanyView(view) {
-  state.currentView = view;
-  await switchCompanyData(state.currentDataType);
+  await switchCompanyData(state.currentDataType, view);
 }
 
 /* 이전/다음 버튼 클릭 시 */
@@ -165,11 +170,6 @@ function rerenderInGridView() {
 }
 
 /** utils */
-
-function resetIndexes() {
-  state.currentTabId = state.currentView === LIST_VIEW ? 1 : null;
-  state.currentDataIndex = 0;
-}
 
 function selectTab(elementId, stateKey) {
   const element = document.getElementById(elementId);
