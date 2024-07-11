@@ -1,21 +1,26 @@
 import { showDialog } from "../../../../components/overlays/dialog/dialog.js";
 import { Company } from "../../../../types/news.js";
-import { rerenderCompanyInSubscribedTab } from "../../../renderNews/utils/updateStates.js";
+import {
+  rerenderCompanyInGridView,
+  rerenderCompanyInSubscribedTab,
+} from "../../../renderNews/utils/updateStates.js";
 import { dispatchSubscriptionUpdateEvent } from "../../utils/dispatchSubscriptionUpdateEvent.js";
 import { removeSubscribedCompany } from "../../utils/localStorage.js";
 
 /**
- * @param {Company} company
- * @param {"all-news-tab" | "subscribed-news-tab"} dataType
+ * @param {Object} props
+ * @param {Company} props.company
+ * @param {"all-news-tab" | "subscribed-news-tab"} props.dataType
+ * @param {boolean} props.isGridView
  */
-export function showUnsubscribeDialog(company, dataType) {
+export function showUnsubscribeDialog(props) {
+  const {
+    company: { name },
+  } = props;
+
   const confirmProps = {
     text: "예, 해지합니다",
-    onClick: () => {
-      removeSubscribedCompany(company.id);
-      dispatchSubscriptionUpdateEvent({ company, isSubscribed: false });
-      dataType === "subscribed-news-tab" && rerenderCompanyInSubscribedTab();
-    },
+    onClick: () => handleUnsubscribe(props),
   };
 
   const cancelProps = {
@@ -24,8 +29,26 @@ export function showUnsubscribeDialog(company, dataType) {
   };
 
   showDialog({
-    message: `<strong>${company.name}</strong>을(를)<br/> 구독해지하시겠습니까?`,
+    message: `<strong>${name}</strong>을(를)<br/> 구독해지하시겠습니까?`,
     leftButtonProps: confirmProps,
     rightButtonProps: cancelProps,
   });
+}
+
+/**
+ * @param {Object} props
+ * @param {Company} props.company
+ * @param {boolean} props.isGridView
+ * @param {"all-news-tab" | "subscribed-news-tab"} props.dataType
+ */
+function handleUnsubscribe({ company, isGridView, dataType }) {
+  removeSubscribedCompany(company.id);
+
+  if (dataType === "subscribed-news-tab") {
+    rerenderCompanyInSubscribedTab();
+  } else if (isGridView) {
+    rerenderCompanyInGridView();
+  } else {
+    dispatchSubscriptionUpdateEvent({ company, isSubscribed: false });
+  }
 }

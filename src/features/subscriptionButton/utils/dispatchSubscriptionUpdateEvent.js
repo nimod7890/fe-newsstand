@@ -17,8 +17,10 @@ export function dispatchSubscriptionUpdateEvent(detail) {
 
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener(SUBSCRIPTION_EVENT_KEY, ({ detail }) => {
-    const { company } = detail;
-    const subscriptionButton = document.querySelector(`[data-company-id="${company.id}"]`);
+    const {
+      company: { id },
+    } = detail;
+    const subscriptionButton = document.querySelector(`[data-company-id="${id}"]`);
 
     if (subscriptionButton) {
       const newButton = createSubscriptionButton(detail);

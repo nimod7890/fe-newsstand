@@ -16,19 +16,36 @@ const state = {
   companies: [],
 };
 
-function resetIndexes() {
-  state.currentTabId = state.currentView === "list-view" ? 1 : null;
-  state.currentDataIndex = 0;
-}
+const updateState = {
+  ["list-view"]: {
+    ["all-news-tab"]: {
+      prev: () => updateListViewCompanyInAllTab(-1),
+      next: () => updateListViewCompanyInAllTab(1),
+    },
+    ["subscribed-news-tab"]: {
+      prev: () => updateListViewCompanyInSubscribedTab(1),
+      next: () => updateListViewCompanyInSubscribedTab(1),
+      rerender: () => updateListViewCompanyInSubscribedTab(0),
+    },
+  },
+  ["grid-view"]: {
+    ["all-news-tab"]: {
+      prev: () => updateGridViewCompany(1),
+      next: () => updateGridViewCompany(1),
+      rerender: () => render(state),
+    },
+    ["subscribed-news-tab"]: {
+      prev: () => updateGridViewCompany(1),
+      next: () => updateGridViewCompany(1),
+      rerender: () => updateGridViewCompany(0),
+    },
+  },
+};
 
 async function renderInit() {
-  const viewTab = document.getElementById("grid-view");
-  viewTab.checked = true;
-  state.currentView = "grid-view";
+  setTabState("grid-view", "currentView");
+  setTabState("all-news-tab", "currentDataType");
 
-  const dataTab = document.getElementById("all-news-tab");
-  dataTab.checked = true;
-  state.currentDataType = "all-news-tab";
   state.companies = await getCompanyList({ categoryId: state.currentTabId });
 
   render(state);
@@ -40,12 +57,13 @@ async function renderInit() {
  */
 async function switchCompanyTab(tabId) {
   resetIndexes();
-  state.currentDataType = tabId;
-  if (tabId === "all-news-tab") {
-    state.companies = await getCompanyList({ categoryId: state.currentTabId });
-  } else {
-    state.companies = getArraySubscribedCompanies();
-  }
+  setTabState(tabId, "currentDataType");
+
+  state.companies =
+    tabId === "all-news-tab"
+      ? await getCompanyList({ categoryId: state.currentTabId })
+      : (state.companies = getArraySubscribedCompanies());
+
   render(state);
 }
 
@@ -56,40 +74,6 @@ async function switchCompanyTab(tabId) {
 async function switchCompanyView(view) {
   state.currentView = view;
   await switchCompanyTab(state.currentDataType);
-}
-
-const updateState = {
-  ["list-view"]: {
-    ["all-news-tab"]: {
-      prev: () => updateListViewCompanyInAllTab(-1),
-      next: () => updateListViewCompanyInAllTab(1),
-    },
-    ["subscribed-news-tab"]: {
-      prev: () => updateListViewCompanyInSubscribedTab(-1),
-      next: () => updateListViewCompanyInSubscribedTab(1),
-      rerender: () => updateListViewCompanyInSubscribedTab(0),
-    },
-  },
-  ["grid-view"]: {
-    ["all-news-tab"]: {
-      prev: () => updateGridViewCompany(-1),
-      next: () => updateGridViewCompany(1),
-    },
-    ["subscribed-news-tab"]: {
-      prev: () => updateGridViewCompany(-1),
-      next: () => updateGridViewCompany(1),
-      rerender: () => {
-        state.companies = getArraySubscribedCompanies();
-        updateGridViewCompany(0);
-      },
-    },
-  },
-};
-
-async function updateData(categoryId) {
-  state.companies = await getCompanyList({ categoryId });
-  state.currentDataIndex = 0;
-  state.currentTabId = categoryId;
 }
 
 function updatePrev() {
@@ -116,11 +100,13 @@ async function updateListViewCompanyType(categoryId) {
 
 function updateListViewCompanyInSubscribedTab(offset) {
   state.currentDataIndex += offset;
+
   if (state.currentDataIndex < 0) {
     state.currentDataIndex = state.companies.length - 1;
   } else if (state.currentDataIndex >= state.companies.length) {
     state.currentDataIndex = 0;
   }
+
   render(state);
 }
 
@@ -133,24 +119,13 @@ async function updateListViewCompanyInAllTab(offset) {
   } else if (state.currentDataIndex >= state.companies.length) {
     await updateData((state.currentTabId % state.totalTabNumber) + 1);
   }
+
   render(state);
 }
 
-function rerenderCompanyInSubscribedTab() {
+function rerenderInSubscribedTab() {
+  state.companies = getArraySubscribedCompanies();
   updateState[state.currentView]["subscribed-news-tab"].rerender();
-}
-
-/** grid view */
-function updateGridViewCompany(offset) {
-  state.currentDataIndex += offset * GRID_ITEM_PER_PAGE;
-  if (state.currentDataIndex < 0) {
-    state.currentDataIndex =
-      Math.floor(state.companies.length / GRID_ITEM_PER_PAGe) * GRID_ITEM_PER_PAGE;
-  } else if (state.currentDataIndex >= state.companies.length) {
-    state.currentDataIndex = 0;
-  }
-
-  render(state);
 }
 
 /**
@@ -158,6 +133,48 @@ function updateGridViewCompany(offset) {
  */
 function setTotalTabNumber(total) {
   state.totalTabNumber = total;
+}
+
+/* grid view */
+
+function updateGridViewCompany(offset) {
+  const newIndex = state.currentDataIndex + offset * GRID_ITEM_PER_PAGE;
+
+  if (newIndex < 0) {
+    state.currentDataIndex =
+      (Math.ceil(state.companies.length / GRID_ITEM_PER_PAGE) - 1) * GRID_ITEM_PER_PAGE;
+  } else if (newIndex >= state.companies.length) {
+    state.currentDataIndex = 0;
+  } else {
+    state.currentDataIndex = newIndex;
+  }
+
+  render(state);
+}
+
+function rerenderInGridView() {
+  updateState["grid-view"][state.currentDataType].rerender();
+}
+
+/** utils */
+
+function resetIndexes() {
+  state.currentTabId = state.currentView === "list-view" ? 1 : null;
+  state.currentDataIndex = 0;
+}
+
+function setTabState(elementId, stateKey) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.checked = true;
+    state[stateKey] = elementId;
+  }
+}
+
+async function updateData(categoryId) {
+  state.companies = await getCompanyList({ categoryId });
+  state.currentDataIndex = 0;
+  state.currentTabId = categoryId;
 }
 
 export {
@@ -168,6 +185,7 @@ export {
   updateNext,
   updateListViewCompanyType,
   switchCompanyTab,
-  rerenderCompanyInSubscribedTab,
+  rerenderInGridView as rerenderCompanyInGridView,
+  rerenderInSubscribedTab as rerenderCompanyInSubscribedTab,
   setTotalTabNumber,
 };

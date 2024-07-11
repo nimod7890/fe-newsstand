@@ -1,13 +1,12 @@
+import { MainNewsState } from "../../../../types/news.js";
 import { GRID_ITEM_PER_PAGE } from "../../constants/gridItemPerPage.js";
 import { renderCompany } from "./company/company.js";
 
 /**
  * @param {HTMLElement} viewContainer
- * @param {"all-news-tab" | "subscribed-news-tab"} state
+ * @param {MainNewsState} state
  */
-export function renderGridView(viewContainer, state) {
-  const { companies, currentDataIndex } = state;
-
+export function renderGridView(viewContainer, { companies, currentDataIndex, currentDataType }) {
   viewContainer.classList.add("grid-company-container");
 
   const currentCompanies = companies.slice(currentDataIndex, currentDataIndex + GRID_ITEM_PER_PAGE);
@@ -17,8 +16,7 @@ export function renderGridView(viewContainer, state) {
 
     let companyContainer = createCompanyContainer();
 
-    company &&
-      renderCompany({ container: companyContainer, company, dataType: state.currentDataType });
+    company && renderCompany({ container: companyContainer, company, dataType: currentDataType });
 
     viewContainer.appendChild(companyContainer);
   }

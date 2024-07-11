@@ -6,7 +6,6 @@ import { createCompanyLogoTemplate } from "../../@common/companyLogo.js";
  * @param {Object} props
  * @param {HTMLDivElement} props.container
  * @param {Company} props.company
- * @param {} props.dataType
  * @returns {HTMLDivElement}
  */
 export function renderCompany({ container, company, dataType }) {
@@ -21,7 +20,9 @@ export function renderCompany({ container, company, dataType }) {
     company,
     isSubscribed,
     dataType,
+    isGridView: true,
   });
+
   subscriptionButton.classList.add("hover-hidden");
 
   container.addEventListener("mouseenter", () => {
