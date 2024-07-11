@@ -3,7 +3,7 @@ import { getCategoryList } from "../../../../../apis/news.js";
 import { MainNewsState } from "../../../../../types/news.js";
 import {
   setTotalTabNumberInListView,
-  selectCompanyInListViewSubscribedTab,
+  selectCompanyByIndexInListView,
   selectCompanyTypeInListView,
 } from "../../../utils/updateStates.js";
 import { createTabItem } from "./tabItem.js";
@@ -40,7 +40,7 @@ export async function createTab({
         innerText: companyName,
         isSelected: companyIndex === currentCompanyIndex,
         children: createIcon({ iconId: "arrow" }),
-        onClick: () => selectCompanyInListViewSubscribedTab(companyIndex),
+        onClick: () => selectCompanyByIndexInListView(companyIndex),
       });
 
       container.appendChild(companyElement);

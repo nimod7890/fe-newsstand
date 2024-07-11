@@ -5,7 +5,7 @@ import { dataTabItems, viewTabItems } from "./features/renderNews/constants/tabI
 import { createMainArrowButton } from "./features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
 
 import {
-  switchCompanyTab,
+  switchCompanyData,
   switchCompanyView,
   updateNext,
   updatePrev,
@@ -59,7 +59,7 @@ function renderSwitcher() {
   const tabSwitcher = createSwitcher({
     className: "tab-switcher",
     items: dataTabItems,
-    onClick: async (event) => await switchCompanyTab(event.target.id),
+    onClick: async (event) => await switchCompanyData(event.target.id),
   });
 
   const viewSwitcher = createSwitcher({

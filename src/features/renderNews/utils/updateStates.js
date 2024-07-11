@@ -4,12 +4,19 @@ import { getArraySubscribedCompanies } from "../../subscriptionButton/utils/loca
 import { getCompanyList } from "../../../apis/news.js";
 import { GRID_ITEM_PER_PAGE } from "../constants/gridItemPerPage.js";
 
+// Constants
+const LIST_VIEW = "list-view";
+const GRID_VIEW = "grid-view";
+
+const ALL_NEWS_TAB = "all-news-tab";
+const SUBSCRIBED_NEWS_TAB = "subscribed-news-tab";
+
 /**
  * @type {MainNewsState}
  */
 const state = {
-  currentView: "grid-view",
-  currentDataType: "all-news-tab",
+  currentView: GRID_VIEW,
+  currentDataType: ALL_NEWS_TAB,
   currentTabId: null,
   totalTabNumber: 0,
   currentDataIndex: 0,
@@ -17,34 +24,34 @@ const state = {
 };
 
 const updateState = {
-  ["list-view"]: {
-    ["all-news-tab"]: {
-      prev: () => selectCompanyInListViewAllTab(-1),
-      next: () => selectCompanyInListViewAllTab(1),
+  [LIST_VIEW]: {
+    [ALL_NEWS_TAB]: {
+      prev: () => selectAdjacentCompanyInListViewAllTab(-1),
+      next: () => selectAdjacentCompanyInListViewAllTab(1),
     },
-    ["subscribed-news-tab"]: {
-      prev: () => selectCompanyInListViewSubscribedTab(-1),
-      next: () => selectCompanyInListViewSubscribedTab(1),
-      rerender: () => selectCompanyInListViewSubscribedTab(0),
+    [SUBSCRIBED_NEWS_TAB]: {
+      prev: () => selectAdjacentCompanyInListViewSubscribedTab(-1),
+      next: () => selectAdjacentCompanyInListViewSubscribedTab(1),
+      rerender: () => selectAdjacentCompanyInListViewSubscribedTab(0),
     },
   },
-  ["grid-view"]: {
-    ["all-news-tab"]: {
-      prev: () => selectGridViewPage(-1),
-      next: () => selectGridViewPage(1),
+  [GRID_VIEW]: {
+    [ALL_NEWS_TAB]: {
+      prev: () => navigateGridViewPage(-1),
+      next: () => navigateGridViewPage(1),
       rerender: () => render(state),
     },
-    ["subscribed-news-tab"]: {
-      prev: () => selectGridViewPage(-1),
-      next: () => selectGridViewPage(1),
-      rerender: () => selectGridViewPage(0),
+    [SUBSCRIBED_NEWS_TAB]: {
+      prev: () => navigateGridViewPage(-1),
+      next: () => navigateGridViewPage(1),
+      rerender: () => navigateGridViewPage(0),
     },
   },
 };
 
 async function renderInit() {
-  selectTab("grid-view", "currentView");
-  selectTab("all-news-tab", "currentDataType");
+  selectTab(GRID_VIEW, "currentView");
+  selectTab(ALL_NEWS_TAB, "currentDataType");
 
   state.companies = await getCompanyList({ categoryId: state.currentTabId });
 
@@ -52,17 +59,17 @@ async function renderInit() {
 }
 
 /**
- * 전체 언론사 보기 / 내가 구독한 언론사 보기 탭 선택 시
- * @param {MainNewsState.currentDataType} tabId
+ * 전체 언론사 보기 / 구독한 언론사 보기 탭 선택 시
+ * @param {"all-news-tab" | "subscribed-news-tab"} tabId
  */
 async function switchCompanyData(tabId) {
   resetIndexes();
   selectTab(tabId, "currentDataType");
 
   state.companies =
-    tabId === "all-news-tab"
+    tabId === ALL_NEWS_TAB
       ? await getCompanyList({ categoryId: state.currentTabId })
-      : (state.companies = getArraySubscribedCompanies());
+      : getArraySubscribedCompanies();
 
   render(state);
 }
@@ -76,6 +83,8 @@ async function switchCompanyView(view) {
   await switchCompanyData(state.currentDataType);
 }
 
+/* 이전/다음 버튼 클릭 시 */
+
 function updatePrev() {
   updateState[state.currentView][state.currentDataType].prev();
 }
@@ -86,30 +95,18 @@ function updateNext() {
 
 /** list view */
 
-function selectCompanyInListViewSubscribedTab(companyIndex) {
-  state.currentDataIndex = companyIndex;
-  render(state);
-}
-
 async function selectCompanyTypeInListView(categoryId) {
   await updateData(categoryId);
   state.currentTabId = categoryId;
   render(state);
 }
 
-function selectCompanyInListViewSubscribedTab(offset) {
-  state.currentDataIndex += offset;
-
-  if (state.currentDataIndex < 0) {
-    state.currentDataIndex = state.companies.length - 1;
-  } else if (state.currentDataIndex >= state.companies.length) {
-    state.currentDataIndex = 0;
-  }
-
+function selectCompanyByIndexInListView(companyIndex) {
+  state.currentDataIndex = companyIndex;
   render(state);
 }
 
-async function selectCompanyInListViewAllTab(offset) {
+async function selectAdjacentCompanyInListViewAllTab(offset) {
   state.currentDataIndex += offset;
 
   if (state.currentDataIndex < 0) {
@@ -122,9 +119,21 @@ async function selectCompanyInListViewAllTab(offset) {
   render(state);
 }
 
+function selectAdjacentCompanyInListViewSubscribedTab(offset) {
+  state.currentDataIndex += offset;
+
+  if (state.currentDataIndex < 0) {
+    state.currentDataIndex = state.companies.length - 1;
+  } else if (state.currentDataIndex >= state.companies.length) {
+    state.currentDataIndex = 0;
+  }
+
+  render(state);
+}
+
 function rerenderInSubscribedTab() {
   state.companies = getArraySubscribedCompanies();
-  updateState[state.currentView]["subscribed-news-tab"].rerender();
+  updateState[state.currentView][SUBSCRIBED_NEWS_TAB].rerender();
 }
 
 /**
@@ -136,7 +145,7 @@ function setTotalTabNumberInListView(total) {
 
 /* grid view */
 
-function selectGridViewPage(offset) {
+function navigateGridViewPage(offset) {
   const newIndex = state.currentDataIndex + offset * GRID_ITEM_PER_PAGE;
 
   if (newIndex < 0) {
@@ -152,13 +161,13 @@ function selectGridViewPage(offset) {
 }
 
 function rerenderInGridView() {
-  updateState["grid-view"][state.currentDataType].rerender();
+  updateState[GRID_VIEW][state.currentDataType].rerender();
 }
 
 /** utils */
 
 function resetIndexes() {
-  state.currentTabId = state.currentView === "list-view" ? 1 : null;
+  state.currentTabId = state.currentView === LIST_VIEW ? 1 : null;
   state.currentDataIndex = 0;
 }
 
@@ -182,9 +191,9 @@ export {
   updateNext,
   switchCompanyData,
   switchCompanyView,
-  selectCompanyInListViewSubscribedTab,
+  selectCompanyByIndexInListView,
   selectCompanyTypeInListView,
+  setTotalTabNumberInListView,
   rerenderInGridView,
   rerenderInSubscribedTab,
-  setTotalTabNumberInListView,
 };
