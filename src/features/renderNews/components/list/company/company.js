@@ -2,6 +2,7 @@ import { Company, NewsItem } from "../../../../../types/news.js";
 import { convertStringToFragment } from "../../../../../utils/convertStringToFragment.js";
 import { createSubscriptionButton } from "../../../../subscriptionButton/components/subscriptionButton.js";
 import { getObjectSubscribedCompanies } from "../../../../subscriptionButton/utils/localStorage.js";
+import { createCompanyLogoTemplate } from "../../@common/companyLogo.js";
 
 /**
  * @param {Company} company
@@ -26,16 +27,14 @@ export function createCompany(company, dataType) {
  * @returns {HTMLDivElement}
  */
 function createHeader(company, dataType) {
-  const { id, logoUrl, name, updatedDate } = company;
-  const formattedUpdatedDate = formatDateString(updatedDate);
+  const { id, updatedDate } = company;
 
   const header = document.createElement("div");
   header.className = "company-container-header display-medium12";
 
-  header.innerHTML = `
-                      <img src=${logoUrl} alt='${name} 로고'/>
-                      <time>${formattedUpdatedDate}</time>
-                    `;
+  const companyLogo = convertStringToFragment(createCompanyLogoTemplate(company));
+  const date = convertStringToFragment(`<time>${formatDateString(updatedDate)}</time>`);
+  header.append(companyLogo, date);
 
   const subscriptions = getObjectSubscribedCompanies();
   const isSubscribed = Object.hasOwn(subscriptions, id);
