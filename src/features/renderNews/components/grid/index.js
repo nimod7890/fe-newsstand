@@ -1,4 +1,5 @@
 import { MainNewsState } from "../../../../types/news.js";
+import { createCompany } from "./company/company.js";
 
 /**
  * @param {HTMLElement} container
@@ -9,9 +10,10 @@ export function renderGridView(container, state) {
 
   container.classList.add("grid-company-container");
 
-  companies.slice(currentDataIndex, currentDataIndex + 24).forEach((company) => {
-    const companyElement = document.createElement("div");
-    companyElement.innerText = company.name;
+  const currentPage = companies.slice(currentDataIndex, currentDataIndex + 24);
+
+  currentPage.forEach((company) => {
+    const companyElement = createCompany(company);
     container.appendChild(companyElement);
   });
 }

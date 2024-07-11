@@ -17,9 +17,10 @@ const stylesheets = [
 
   "src/features/renderNews/components/@common/mainArrowButton/mainArrowButton.css",
 
+  "src/features/renderNews/styles/layout.css",
   "src/features/renderNews/components/list/company/company.css",
   "src/features/renderNews/components/list/tab/tab.css",
-  "src/features/renderNews/styles/layout.css",
+  "src/features/renderNews/components/grid/company/company.css",
 ];
 
 stylesheets.forEach(loadCSS);
