@@ -26,10 +26,10 @@
 
 /**
  * @typedef {Object} MainNewsState
- * @property {'list-view' | 'grid-view' } MainNewsState.currentView
- * @property {"all-news-tab" | "subscribed-news-tab"} MainNewsState.currentDataType
- * @property {number | null} MainNewsState.currentTabId
- * @property {number} MainNewsState.currentDataIndex
+ * @property {'list-view' | 'grid-view' } MainNewsState.viewTabId
+ * @property {"all-news-tab" | "subscribed-news-tab"} MainNewsState.dataTabId
+ * @property {number | null} MainNewsState.categoryId
+ * @property {number} MainNewsState.companyIndex
  * @property {number} MainNewsState.totalTabNumber
  * @property {Company[]} MainNewsState.companies
  */

@@ -12,7 +12,7 @@ const buttonProps = {
  * @typedef {Object} SubscriptionButtonProps
  * @property {Company} company
  * @property {boolean} isSubscribed
- * @property {"all-news-tab" | "subscribed-news-tab"} [dataType="all-news-tab"]
+ * @property {"all-news-tab" | "subscribed-news-tab"} [dataTabId="all-news-tab"]
  * @property {boolean} [isGridView=false]
  */
 
@@ -41,9 +41,9 @@ export function createSubscriptionButton({ container, ...props }) {
  * @param {SubscriptionButtonProps} props
  */
 function handleSubscriptionClick(props) {
-  const { company, isSubscribed, isGridView, dataType } = props;
+  const { company, isSubscribed, isGridView, dataTabId } = props;
 
   isSubscribed
-    ? showUnsubscribeDialog({ company, isGridView, dataType })
+    ? showUnsubscribeDialog({ company, isGridView, dataTabId })
     : showSubscribeToast(company, isGridView);
 }

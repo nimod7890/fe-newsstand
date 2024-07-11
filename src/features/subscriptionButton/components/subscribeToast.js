@@ -14,7 +14,7 @@ export function showSubscribeToast(company, isGridView) {
   addSubscribedCompany(company);
 
   setTimeout(async () => {
-    await switchCompanyData("subscribed-news-tab");
+    await switchCompanyData({ dataTapId: "subscribed-news-tab" });
   }, TOAST_SHOWING_TIME);
 
   isGridView

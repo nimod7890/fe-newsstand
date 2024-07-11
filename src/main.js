@@ -59,7 +59,7 @@ function renderSwitcher() {
   const tabSwitcher = createSwitcher({
     className: "tab-switcher",
     items: dataTabItems,
-    onClick: async (event) => await switchCompanyData(event.target.id),
+    onClick: async (event) => await switchCompanyData({ dataTabId: event.target.id }),
   });
 
   const viewSwitcher = createSwitcher({

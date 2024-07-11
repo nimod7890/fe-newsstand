@@ -6,9 +6,10 @@ import { createCompanyLogoTemplate } from "../../@common/companyLogo.js";
  * @param {Object} props
  * @param {HTMLDivElement} props.container
  * @param {Company} props.company
+ * @param {"all-news-tab" | "subscribed-news-tab"} props.dataTabId
  * @returns {HTMLDivElement}
  */
-export function renderCompany({ container, company, dataType }) {
+export function renderCompany({ container, company, dataTabId }) {
   container.classList.add("grid-item-company");
 
   const companyLogo = document.createElement("div");
@@ -19,7 +20,7 @@ export function renderCompany({ container, company, dataType }) {
   const subscriptionButton = createSubscriptionButton({
     company,
     isSubscribed,
-    dataType,
+    dataTabId,
     isGridView: true,
     container,
   });

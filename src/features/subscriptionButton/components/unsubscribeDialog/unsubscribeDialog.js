@@ -10,7 +10,7 @@ import { removeSubscribedCompany } from "../../utils/localStorage.js";
 /**
  * @param {Object} props
  * @param {Company} props.company
- * @param {"all-news-tab" | "subscribed-news-tab"} props.dataType
+ * @param {"all-news-tab" | "subscribed-news-tab"} props.dataTabId
  * @param {boolean} props.isGridView
  */
 export function showUnsubscribeDialog(props) {
@@ -39,12 +39,12 @@ export function showUnsubscribeDialog(props) {
  * @param {Object} props
  * @param {Company} props.company
  * @param {boolean} props.isGridView
- * @param {"all-news-tab" | "subscribed-news-tab"} props.dataType
+ * @param {"all-news-tab" | "subscribed-news-tab"} props.dataTabId
  */
-function handleUnsubscribe({ company, isGridView, dataType }) {
+function handleUnsubscribe({ company, isGridView, dataTabId }) {
   removeSubscribedCompany(company.id);
 
-  if (dataType === "subscribed-news-tab") {
+  if (dataTabId === "subscribed-news-tab") {
     rerenderInSubscribedTab();
   } else if (isGridView) {
     rerenderInGridView();

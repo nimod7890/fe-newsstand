@@ -11,24 +11,19 @@ import { createTabItem } from "./tabItem.js";
 /**
  * @param {MainNewsState} state
  */
-export async function createTab({
-  currentTabId,
-  currentDataIndex: currentCompanyIndex,
-  currentDataType,
-  companies,
-}) {
+export async function createTab({ categoryId, companyIndex, dataTabId, companies }) {
   const container = document.createElement("div");
   container.className = "list-tab border-box";
 
-  if (currentDataType === "all-news-tab") {
+  if (dataTabId === "all-news-tab") {
     const categoryList = await getCategoryList();
     setTotalTabNumberInListView(categoryList.length);
 
     categoryList.forEach(({ id, name }) => {
       const categoryElement = createTabItem({
         innerText: name,
-        isSelected: +id === +currentTabId,
-        children: `${currentCompanyIndex + 1}/${companies.length}`,
+        isSelected: +id === +categoryId,
+        children: `${companyIndex + 1}/${companies.length}`,
         onClick: async () => await selectCompanyTypeInListView(id),
       });
 
@@ -38,7 +33,7 @@ export async function createTab({
     companies.forEach(({ name: companyName }, companyIndex) => {
       const companyElement = createTabItem({
         innerText: companyName,
-        isSelected: companyIndex === currentCompanyIndex,
+        isSelected: companyIndex === companyIndex,
         children: createIcon({ iconId: "arrow" }),
         onClick: () => selectCompanyByIndexInListView(companyIndex),
       });
