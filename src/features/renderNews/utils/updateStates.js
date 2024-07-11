@@ -12,10 +12,9 @@ const state = {
   currentTabId: 1,
   totalTabNumber: 0,
   currentCompanyIndex: 0,
-  data: [],
+  companies: [],
 };
 
-/** todo: tab id data에서 가져와서 보완해야 함  */
 function resetIndexes() {
   state.currentTabId = 1;
   state.currentCompanyIndex = 0;
@@ -31,9 +30,9 @@ async function switchCompanyTab(tabId) {
 
   state.currentDataType = tabId;
   if (tabId === "all-news-tab") {
-    state.data = await getCompanyList({ categoryId: state.currentTabId });
+    state.companies = await getCompanyList({ categoryId: state.currentTabId });
   } else {
-    state.data = getArraySubscribedCompanies();
+    state.companies = getArraySubscribedCompanies();
   }
   resetIndexes();
   render(state);
@@ -42,6 +41,7 @@ async function switchCompanyTab(tabId) {
 /** 리스트 뷰 / 그리드 뷰 탭 선택 시 */
 function switchCompanyView(view) {
   state.currentView = view;
+
   resetIndexes();
   render(state);
 }
@@ -73,7 +73,7 @@ const updateCompanyState = {
 };
 
 async function updateData(categoryId) {
-  state.data = await getCompanyList({ categoryId });
+  state.companies = await getCompanyList({ categoryId });
   state.currentCompanyIndex = 0;
   state.currentTabId = categoryId;
 }
@@ -87,12 +87,12 @@ function updateNext() {
 }
 
 function updateListViewCompanyInSubscribedTab(offset) {
-  state.data = getArraySubscribedCompanies();
+  state.companies = getArraySubscribedCompanies();
 
   state.currentCompanyIndex += offset;
   if (state.currentCompanyIndex < 0) {
-    state.currentCompanyIndex = state.data.length - 1;
-  } else if (state.currentCompanyIndex >= state.data.length) {
+    state.currentCompanyIndex = state.companies.length - 1;
+  } else if (state.currentCompanyIndex >= state.companies.length) {
     state.currentCompanyIndex = 0;
   }
   render(state);
@@ -103,8 +103,8 @@ async function updateListViewCompanyInAllTab(offset) {
 
   if (state.currentCompanyIndex < 0) {
     await updateData(((state.currentTabId - 2 + state.totalTabNumber) % state.totalTabNumber) + 1);
-    state.currentCompanyIndex = state.data.length - 1;
-  } else if (state.currentCompanyIndex >= state.data.length) {
+    state.currentCompanyIndex = state.companies.length - 1;
+  } else if (state.currentCompanyIndex >= state.companies.length) {
     await updateData((state.currentTabId % state.totalTabNumber) + 1);
   }
   render(state);

@@ -11,7 +11,7 @@ import { createTabItem } from "./tabItem.js";
 /**
  * @param {MainNewsState} state
  */
-export async function createTab({ currentTabId, currentCompanyIndex, currentDataType, data }) {
+export async function createTab({ currentTabId, currentCompanyIndex, currentDataType, companies }) {
   const container = document.createElement("div");
   container.className = "list-tab border-box";
 
@@ -23,14 +23,14 @@ export async function createTab({ currentTabId, currentCompanyIndex, currentData
       const categoryElement = createTabItem({
         innerText: name,
         isSelected: +id === +currentTabId,
-        children: `${currentCompanyIndex + 1}/${data.length}`,
+        children: `${currentCompanyIndex + 1}/${companies.length}`,
         onClick: async () => await updateCompanyType(id),
       });
 
       container.appendChild(categoryElement);
     });
   } else {
-    data.forEach(({ name: companyName }, companyIndex) => {
+    companies.forEach(({ name: companyName }, companyIndex) => {
       const companyElement = createTabItem({
         innerText: companyName,
         isSelected: companyIndex === currentCompanyIndex,
