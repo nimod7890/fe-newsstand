@@ -4,7 +4,7 @@ import { MainNewsState } from "../../../../../types/news.js";
 import {
   setTotalTabNumber,
   updateCompany,
-  updateCompanyType,
+  updateListViewCompanyType,
 } from "../../../utils/updateStates.js";
 import { createTabItem } from "./tabItem.js";
 
@@ -24,7 +24,7 @@ export async function createTab({ currentTabId, currentCompanyIndex, currentData
         innerText: name,
         isSelected: +id === +currentTabId,
         children: `${currentCompanyIndex + 1}/${companies.length}`,
-        onClick: async () => await updateCompanyType(id),
+        onClick: async () => await updateListViewCompanyType(id),
       });
 
       container.appendChild(categoryElement);
