@@ -1,8 +1,8 @@
 import { showDialog } from "../../../../components/overlays/dialog/dialog.js";
 import { Company } from "../../../../types/news.js";
 import {
-  rerenderCompanyInGridView,
-  rerenderCompanyInSubscribedTab,
+  rerenderInGridView,
+  rerenderInSubscribedTab,
 } from "../../../renderNews/utils/updateStates.js";
 import { dispatchSubscriptionUpdateEvent } from "../../utils/dispatchSubscriptionUpdateEvent.js";
 import { removeSubscribedCompany } from "../../utils/localStorage.js";
@@ -45,9 +45,9 @@ function handleUnsubscribe({ company, isGridView, dataType }) {
   removeSubscribedCompany(company.id);
 
   if (dataType === "subscribed-news-tab") {
-    rerenderCompanyInSubscribedTab();
+    rerenderInSubscribedTab();
   } else if (isGridView) {
-    rerenderCompanyInGridView();
+    rerenderInGridView();
   } else {
     dispatchSubscriptionUpdateEvent({ company, isSubscribed: false });
   }

@@ -2,9 +2,9 @@ import { createIcon } from "../../../../../components/icon/icon.js";
 import { getCategoryList } from "../../../../../apis/news.js";
 import { MainNewsState } from "../../../../../types/news.js";
 import {
-  setTotalTabNumber,
-  updateCompany,
-  updateListViewCompanyType,
+  setTotalTabNumberInListView,
+  selectCompanyInListViewSubscribedTab,
+  selectCompanyTypeInListView,
 } from "../../../utils/updateStates.js";
 import { createTabItem } from "./tabItem.js";
 
@@ -22,14 +22,14 @@ export async function createTab({
 
   if (currentDataType === "all-news-tab") {
     const categoryList = await getCategoryList();
-    setTotalTabNumber(categoryList.length);
+    setTotalTabNumberInListView(categoryList.length);
 
     categoryList.forEach(({ id, name }) => {
       const categoryElement = createTabItem({
         innerText: name,
         isSelected: +id === +currentTabId,
         children: `${currentCompanyIndex + 1}/${companies.length}`,
-        onClick: async () => await updateListViewCompanyType(id),
+        onClick: async () => await selectCompanyTypeInListView(id),
       });
 
       container.appendChild(categoryElement);
@@ -40,7 +40,7 @@ export async function createTab({
         innerText: companyName,
         isSelected: companyIndex === currentCompanyIndex,
         children: createIcon({ iconId: "arrow" }),
-        onClick: () => updateCompany(companyIndex),
+        onClick: () => selectCompanyInListViewSubscribedTab(companyIndex),
       });
 
       container.appendChild(companyElement);

@@ -19,32 +19,32 @@ const state = {
 const updateState = {
   ["list-view"]: {
     ["all-news-tab"]: {
-      prev: () => updateListViewCompanyInAllTab(-1),
-      next: () => updateListViewCompanyInAllTab(1),
+      prev: () => selectCompanyInListViewAllTab(-1),
+      next: () => selectCompanyInListViewAllTab(1),
     },
     ["subscribed-news-tab"]: {
-      prev: () => updateListViewCompanyInSubscribedTab(1),
-      next: () => updateListViewCompanyInSubscribedTab(1),
-      rerender: () => updateListViewCompanyInSubscribedTab(0),
+      prev: () => selectCompanyInListViewSubscribedTab(-1),
+      next: () => selectCompanyInListViewSubscribedTab(1),
+      rerender: () => selectCompanyInListViewSubscribedTab(0),
     },
   },
   ["grid-view"]: {
     ["all-news-tab"]: {
-      prev: () => updateGridViewCompany(1),
-      next: () => updateGridViewCompany(1),
+      prev: () => selectGridViewPage(-1),
+      next: () => selectGridViewPage(1),
       rerender: () => render(state),
     },
     ["subscribed-news-tab"]: {
-      prev: () => updateGridViewCompany(1),
-      next: () => updateGridViewCompany(1),
-      rerender: () => updateGridViewCompany(0),
+      prev: () => selectGridViewPage(-1),
+      next: () => selectGridViewPage(1),
+      rerender: () => selectGridViewPage(0),
     },
   },
 };
 
 async function renderInit() {
-  setTabState("grid-view", "currentView");
-  setTabState("all-news-tab", "currentDataType");
+  selectTab("grid-view", "currentView");
+  selectTab("all-news-tab", "currentDataType");
 
   state.companies = await getCompanyList({ categoryId: state.currentTabId });
 
@@ -55,9 +55,9 @@ async function renderInit() {
  * 전체 언론사 보기 / 내가 구독한 언론사 보기 탭 선택 시
  * @param {MainNewsState.currentDataType} tabId
  */
-async function switchCompanyTab(tabId) {
+async function switchCompanyData(tabId) {
   resetIndexes();
-  setTabState(tabId, "currentDataType");
+  selectTab(tabId, "currentDataType");
 
   state.companies =
     tabId === "all-news-tab"
@@ -73,7 +73,7 @@ async function switchCompanyTab(tabId) {
  */
 async function switchCompanyView(view) {
   state.currentView = view;
-  await switchCompanyTab(state.currentDataType);
+  await switchCompanyData(state.currentDataType);
 }
 
 function updatePrev() {
@@ -86,19 +86,18 @@ function updateNext() {
 
 /** list view */
 
-/** 리스트 뷰 내 내가 구독한 언론사 페이지에서 company 선택 시 */
-function updateCompany(companyIndex) {
+function selectCompanyInListViewSubscribedTab(companyIndex) {
   state.currentDataIndex = companyIndex;
   render(state);
 }
 
-async function updateListViewCompanyType(categoryId) {
+async function selectCompanyTypeInListView(categoryId) {
   await updateData(categoryId);
   state.currentTabId = categoryId;
   render(state);
 }
 
-function updateListViewCompanyInSubscribedTab(offset) {
+function selectCompanyInListViewSubscribedTab(offset) {
   state.currentDataIndex += offset;
 
   if (state.currentDataIndex < 0) {
@@ -110,7 +109,7 @@ function updateListViewCompanyInSubscribedTab(offset) {
   render(state);
 }
 
-async function updateListViewCompanyInAllTab(offset) {
+async function selectCompanyInListViewAllTab(offset) {
   state.currentDataIndex += offset;
 
   if (state.currentDataIndex < 0) {
@@ -131,13 +130,13 @@ function rerenderInSubscribedTab() {
 /**
  * @param {number} total
  */
-function setTotalTabNumber(total) {
+function setTotalTabNumberInListView(total) {
   state.totalTabNumber = total;
 }
 
 /* grid view */
 
-function updateGridViewCompany(offset) {
+function selectGridViewPage(offset) {
   const newIndex = state.currentDataIndex + offset * GRID_ITEM_PER_PAGE;
 
   if (newIndex < 0) {
@@ -163,7 +162,7 @@ function resetIndexes() {
   state.currentDataIndex = 0;
 }
 
-function setTabState(elementId, stateKey) {
+function selectTab(elementId, stateKey) {
   const element = document.getElementById(elementId);
   if (element) {
     element.checked = true;
@@ -179,13 +178,13 @@ async function updateData(categoryId) {
 
 export {
   renderInit,
-  updateCompany,
-  switchCompanyView,
   updatePrev,
   updateNext,
-  updateListViewCompanyType,
-  switchCompanyTab,
-  rerenderInGridView as rerenderCompanyInGridView,
-  rerenderInSubscribedTab as rerenderCompanyInSubscribedTab,
-  setTotalTabNumber,
+  switchCompanyData,
+  switchCompanyView,
+  selectCompanyInListViewSubscribedTab,
+  selectCompanyTypeInListView,
+  rerenderInGridView,
+  rerenderInSubscribedTab,
+  setTotalTabNumberInListView,
 };

@@ -1,8 +1,5 @@
 import { showToast } from "../../../components/overlays/toast/toast.js";
-import {
-  rerenderCompanyInGridView,
-  switchCompanyTab,
-} from "../../renderNews/utils/updateStates.js";
+import { rerenderInGridView, switchCompanyData } from "../../renderNews/utils/updateStates.js";
 import { dispatchSubscriptionUpdateEvent } from "../utils/dispatchSubscriptionUpdateEvent.js";
 import { addSubscribedCompany } from "../utils/localStorage.js";
 
@@ -17,10 +14,10 @@ export function showSubscribeToast(company, isGridView) {
   addSubscribedCompany(company);
 
   setTimeout(async () => {
-    await switchCompanyTab("subscribed-news-tab");
+    await switchCompanyData("subscribed-news-tab");
   }, TOAST_SHOWING_TIME);
 
   isGridView
-    ? rerenderCompanyInGridView()
+    ? rerenderInGridView()
     : dispatchSubscriptionUpdateEvent({ company, isSubscribed: true });
 }
