@@ -19,6 +19,7 @@ const stylesheets = [
 
   "src/features/renderNews/components/list/company/company.css",
   "src/features/renderNews/components/list/tab/tab.css",
+  "src/features/renderNews/styles/layout.css",
 ];
 
 stylesheets.forEach(loadCSS);

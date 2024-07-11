@@ -1,0 +1,19 @@
+/* container */
+.list-company-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 24px 0;
+}
+
+.list-company-container > div {
+  padding: 0 24px;
+}
+
+.grid-company-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: minmax(90px, auto);
+  justify-content: center;
+}

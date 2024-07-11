@@ -7,17 +7,30 @@ import { getCompanyList } from "../../../apis/news.js";
  * @type {MainNewsState}
  */
 const state = {
-  currentView: "list-view",
+  currentView: "grid-view",
   currentDataType: "all-news-tab",
-  currentTabId: 1,
+  currentTabId: null,
   totalTabNumber: 0,
   currentDataIndex: 0,
   companies: [],
 };
 
 function resetIndexes() {
-  state.currentTabId = 1;
+  state.currentTabId = state.currentView === "list-view" ? 1 : null;
   state.currentDataIndex = 0;
+}
+
+async function renderInit() {
+  const viewTab = document.getElementById("grid-view");
+  viewTab.checked = true;
+  state.currentView = "grid-view";
+
+  const dataTab = document.getElementById("all-news-tab");
+  dataTab.checked = true;
+  state.currentDataType = "all-news-tab";
+  state.companies = await getCompanyList({ categoryId: state.currentTabId });
+
+  render(state);
 }
 
 /**
@@ -25,16 +38,13 @@ function resetIndexes() {
  * @param {MainNewsState.currentDataType} tabId
  */
 async function switchCompanyTab(tabId) {
-  const tab = document.getElementById(tabId);
-  tab.checked = true;
-
+  resetIndexes();
   state.currentDataType = tabId;
   if (tabId === "all-news-tab") {
     state.companies = await getCompanyList({ categoryId: state.currentTabId });
   } else {
     state.companies = getArraySubscribedCompanies();
   }
-  resetIndexes();
   render(state);
 }
 
@@ -42,17 +52,9 @@ async function switchCompanyTab(tabId) {
  * 리스트 뷰 / 그리드 뷰 탭 선택 시
  * @param {'list-view' | 'grid-view'} view
  */
-function switchCompanyView(view) {
+async function switchCompanyView(view) {
   state.currentView = view;
-
-  resetIndexes();
-  render(state);
-}
-
-/** 내가 구독한 언론사 페이지에서 company 선택 시 */
-function updateCompany(companyIndex) {
-  state.currentDataIndex = companyIndex;
-  render(state);
+  await switchCompanyTab(state.currentDataType);
 }
 
 const updateState = {
@@ -64,6 +66,16 @@ const updateState = {
     ["subscribed-news-tab"]: {
       prev: () => updateListViewCompanyInSubscribedTab(-1),
       next: () => updateListViewCompanyInSubscribedTab(1),
+    },
+  },
+  ["grid-view"]: {
+    ["all-news-tab"]: {
+      prev: () => updateGridViewCompany(-1),
+      next: () => updateGridViewCompany(1),
+    },
+    ["subscribed-news-tab"]: {
+      prev: () => updateGridViewCompany(-1),
+      next: () => updateGridViewCompany(1),
     },
   },
 };
@@ -82,6 +94,14 @@ function updateNext() {
   updateState[state.currentView][state.currentDataType].next();
 }
 
+/** list view */
+
+/** 리스트 뷰 내 내가 구독한 언론사 페이지에서 company 선택 시 */
+function updateCompany(companyIndex) {
+  state.currentDataIndex = companyIndex;
+  render(state);
+}
+
 async function updateListViewCompanyType(categoryId) {
   await updateData(categoryId);
   state.currentTabId = categoryId;
@@ -89,8 +109,6 @@ async function updateListViewCompanyType(categoryId) {
 }
 
 function updateListViewCompanyInSubscribedTab(offset) {
-  state.companies = getArraySubscribedCompanies();
-
   state.currentDataIndex += offset;
   if (state.currentDataIndex < 0) {
     state.currentDataIndex = state.companies.length - 1;
@@ -116,6 +134,18 @@ function rerenderListViewCompanyInSubscribedTab() {
   updateListViewCompanyInSubscribedTab(0);
 }
 
+/** grid view */
+function updateGridViewCompany(offset) {
+  state.currentDataIndex += offset * 24;
+  if (state.currentDataIndex < 0) {
+    state.currentDataIndex = Math.floor(state.companies.length / 24) * 24;
+  } else if (state.currentDataIndex >= state.companies.length) {
+    state.currentDataIndex = 0;
+  }
+
+  render(state);
+}
+
 /**
  * @param {number} total
  */
@@ -124,6 +154,7 @@ function setTotalTabNumber(total) {
 }
 
 export {
+  renderInit,
   updateCompany,
   switchCompanyView,
   updatePrev,

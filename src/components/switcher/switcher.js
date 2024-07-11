@@ -51,10 +51,6 @@ function createInput({ item, name, itemIndex, onClick }) {
   input.type = "radio";
   input.addEventListener("change", onClick);
 
-  if (itemIndex === 0) {
-    input.checked = true;
-  }
-
   return input;
 }
 

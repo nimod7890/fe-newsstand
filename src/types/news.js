@@ -26,9 +26,9 @@
 
 /**
  * @typedef {Object} MainNewsState
- * @property {'list-view' | 'grid-view'} MainNewsState.currentView
+ * @property {'list-view' | 'grid-view' } MainNewsState.currentView
  * @property {"all-news-tab" | "subscribed-news-tab"} MainNewsState.currentDataType
- * @property {number} MainNewsState.currentTabId
+ * @property {number | null} MainNewsState.currentTabId
  * @property {number} MainNewsState.currentDataIndex
  * @property {number} MainNewsState.totalTabNumber
  * @property {Company[]} MainNewsState.companies

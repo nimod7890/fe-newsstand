@@ -9,6 +9,7 @@ import {
   switchCompanyView,
   updateNext,
   updatePrev,
+  renderInit,
 } from "./features/renderNews/utils/updateStates.js";
 import { getHeadlineList } from "./apis/news.js";
 
@@ -64,7 +65,7 @@ function renderSwitcher() {
   const viewSwitcher = createSwitcher({
     className: "view-switcher",
     items: viewTabItems,
-    onClick: (event) => switchCompanyView(event.target.id),
+    onClick: async (event) => await switchCompanyView(event.target.id),
   });
 
   navContainer.append(tabSwitcher, viewSwitcher);
@@ -72,7 +73,7 @@ function renderSwitcher() {
 
 /** render news view */
 async function renderNewsView() {
-  await switchCompanyTab("all-news-tab");
+  await renderInit();
 
   const container = document.getElementById("main-news-contents");
 
