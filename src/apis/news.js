@@ -19,6 +19,5 @@ export const getHeadlineList = async () => http.get("/headlines");
 export const getCompanyList = ({ categoryId = null } = {}) => {
   const params = new URLSearchParams();
   categoryId && params.set("categoryId", categoryId);
-  console.log(params);
   return http.get(`/companies?${params.toString()}`);
 };

@@ -2,6 +2,7 @@ import { render } from "./renderView.js";
 import { MainNewsState } from "../../../types/news.js";
 import { getArraySubscribedCompanies } from "../../subscriptionButton/utils/localStorage.js";
 import { getCompanyList } from "../../../apis/news.js";
+import { GRID_ITEM_PER_PAGE } from "../constants/gridItemPerPage.js";
 
 /**
  * @type {MainNewsState}
@@ -136,9 +137,10 @@ function rerenderListViewCompanyInSubscribedTab() {
 
 /** grid view */
 function updateGridViewCompany(offset) {
-  state.currentDataIndex += offset * 24;
+  state.currentDataIndex += offset * GRID_ITEM_PER_PAGE;
   if (state.currentDataIndex < 0) {
-    state.currentDataIndex = Math.floor(state.companies.length / 24) * 24;
+    state.currentDataIndex =
+      Math.floor(state.companies.length / GRID_ITEM_PER_PAGe) * GRID_ITEM_PER_PAGE;
   } else if (state.currentDataIndex >= state.companies.length) {
     state.currentDataIndex = 0;
   }

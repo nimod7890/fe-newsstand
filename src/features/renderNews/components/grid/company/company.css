@@ -1,5 +1,9 @@
-.grid-company {
+.grid-item {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.grid-item-company:hover {
+  background-color: var(--surface-alt);
 }

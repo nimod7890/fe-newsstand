@@ -1,19 +1,31 @@
-import { MainNewsState } from "../../../../types/news.js";
-import { createCompany } from "./company/company.js";
+import { GRID_ITEM_PER_PAGE } from "../../constants/gridItemPerPage.js";
+import { renderCompany } from "./company/company.js";
 
 /**
- * @param {HTMLElement} container
- * @param {MainNewsState} state
+ * @param {HTMLElement} viewContainer
+ * @param {"all-news-tab" | "subscribed-news-tab"} state
  */
-export function renderGridView(container, state) {
+export function renderGridView(viewContainer, state) {
   const { companies, currentDataIndex } = state;
 
-  container.classList.add("grid-company-container");
+  viewContainer.classList.add("grid-company-container");
 
-  const currentPage = companies.slice(currentDataIndex, currentDataIndex + 24);
+  const currentCompanies = companies.slice(currentDataIndex, currentDataIndex + GRID_ITEM_PER_PAGE);
 
-  currentPage.forEach((company) => {
-    const companyElement = createCompany(company);
-    container.appendChild(companyElement);
-  });
+  for (let i = 0; i < GRID_ITEM_PER_PAGE; i++) {
+    const company = currentCompanies[i];
+
+    let companyContainer = createCompanyContainer();
+
+    company &&
+      renderCompany({ container: companyContainer, company, dataType: state.currentDataType });
+
+    viewContainer.appendChild(companyContainer);
+  }
+}
+
+function createCompanyContainer() {
+  let container = document.createElement("div");
+  container.className = "grid-item border-box";
+  return container;
 }
