@@ -23,8 +23,8 @@ export function createButton({ iconId, text = "", color = "white" }) {
   const button = document.createElement("button");
   button.className = `button button-${color} border-box`;
 
-  const icon = createIcon({ className: "button-icon", iconId });
-  button.appendChild(icon);
+  const iconComponent = createIcon({ className: "button-icon", iconId });
+  button.appendChild(iconComponent);
 
   if (text) {
     const label = convertStringToFragment(

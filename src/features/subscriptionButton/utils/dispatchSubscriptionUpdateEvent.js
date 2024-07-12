@@ -20,11 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const {
       company: { id },
     } = detail;
-    const subscriptionButton = document.querySelector(`[data-company-id="${id}"]`);
+    const subscriptionButtonElement = document.querySelector(`[data-company-id="${id}"]`);
 
-    if (subscriptionButton) {
-      const newButton = createSubscriptionButton(detail);
-      subscriptionButton.replaceWith(newButton);
+    if (subscriptionButtonElement) {
+      const newButtonComponent = createSubscriptionButton(detail);
+      subscriptionButtonElement.replaceWith(newButtonComponent);
     }
   });
 });

@@ -28,13 +28,15 @@ export function createSubscriptionButton({ container, ...props }) {
     isGridView = false,
   } = props;
 
-  const button = createButton(buttonProps[isSubscribed]);
+  const buttonComponent = createButton(buttonProps[isSubscribed]);
 
-  button.setAttribute("data-company-id", id);
-  button.setAttribute("aria-label", `${name} ${buttonProps[isSubscribed].ariaLabel}`);
-  (isGridView ? container : button).addEventListener("click", () => handleSubscriptionClick(props));
+  buttonComponent.setAttribute("data-company-id", id);
+  buttonComponent.setAttribute("aria-label", `${name} ${buttonProps[isSubscribed].ariaLabel}`);
+  (isGridView ? container : buttonComponent).addEventListener("click", () =>
+    handleSubscriptionClick(props)
+  );
 
-  return button;
+  return buttonComponent;
 }
 
 /**

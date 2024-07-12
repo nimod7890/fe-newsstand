@@ -14,11 +14,11 @@ export function renderGridView(viewContainer, { companies, companyIndex, dataTab
   for (let i = 0; i < GRID_ITEM_PER_PAGE; i++) {
     const company = currentCompanies[i];
 
-    let companyContainer = createCompanyContainer();
+    const containerComponent = createCompanyContainer();
 
-    company && renderCompany({ container: companyContainer, company, dataTabId });
+    company && renderCompany({ container: containerComponent, company, dataTabId });
 
-    viewContainer.appendChild(companyContainer);
+    viewContainer.appendChild(containerComponent);
   }
 }
 

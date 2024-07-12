@@ -13,21 +13,21 @@ import { createOverlayContainer } from "../overlay.js";
  * @param {{message:string;leftButtonProps:DialogButtonProps;rightButtonProps:DialogButtonProps}} dialogProps
  */
 export function showDialog({ message, leftButtonProps, rightButtonProps }) {
-  const dialog = createOverlayContainer("dialog border-box");
+  const dialogComponent = createOverlayContainer("dialog border-box");
 
   const messageString = `<p class='border-box display-medium16'>${message}</p>`;
 
   const buttonsContainer = document.createElement("div");
   buttonsContainer.className = "dialog-buttons";
 
-  const leftButton = createDialogButton(leftButtonProps, dialog);
-  const rightButton = createDialogButton(rightButtonProps, dialog);
-  buttonsContainer.append(leftButton, rightButton);
+  const leftButtonComponent = createDialogButton(leftButtonProps, dialogComponent);
+  const rightButtonComponent = createDialogButton(rightButtonProps, dialogComponent);
+  buttonsContainer.append(leftButtonComponent, rightButtonComponent);
 
-  dialog.innerHTML = messageString;
-  dialog.appendChild(buttonsContainer);
+  dialogComponent.innerHTML = messageString;
+  dialogComponent.appendChild(buttonsContainer);
 
-  document.body.appendChild(dialog);
+  document.body.appendChild(dialogComponent);
 }
 
 /**

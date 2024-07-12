@@ -13,10 +13,10 @@ export function createCompany(company, dataType) {
   const container = document.createElement("div");
   container.className = "list-company-container border-box";
 
-  const header = createHeader(company, dataType);
-  const contents = createMainContents(company);
+  const headerComponent = createHeader(company, dataType);
+  const contentsComponent = createMainContents(company);
 
-  container.append(header, contents);
+  container.append(headerComponent, contentsComponent);
 
   return container;
 }
@@ -32,18 +32,20 @@ function createHeader(company, dataType) {
   const header = document.createElement("div");
   header.className = "company-container-header display-medium12";
 
-  const companyLogo = convertStringToFragment(createCompanyLogoTemplate(company));
-  const date = convertStringToFragment(`<time>${formatDateString(updatedDate)}</time>`);
-  header.append(companyLogo, date);
+  const companyLogoComponent = convertStringToFragment(createCompanyLogoTemplate(company));
+  const updatedDateComponent = convertStringToFragment(
+    `<time>${formatDateString(updatedDate)}</time>`
+  );
+  header.append(companyLogoComponent, updatedDateComponent);
 
   const subscriptions = getObjectSubscribedCompanies();
   const isSubscribed = Object.hasOwn(subscriptions, id);
-  const subscriptionButton = createSubscriptionButton({
+  const subscriptionButtonComponent = createSubscriptionButton({
     company,
     dataTabId: dataType,
     isSubscribed,
   });
-  header.appendChild(subscriptionButton);
+  header.appendChild(subscriptionButtonComponent);
 
   return header;
 }
@@ -53,12 +55,12 @@ function createHeader(company, dataType) {
  * @returns {HTMLDivElement}
  */
 function createMainContents({ newsItems, name, mainNews }) {
-  const thumbnailNews = createStringMainNews(mainNews);
-  const newsList = createStringNewsList(newsItems, name);
+  const thumbnailNewsString = createStringMainNews(mainNews);
+  const newsListString = createStringNewsList(newsItems, name);
 
   const contentsString = `<div class='company-container-contents'>
-                            ${thumbnailNews}
-                            ${newsList}
+                            ${thumbnailNewsString}
+                            ${newsListString}
                           </div>`;
 
   return convertStringToFragment(contentsString);
@@ -71,11 +73,11 @@ function createMainContents({ newsItems, name, mainNews }) {
 function createStringMainNews(mainNews) {
   const { thumbnailUrl } = mainNews;
 
-  const newsTitle = createStringNewsTitle(mainNews);
+  const newsTitleString = createStringNewsTitle(mainNews);
 
   return `<div class='main-news'>
             <img loading='lazy' src=${thumbnailUrl} alt='메인 뉴스 썸네일'/>
-            ${newsTitle}
+            ${newsTitleString}
           </div>`;
 }
 
@@ -85,10 +87,10 @@ function createStringMainNews(mainNews) {
  * @returns {string}
  */
 function createStringNewsList(newsList, name) {
-  const newsElements = newsList.map(createStringNewsTitle).join("");
+  const newsElementsString = newsList.map(createStringNewsTitle).join("");
 
   return `<ul class="news-list">
-            ${newsElements}
+            ${newsElementsString}
             <p class="display-medium14">${name}에서 직접 편집한 뉴스입니다.</p>
           </ul>`;
 }

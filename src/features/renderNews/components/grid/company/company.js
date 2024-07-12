@@ -17,7 +17,7 @@ export function renderCompany({ container, company, dataTabId }) {
 
   const subscriptions = getObjectSubscribedCompanies();
   const isSubscribed = Object.hasOwn(subscriptions, company.id);
-  const subscriptionButton = createSubscriptionButton({
+  const subscriptionButtonContainer = createSubscriptionButton({
     company,
     isSubscribed,
     dataTabId,
@@ -25,17 +25,17 @@ export function renderCompany({ container, company, dataTabId }) {
     container,
   });
 
-  subscriptionButton.classList.add("hover-hidden");
+  subscriptionButtonContainer.classList.add("hover-hidden");
 
   container.addEventListener("mouseenter", () => {
     companyLogo.classList.add("hover-hidden");
-    subscriptionButton.classList.remove("hover-hidden");
+    subscriptionButtonContainer.classList.remove("hover-hidden");
   });
 
   container.addEventListener("mouseleave", () => {
     companyLogo.classList.remove("hover-hidden");
-    subscriptionButton.classList.add("hover-hidden");
+    subscriptionButtonContainer.classList.add("hover-hidden");
   });
 
-  container.append(companyLogo, subscriptionButton);
+  container.append(companyLogo, subscriptionButtonContainer);
 }

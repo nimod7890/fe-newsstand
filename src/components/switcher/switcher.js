@@ -16,13 +16,13 @@ import { createIcon } from "../icon/icon.js";
  * @returns {HTMLUListElement}
  */
 export function createSwitcher({ className, items, onClick }) {
-  const switcher = items.reduce((list, item, itemIndex) => {
+  const switcher = items.reduce((list, item) => {
     const listItem = document.createElement("li");
 
-    const input = createInput({ item, itemIndex, name: className, onClick });
-    const label = createLabel(item);
+    const inputComponent = createInput({ item, name: className, onClick });
+    const labelComponent = createLabel(item);
 
-    listItem.append(input, label);
+    listItem.append(inputComponent, labelComponent);
 
     list.appendChild(listItem);
 
@@ -44,7 +44,7 @@ export function createSwitcher({ className, items, onClick }) {
  *
  * @returns {HTMLInputElement}
  */
-function createInput({ item, name, itemIndex, onClick }) {
+function createInput({ item, name, onClick }) {
   const input = document.createElement("input");
   input.id = getItemId(item);
   input.name = name;

@@ -11,8 +11,8 @@ export function createAdjacentButton({ direction, onClick }) {
   button.className = `adjacent-button ${direction}`;
   button.setAttribute("aria-label", direction === "prev" ? "이전" : "다음");
 
-  const icon = createIcon({ iconId: "arrow" });
-  button.appendChild(icon);
+  const iconComponent = createIcon({ iconId: "arrow" });
+  button.appendChild(iconComponent);
 
   button.addEventListener("click", onClick);
 

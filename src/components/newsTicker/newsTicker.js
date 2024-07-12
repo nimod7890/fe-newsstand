@@ -14,10 +14,10 @@ export function createNewsTicker({ tag, newsItems }, scrollDelay = 0) {
   const ticker = document.createElement("ul");
   ticker.className = `news-ticker border-box`;
 
-  newsItems.forEach((item, index) => {
-    const newsItem = createNewsItem(item, tag);
-    newsItem.classList.add(index === 0 ? "visible" : "hidden");
-    ticker.appendChild(newsItem);
+  newsItems.forEach((news, index) => {
+    const newsComponent = createNews(news, tag);
+    newsComponent.classList.add(index === 0 ? "visible" : "hidden");
+    ticker.appendChild(newsComponent);
   });
 
   if (scrollDelay > 0) {
@@ -33,7 +33,7 @@ export function createNewsTicker({ tag, newsItems }, scrollDelay = 0) {
  * @param {string} [tag='']
  * @returns {string}
  */
-function createNewsItem({ title, url }, tag) {
+function createNews({ title, url }, tag) {
   const container = document.createElement("li");
 
   if (tag?.length > 0) {

@@ -46,32 +46,35 @@ async function renderHeadlineNewsTicker() {
 
   const containerElement = document.getElementById("news-ticker-container");
 
-  const leftNewsTicker = createNewsTicker({
+  const leftNewsTickerComponent = createNewsTicker({
     newsItems: headlinesData.slice(0, 5),
     tag: "연합뉴스",
   });
-  const rightNewsTicker = createNewsTicker({ newsItems: headlinesData.slice(5), tag: "연합뉴스" });
+  const rightNewsTickerComponent = createNewsTicker({
+    newsItems: headlinesData.slice(5),
+    tag: "연합뉴스",
+  });
 
-  containerElement.append(leftNewsTicker, rightNewsTicker);
+  containerElement.append(leftNewsTickerComponent, rightNewsTickerComponent);
 }
 
 /* render switcher */
 function renderSwitcher() {
   const containerElement = document.getElementById("switcher-container");
 
-  const dataSwitcher = createSwitcher({
+  const dataSwitcherComponent = createSwitcher({
     className: "data-switcher",
     items: dataTabItems,
     onClick: async (event) => await switchCompanyData({ dataTabId: event.target.id }),
   });
 
-  const viewSwitcher = createSwitcher({
+  const viewSwitcherComponent = createSwitcher({
     className: "view-switcher",
     items: viewTabItems,
     onClick: async (event) => await switchCompanyView(event.target.id),
   });
 
-  containerElement.append(dataSwitcher, viewSwitcher);
+  containerElement.append(dataSwitcherComponent, viewSwitcherComponent);
 }
 
 /** render news view */
@@ -80,8 +83,8 @@ async function renderNewsView() {
 
   const containerElement = document.getElementById("main-news-contents");
 
-  const prevButton = createAdjacentButton({ direction: "prev", onClick: updatePrev });
-  const nextButton = createAdjacentButton({ direction: "next", onClick: updateNext });
+  const prevButtonComponent = createAdjacentButton({ direction: "prev", onClick: updatePrev });
+  const nextButtonComponent = createAdjacentButton({ direction: "next", onClick: updateNext });
 
-  containerElement.append(prevButton, nextButton);
+  containerElement.append(prevButtonComponent, nextButtonComponent);
 }
