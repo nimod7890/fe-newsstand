@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-#switcher-container .tab-switcher input:checked + label {
+#switcher-container .data-switcher input:checked + label {
   color: var(--text-bold);
   font-weight: var(--bold-weight);
 }
@@ -27,7 +27,7 @@
   color: var(--text-point);
 }
 
-.tab-switcher {
+.data-switcher {
   gap: 24px;
 }
 

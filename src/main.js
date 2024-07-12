@@ -42,22 +42,25 @@ function renderHeader() {
 
 /* render headline news ticker */
 async function renderHeadlineNewsTicker() {
-  const headlines = await getHeadlineList();
+  const headlinesData = await getHeadlineList();
 
   const container = document.getElementById("news-ticker-container");
 
-  const left = createNewsTicker({ newsItems: headlines.slice(0, 5), tag: "연합뉴스" });
-  const right = createNewsTicker({ newsItems: headlines.slice(5), tag: "연합뉴스" }, 1);
+  const leftNewsTicker = createNewsTicker({
+    newsItems: headlinesData.slice(0, 5),
+    tag: "연합뉴스",
+  });
+  const rightNewsTicker = createNewsTicker({ newsItems: headlinesData.slice(5), tag: "연합뉴스" });
 
-  container.append(left, right);
+  container.append(leftNewsTicker, rightNewsTicker);
 }
 
 /* render switcher */
 function renderSwitcher() {
-  const navContainer = document.getElementById("switcher-container");
+  const container = document.getElementById("switcher-container");
 
-  const tabSwitcher = createSwitcher({
-    className: "tab-switcher",
+  const dataSwitcher = createSwitcher({
+    className: "data-switcher",
     items: dataTabItems,
     onClick: async (event) => await switchCompanyData({ dataTabId: event.target.id }),
   });
@@ -68,7 +71,7 @@ function renderSwitcher() {
     onClick: async (event) => await switchCompanyView(event.target.id),
   });
 
-  navContainer.append(tabSwitcher, viewSwitcher);
+  container.append(dataSwitcher, viewSwitcher);
 }
 
 /** render news view */
