@@ -24,7 +24,7 @@ export async function createTab({ categoryId, companyIndex, dataTabId, companies
       const categoryElement = createTabItem({
         innerText: name,
         isSelected: +id === +categoryId,
-        children: `${companyIndex + 1}/${companies.length}`,
+        children: companies.length && `${companyIndex + 1}/${companies.length}`,
         onClick: async () => await selectCompanyTypeInListView(id),
       });
 

@@ -14,7 +14,9 @@ export async function renderListView(container, state) {
   const tab = await createTab(state);
   const content = company
     ? createCompany(company, state.dataTabId)
-    : convertStringToFragment(`<p class='empty-text'>해당하는 언론사가 존재하지 않습니다.</p>`);
+    : convertStringToFragment(
+        `<div class='empty-text'><p>해당하는 언론사가 존재하지 않습니다.</p></div>`
+      );
 
   container.append(tab, content);
 }
