@@ -87,10 +87,10 @@ function createStringMainNews(mainNews) {
  * @returns {string}
  */
 function createStringNewsList(newsList, name) {
-  const newsElementsString = newsList.map(createStringNewsTitle).join("");
+  const newsListString = newsList.map(createStringNewsTitle).join("");
 
   return `<ul class="news-list">
-            ${newsElementsString}
+            ${newsListString}
             <p class="display-medium14">${name}에서 직접 편집한 뉴스입니다.</p>
           </ul>`;
 }
