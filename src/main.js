@@ -23,8 +23,8 @@ async function initialize() {
 }
 
 function renderHeader() {
-  const logo = document.getElementById("logo");
-  logo.addEventListener("click", () => history.go(0));
+  const logoElement = document.getElementById("logo");
+  logoElement.addEventListener("click", () => history.go(0));
 
   /* render current time */
   const timeElement = document.getElementById("current-date");
@@ -44,7 +44,7 @@ function renderHeader() {
 async function renderHeadlineNewsTicker() {
   const headlinesData = await getHeadlineList();
 
-  const container = document.getElementById("news-ticker-container");
+  const containerElement = document.getElementById("news-ticker-container");
 
   const leftNewsTicker = createNewsTicker({
     newsItems: headlinesData.slice(0, 5),
@@ -52,12 +52,12 @@ async function renderHeadlineNewsTicker() {
   });
   const rightNewsTicker = createNewsTicker({ newsItems: headlinesData.slice(5), tag: "연합뉴스" });
 
-  container.append(leftNewsTicker, rightNewsTicker);
+  containerElement.append(leftNewsTicker, rightNewsTicker);
 }
 
 /* render switcher */
 function renderSwitcher() {
-  const container = document.getElementById("switcher-container");
+  const containerElement = document.getElementById("switcher-container");
 
   const dataSwitcher = createSwitcher({
     className: "data-switcher",
@@ -71,17 +71,17 @@ function renderSwitcher() {
     onClick: async (event) => await switchCompanyView(event.target.id),
   });
 
-  container.append(dataSwitcher, viewSwitcher);
+  containerElement.append(dataSwitcher, viewSwitcher);
 }
 
 /** render news view */
 async function renderNewsView() {
   await renderInit();
 
-  const container = document.getElementById("main-news-contents");
+  const containerElement = document.getElementById("main-news-contents");
 
   const prevButton = createAdjacentButton({ direction: "prev", onClick: updatePrev });
   const nextButton = createAdjacentButton({ direction: "next", onClick: updateNext });
 
-  container.append(prevButton, nextButton);
+  containerElement.append(prevButton, nextButton);
 }

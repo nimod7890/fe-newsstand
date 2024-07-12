@@ -11,8 +11,8 @@ const renderView = {
  * @param {MainNewsState} state
  */
 export function render(state) {
-  const container = document.getElementById("news-container");
-  container.className = "border-box";
-  container.innerHTML = "";
-  renderView[state.viewTabId](container, state);
+  const containerElement = document.getElementById("news-container");
+  containerElement.className = "border-box";
+  containerElement.innerHTML = "";
+  renderView[state.viewTabId](containerElement, state);
 }

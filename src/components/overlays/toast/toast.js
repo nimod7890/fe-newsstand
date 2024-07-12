@@ -5,15 +5,15 @@ import { createOverlayContainer } from "../overlay.js";
  * @param {number} [time=5000]
  */
 export function showToast(message, time = 5000) {
-  const toastContainer = document.getElementById("toast-container");
+  const toastContainerElement = document.getElementById("toast-container");
 
-  if (!toastContainer) {
+  if (!toastContainerElement) {
     throw Error("toast container가 정의되지 않았습니다. ");
   }
 
   const toast = createOverlayContainer("toast");
   toast.textContent = message;
-  toastContainer.appendChild(toast);
+  toastContainerElement.appendChild(toast);
 
   setTimeout(() => {
     toast.classList.add("fadeout");

@@ -173,9 +173,9 @@ function rerenderInGridView() {
 /** utils */
 
 function selectTab(elementId, stateKey) {
-  const element = document.getElementById(elementId);
-  if (element) {
-    element.checked = true;
+  const tabElement = document.getElementById(elementId);
+  if (tabElement) {
+    tabElement.checked = true;
     state[stateKey] = elementId;
   }
 }

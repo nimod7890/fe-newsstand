@@ -21,25 +21,25 @@ export async function createTab({ categoryId, companyIndex, dataTabId, companies
     setTotalTabNumberInListView(categoryList.length);
 
     categoryList.forEach(({ id, name }) => {
-      const categoryElement = createTabItem({
+      const categoryComponent = createTabItem({
         innerText: name,
         isSelected: +id === +categoryId,
         children: companies.length && `${companyIndex + 1}/${companies.length}`,
         onClick: async () => await selectCompanyTypeInListView(id),
       });
 
-      container.appendChild(categoryElement);
+      container.appendChild(categoryComponent);
     });
   } else {
     companies.forEach(({ name: companyName }, index) => {
-      const companyElement = createTabItem({
+      const companyComponent = createTabItem({
         innerText: companyName,
         isSelected: companyIndex === index,
         children: createIcon({ iconId: "arrow" }),
         onClick: () => selectCompanyByIndexInListView(index),
       });
 
-      container.appendChild(companyElement);
+      container.appendChild(companyComponent);
     });
   }
 
