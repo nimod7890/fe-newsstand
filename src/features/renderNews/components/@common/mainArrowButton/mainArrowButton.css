@@ -1,4 +1,4 @@
-.company-nav-button {
+.adjacent-button {
   z-index: 1;
 
   position: absolute;
@@ -18,16 +18,16 @@
   transform-origin: center;
 }
 
-.company-nav-button > svg {
+.adjacent-button > svg {
   height: 40px;
   width: 40px;
 }
 
-.company-nav-button.prev {
+.adjacent-button.prev {
   left: -50px;
   transform: rotate(180deg);
 }
 
-.company-nav-button.next {
+.adjacent-button.next {
   right: -50px;
 }
