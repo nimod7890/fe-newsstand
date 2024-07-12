@@ -11,12 +11,12 @@ export function showToast(message, time = 5000) {
     throw Error("toast container가 정의되지 않았습니다. ");
   }
 
-  const toast = createOverlayContainer("toast");
-  toast.textContent = message;
-  toastContainerElement.appendChild(toast);
+  const toastComponent = createOverlayContainer("toast");
+  toastComponent.textContent = message;
+  toastContainerElement.appendChild(toastComponent);
 
   setTimeout(() => {
-    toast.classList.add("fadeout");
-    toast.addEventListener("animationend", toast.remove);
+    toastComponent.classList.add("fadeout");
+    toastComponent.addEventListener("animationend", toastComponent.remove);
   }, time);
 }
