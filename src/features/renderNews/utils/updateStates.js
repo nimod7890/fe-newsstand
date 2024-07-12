@@ -77,7 +77,7 @@ async function switchCompanyData({ dataTabId, view }) {
     dataTabId === ALL_NEWS_TAB
       ? await getCompanyList({ categoryId })
       : getArraySubscribedCompanies();
-  console.log(state);
+
   render(state);
 }
 
