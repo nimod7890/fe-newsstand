@@ -17,6 +17,7 @@ export async function createTab({ categoryId, companyIndex, dataTabId, companies
 
   if (dataTabId === "all-news-tab") {
     const categoryList = await getCategoryList();
+
     setTotalTabNumberInListView(categoryList.length);
 
     categoryList.forEach(({ id, name }) => {
@@ -30,12 +31,12 @@ export async function createTab({ categoryId, companyIndex, dataTabId, companies
       container.appendChild(categoryElement);
     });
   } else {
-    companies.forEach(({ name: companyName }, companyIndex) => {
+    companies.forEach(({ name: companyName }, index) => {
       const companyElement = createTabItem({
         innerText: companyName,
-        isSelected: companyIndex === companyIndex,
+        isSelected: companyIndex === index,
         children: createIcon({ iconId: "arrow" }),
-        onClick: () => selectCompanyByIndexInListView(companyIndex),
+        onClick: () => selectCompanyByIndexInListView(index),
       });
 
       container.appendChild(companyElement);
