@@ -1,5 +1,5 @@
 :root {
-  --grayscale-white-alt: rgba(255, 255, 255, 0.7);
+  --grayscale-white-alt: #ffffffb3;
   --grayscale-white: #ffffff;
   --grayscale-50: #f5f7f9;
   --grayscale-100: #d2dae0;
@@ -11,19 +11,52 @@
 
   --blue-100: #7890e7;
   --blue-500: #4362d0;
+}
 
-  --border-default: #d2dae0;
-  --border-bold: #6e8091;
+@media (prefers-color-scheme: light) {
+  :root {
+    --border-default: var(--grayscale-100);
+    --border-bold: var(--grayscale-300);
 
-  --surface-alt: #f5f7f9;
-  --surface-default: #ffffff;
-  --surface-brand-default: #4362d0;
-  --surface-brand-alt: #7890e7;
+    --surface-default: var(--grayscale-white);
+    --surface-alt: var(--grayscale-50);
 
-  --text-point: #4362d0;
-  --text-default: #5f6e76;
-  --text-white-default: #ffffff;
-  --text-weak: #879298;
-  --text-strong: #14212b;
-  --text-bold: #4b5966;
+    --surface-brand-alt: var(--blue-100);
+    --surface-brand-default: var(--blue-500);
+
+    --text-point: var(--blue-500);
+    --text-white-default: var(--grayscale-white);
+    --text-weak: var(--grayscale-200);
+    --text-default: var(--grayscale-400);
+    --text-bold: var(--grayscale-500);
+    --text-strong: var(--grayscale-black);
+  }
+
+  body {
+    background-color: var(--grayscale-white);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border-default: var(--grayscale-400);
+    --border-bold: var(--grayscale-white-alt);
+
+    --surface-default: var(--grayscale-black);
+    --surface-alt: var(--grayscale-500);
+
+    --surface-brand-alt: var(--blue-100);
+    --surface-brand-default: var(--blue-500);
+
+    --text-point: var(--blue-500);
+    --text-white-default: var(--grayscale-black);
+    --text-weak: var(--grayscale-white-alt);
+    --text-default: var(--grayscale-100);
+    --text-bold: var(--grayscale-50);
+    --text-strong: var(--grayscale-white);
+  }
+
+  body {
+    background-color: var(--grayscale-black);
+  }
 }
