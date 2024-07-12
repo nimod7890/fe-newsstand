@@ -9,17 +9,14 @@ import { convertStringToFragment } from "../../../../utils/convertStringToFragme
  * @param {MainNewsState} state
  */
 export async function renderListView(container, state) {
-  const currentCompany = state.companies[state.companyIndex];
+  const company = state.companies[state.companyIndex];
 
-  if (currentCompany) {
-    const tab = await createTab(state);
-    const company = createCompany(currentCompany, state.dataTabId);
-    container.append(tab, company);
-  } else {
-    // Todo: 전체 언론사 페이지에서 선택한 카테고리 내 언론사 데이터 존재하지 않는 경우 에러 처리 필요
-    const empty = convertStringToFragment(
-      `<p class='empty-text'>해당하는 언론사가 존재하지 않습니다.</p>`
-    );
-    container.appendChild(empty);
-  }
+  const tab = await createTab(state);
+  const content = company
+    ? createCompany(company, state.dataTabId)
+    : convertStringToFragment(
+        `<div class='empty-text'><p>해당하는 언론사가 존재하지 않습니다.</p></div>`
+      );
+
+  container.append(tab, content);
 }

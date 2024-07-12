@@ -50,8 +50,8 @@ const updateState = {
 };
 
 async function renderInit() {
-  selectTab(GRID_VIEW, "currentView");
-  selectTab(ALL_NEWS_TAB, "currentDataType");
+  selectTab(GRID_VIEW, "viewTabId");
+  selectTab(ALL_NEWS_TAB, "dataTabId");
 
   state.companies = await getCompanyList({ categoryId: state.categoryId });
 
@@ -68,8 +68,8 @@ async function switchCompanyData({ dataTabId, view }) {
   const viewTabId = view ?? (dataTabId === ALL_NEWS_TAB ? GRID_VIEW : LIST_VIEW);
   const categoryId = viewTabId === LIST_VIEW ? 1 : null;
 
-  selectTab(dataTabId, "currentDataType");
-  selectTab(viewTabId, "currentView");
+  selectTab(dataTabId, "dataTabId");
+  selectTab(viewTabId, "viewTabId");
 
   state.companyIndex = 0;
   state.categoryId = categoryId;
@@ -77,7 +77,7 @@ async function switchCompanyData({ dataTabId, view }) {
     dataTabId === ALL_NEWS_TAB
       ? await getCompanyList({ categoryId })
       : getArraySubscribedCompanies();
-
+  console.log(state);
   render(state);
 }
 
