@@ -1,8 +1,8 @@
 const stylesheets = [
-  "src/style/global.css",
-  "src/style/typography.css",
-  "src/style/color.css",
-  "src/style/layout.css",
+  "src/styles/global.css",
+  "src/styles/typography.css",
+  "src/styles/color.css",
+  "src/styles/layout.css",
 
   "src/components/button/button.css",
   "src/components/newsTicker/newsTicker.css",
