@@ -2,7 +2,7 @@ import { createNewsTicker } from "./components/newsTicker/newsTicker.js";
 import { createSwitcher } from "./components/switcher/switcher.js";
 
 import { dataTabItems, viewTabItems } from "./features/renderNews/constants/tabItems.js";
-import { createMainArrowButton } from "./features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
+import { createAdjacentButton } from "./features/renderNews/components/@common/adjacentButton/adjacentButton.js";
 
 import {
   switchCompanyData,
@@ -80,8 +80,8 @@ async function renderNewsView() {
 
   const container = document.getElementById("main-news-contents");
 
-  const prevButton = createMainArrowButton({ direction: "prev", onClick: updatePrev });
-  const nextButton = createMainArrowButton({ direction: "next", onClick: updateNext });
+  const prevButton = createAdjacentButton({ direction: "prev", onClick: updatePrev });
+  const nextButton = createAdjacentButton({ direction: "next", onClick: updateNext });
 
   container.append(prevButton, nextButton);
 }

@@ -1,16 +1,12 @@
 import { createIcon } from "../../../../../components/icon/icon.js";
 
 /**
- * @typedef {Object} CompanyNavButtonProps
- * @property {'prev' | 'next'} direction - The direction of navigation
- * @property {Function} onClick - The click handler function
- */
-
-/**
- * @param {CompanyNavButtonProps} props
+ * @param {Object} this.props
+ * @param {'prev' | 'next'} direction
+ * @param {Function} onClick
  * @returns {HTMLButtonElement}
  */
-export function createMainArrowButton({ direction, onClick }) {
+export function createAdjacentButton({ direction, onClick }) {
   const button = document.createElement("button");
   button.className = `adjacent-button ${direction}`;
   button.setAttribute("aria-label", direction === "prev" ? "이전" : "다음");
