@@ -5,20 +5,20 @@ import { getObjectSubscribedCompanies } from "../../../../subscriptionButton/uti
 import { createCompanyLogoTemplate } from "../../@common/companyLogo.js";
 
 /**
- * @param {Company} company
+ * @param {Company} companyData
  * @param {"all-news-tab" | "subscribed-news-tab"} dataType
  * @returns {HTMLDivElement}
  */
-export function createCompany(company, dataType) {
-  const container = document.createElement("div");
-  container.className = "list-company-container border-box";
+export function createCompany(companyData, dataType) {
+  const company = document.createElement("div");
+  company.className = "list-company-container border-box";
 
-  const headerComponent = createHeader(company, dataType);
-  const contentsComponent = createMainContents(company);
+  const headerComponent = createHeader(companyData, dataType);
+  const contentsComponent = createMainContents(companyData);
 
-  container.append(headerComponent, contentsComponent);
+  company.append(headerComponent, contentsComponent);
 
-  return container;
+  return company;
 }
 
 /**

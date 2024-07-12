@@ -12,8 +12,8 @@ import { createTabItem } from "./tabItem.js";
  * @param {MainNewsState} state
  */
 export async function createTab({ categoryId, companyIndex, dataTabId, companies }) {
-  const container = document.createElement("div");
-  container.className = "list-tab border-box";
+  const tab = document.createElement("div");
+  tab.className = "list-tab border-box";
 
   if (dataTabId === "all-news-tab") {
     const categoryList = await getCategoryList();
@@ -28,7 +28,7 @@ export async function createTab({ categoryId, companyIndex, dataTabId, companies
         onClick: async () => await selectCompanyTypeInListView(id),
       });
 
-      container.appendChild(categoryComponent);
+      tab.appendChild(categoryComponent);
     });
   } else {
     companies.forEach(({ name: companyName }, index) => {
@@ -39,9 +39,9 @@ export async function createTab({ categoryId, companyIndex, dataTabId, companies
         onClick: () => selectCompanyByIndexInListView(index),
       });
 
-      container.appendChild(companyComponent);
+      tab.appendChild(companyComponent);
     });
   }
 
-  return container;
+  return tab;
 }

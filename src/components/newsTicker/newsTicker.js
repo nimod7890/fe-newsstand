@@ -34,18 +34,18 @@ export function createNewsTicker({ tag, newsItems }, scrollDelay = 0) {
  * @returns {string}
  */
 function createNews({ title, url }, tag) {
-  const container = document.createElement("li");
+  const news = document.createElement("li");
 
   if (tag?.length > 0) {
-    container.insertAdjacentHTML("beforeend", `<p class='display-bold14'>${tag}</p>`);
+    news.insertAdjacentHTML("beforeend", `<p class='display-bold14'>${tag}</p>`);
   }
 
-  container.insertAdjacentHTML(
+  news.insertAdjacentHTML(
     "beforeend",
     `<a href=${url} class='available-medium14 ellipsis'>${title}</a>`
   );
 
-  return container;
+  return news;
 }
 
 /**
